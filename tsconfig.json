@@ -1,27 +1,18 @@
 {
-"compilerOptions":
-    {
+  "compilerOptions": {
     "target": "es6",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "module": "commonjs",
     "moduleResolution": "node",
     "jsx": "react",
     "rootDir": "src",
     "outDir": "dist",
-    "baseUrl": "src",
-    "paths": {
-        "@/*": ["*"]
-    },
     "allowJs": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "noEmit": true,
-},
-"include": [
-    "src"
-],
-"exclude": [
-    "node_modules"
-]
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
