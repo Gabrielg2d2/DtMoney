@@ -1,20 +1,15 @@
 module.exports = {
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/__tests__'],
   moduleNameMapper: {
-    '@/(.*)': '<rootDir>/src/$1'
+    '@/(.*)': '<rootDir>/src/$1',
+    '\\.(css|less)$': 'identity-obj-proxy'
   },
   transformIgnorePatterns: ['/node_modules/'],
-  testMatch: ['**/?(*.)+(spec|test).(js|jsx|ts|tsx)'],
   preset: 'ts-jest',
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'src/**/*.(js|jsx|ts|tsx)?',
-    '!src/**/*.d.ts',
-    '!src/main.tsx',
-    '!src/global/types/**/*'
-  ],
+  collectCoverageFrom: ['<rootDir>src/**/*.(js|jsx|ts|tsx)?', '!**/*.d.ts'],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
   coverageThreshold: {
@@ -27,6 +22,7 @@ module.exports = {
   },
   maxWorkers: '50%',
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
+  testMatch: ['**/?(*.)+(spec|test).(js|jsx|ts|tsx)'],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':

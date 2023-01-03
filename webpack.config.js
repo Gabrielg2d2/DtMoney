@@ -1,31 +1,44 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
-    path: path.join(__dirname, 'public/js'),
-    publicPath: '/public/js',
+    path: path.resolve(__dirname, 'public/js'),
     filename: 'bundle.js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '@': path.join(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src')
     }
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    writeToDisk: true,
-    historyApiFallback: true,
-    hotOnly: true,
+    static: {
+      directory: path.resolve(__dirname, 'public')
+    },
+    open: true,
+    compress: true,
     port: 3000,
-    publicPath: 'http://localhost:3000/public/js'
+    historyApiFallback: true,
+    hot: true
   },
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM'
   },
-  plugins: [new CleanWebpackPlugin()]
+  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.(js|ts)x?$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  }
 }

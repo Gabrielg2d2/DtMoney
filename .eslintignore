@@ -1,0 +1,10 @@
+node_modules
+.gitignore
+package.json
+package-lock.json
+README.md
+public
+coverage
+.vscode
+*.d.ts
+__tests__

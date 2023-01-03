@@ -1,7 +1,9 @@
-import { basename } from 'path'
+const { basename } = require('path')
 
-export function process(sourceText, sourcePath, options) {
-  return {
-    code: `module.exports = ${JSON.stringify(basename(sourcePath))};`
+module.exports = {
+  process(sourceText, sourcePath, options) {
+    return {
+      code: `module.exports = ${JSON.stringify(basename(sourcePath))};`
+    }
   }
 }

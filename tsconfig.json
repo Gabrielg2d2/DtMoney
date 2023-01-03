@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES2021",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "rootDir": "src",
+    "outDir": "dist",
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"]
     },
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "rootDir": "src",
-    "outDir": "dist",
     "allowJs": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src", "custom.d.ts", "__tests__"],
   "exclude": ["node_modules"]
 }
