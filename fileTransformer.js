@@ -1,7 +1,7 @@
-import { basename } from "path";
+import { basename } from 'path'
 
 export function process(sourceText, sourcePath, options) {
-    return {
-        code: `module.exports = ${JSON.stringify(basename(sourcePath))};`,
-    };
+  return {
+    code: `module.exports = ${JSON.stringify(basename(sourcePath))};`
+  }
 }
