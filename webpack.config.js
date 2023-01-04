@@ -7,6 +7,7 @@ module.exports = {
   entry: './src/main/index.tsx',
   output: {
     path: path.resolve(__dirname, 'public/js'),
+    publicPath: '/public/js/',
     filename: 'bundle.js'
   },
   resolve: {
@@ -19,11 +20,12 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'public')
     },
-    open: true,
-    compress: true,
-    port: 3000,
+    devMiddleware: {
+      writeToDisk: true
+    },
     historyApiFallback: true,
-    hot: true
+    compress: true,
+    port: 3000
   },
   externals: {
     react: 'React',
@@ -34,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|ts)x?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
