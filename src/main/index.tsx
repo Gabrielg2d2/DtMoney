@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './App'
+import { Home } from '@/presentation/pages/Home'
 
-const root = ReactDOM.createRoot(document.getElementById('main') as HTMLElement)
+const root = ReactDOM.createRoot(document.getElementById('main'))
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Home />
   </React.StrictMode>
 )

@@ -1,7 +1,7 @@
-import { App } from '@/main/App'
+import { Home } from '@/presentation/pages/Home'
 
-describe('App', () => {
-  it('should render App', () => {
-    expect(App).toBeTruthy()
+describe('Home', () => {
+  it('should render page Home', () => {
+    expect(Home).toBeTruthy()
   })
 })
