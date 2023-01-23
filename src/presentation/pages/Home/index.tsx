@@ -1,9 +1,23 @@
-import { Header } from '@/components'
+import { Container, Header } from '@/components'
 
 export function Home() {
   return (
-    <div className="bg-slate-100 h-screen">
+    <Container>
       <Header />
-    </div>
+
+      <main className="max-w-screen-xl mx-auto border">
+        <section>
+          <h2>Summary</h2>
+          <h2>Summary</h2>
+          <h2>Summary</h2>
+        </section>
+
+        <section>
+          <h2>Transactions</h2>
+          <h2>Transactions</h2>
+          <h2>Transactions</h2>
+        </section>
+      </main>
+    </Container>
   )
 }
