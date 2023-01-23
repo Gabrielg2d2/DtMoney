@@ -1,3 +1,4 @@
+import { globalColors } from '@/global/styles'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 
 type CardProps = {
@@ -47,7 +48,7 @@ export function CardOutgoing({ title = 'Saídas', value }: CardProps) {
 
 export function CardTotal({ title = 'Total', value }: CardProps) {
   return (
-    <ContainerCard bgColor="bg-green-500">
+    <ContainerCard bgColor={`bg-[${globalColors.green}]`}>
       <div className="flex items-center justify-between">
         <span className="text-white text-base">{title}</span>
         <CurrencyDollar size={32} className="text-white rounded-full p-1" />
