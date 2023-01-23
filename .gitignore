@@ -3,3 +3,4 @@ public/js
 coverage
 .vscode
 dist
+.eslintcache

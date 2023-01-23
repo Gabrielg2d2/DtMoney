@@ -1,7 +1,7 @@
 {
-  "src/**": [
-    "npm run lint --fix",
-    "eslint --cache --fix",
-    "prettier --write"
+  "*.{js,jsx,ts,tsx}": [
+    "npm run lint",
+    "eslint --cache",
+    "npx prettier --write --fix src/**"
   ]
 }
