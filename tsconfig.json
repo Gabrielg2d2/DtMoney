@@ -15,6 +15,6 @@
     "allowJs": true,
     "resolveJsonModule": true
   },
-  "include": ["src", "custom.d.ts", "__tests__"],
+  "include": ["src", "custom.d.ts"],
   "exclude": ["node_modules"]
 }

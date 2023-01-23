@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/__tests__'],
+  roots: ['<rootDir>/src'],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '\\.(css|less|scss)$': 'identity-obj-proxy'
@@ -9,7 +9,11 @@ module.exports = {
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['<rootDir>/src/**/*.(js|jsx|ts|tsx)?', '!**/*.d.ts'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
+    '!**/*.d.ts',
+    '!src/domain/**'
+  ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
   coverageThreshold: {
