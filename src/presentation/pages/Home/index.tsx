@@ -1,15 +1,21 @@
-import { Container, Header } from '@/components'
+import {
+  CardIncoming,
+  CardOutgoing,
+  CardTotal,
+  Container,
+  Header
+} from '@/components'
 
 export function Home() {
   return (
     <Container>
       <Header />
 
-      <main className="max-w-screen-xl mx-auto border">
-        <section>
-          <h2>Summary</h2>
-          <h2>Summary</h2>
-          <h2>Summary</h2>
+      <main className="max-w-screen-xl mx-auto mt-[-48px]">
+        <section className="flex items-center gap-8">
+          <CardIncoming value="R$ 1000,00" />
+          <CardOutgoing value="R$ 100,00" />
+          <CardTotal value="R$ 9000,00" />
         </section>
 
         <section>
