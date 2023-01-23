@@ -91,12 +91,6 @@ export class MainTransaction {
   async handleUpdateTransaction(id: string, body: TransactionData) {
     const urlUpdate = `${this.url}/${id}`
     const updateTransaction = new UpdateNewTransactions(urlUpdate, api.put)
-    const mainSpy = jest.spyOn(updateTransaction, 'put')
-
-    mainSpy.mockResolvedValue({
-      status: 200,
-      data: []
-    })
 
     const response = await updateTransaction.put(body)
 
