@@ -4,10 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './src/main/index.tsx',
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'public/js'),
-    publicPath: '/public/js/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   resolve: {
@@ -16,22 +15,13 @@ module.exports = {
       '@': path.resolve(__dirname, 'src')
     }
   },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'public')
-    },
-    devMiddleware: {
-      writeToDisk: true
-    },
-    historyApiFallback: true,
-    compress: true,
-    port: 3000
-  },
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
-  },
-  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public', 'index.html')
+    })
+  ],
   module: {
     rules: [
       {
@@ -40,7 +30,27 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       }
     ]
+  },
+
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
+  },
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public')
+    },
+    open: true,
+    hot: true,
+    liveReload: true,
+    port: 3000
   }
 }
