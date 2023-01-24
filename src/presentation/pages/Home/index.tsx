@@ -12,7 +12,7 @@ export function Home() {
       <Header />
 
       <main className="max-w-screen-xl mx-auto mt-[-48px]">
-        <section className="flex items-center gap-8">
+        <section className="flex items-center gap-8 max-sm:px-4 overflow-x-auto">
           <CardIncoming value="R$ 1000,00" />
           <CardOutgoing value="R$ 100,00" />
           <CardTotal value="R$ 9000,00" />
