@@ -3,8 +3,14 @@ export type TransactionData = {
   amount: number
   type: string
   category: string
+  date: string
 }
 
 export type TransactionDataAPI = {
   id: string
-} & TransactionData
+  name: string
+  amount: number
+  type: string
+  category: string
+  date: string
+}

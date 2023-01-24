@@ -4,6 +4,7 @@ export type DataTransactionProps = {
   amount: number
   type: string
   category: string
+  date: string
 }
 
 export type ListTransactionsReturn = {

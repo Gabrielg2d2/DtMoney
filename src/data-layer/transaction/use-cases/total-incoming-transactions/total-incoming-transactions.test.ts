@@ -10,28 +10,32 @@ describe('TotalIncomingTransactions', () => {
         name: 'Salary',
         type: 'deposit', // <--- This is the only difference
         category: 'Salary',
-        amount: 1000
+        amount: 1000,
+        date: '2021-01-01'
       },
       {
         id: '2',
         name: 'Salary',
         type: 'deposit', // <--- This is the only difference
         category: 'Salary',
-        amount: 1000
+        amount: 1000,
+        date: '2021-01-01'
       },
       {
         id: '3',
         name: 'Salary',
         type: 'deposit', // <--- This is the only difference
         category: 'Salary',
-        amount: 1000
+        amount: 1000,
+        date: '2021-01-01'
       },
       {
         id: '4',
         name: 'Salary',
         type: 'withdraw',
         category: 'Salary',
-        amount: 1000
+        amount: 1000,
+        date: '2021-01-01'
       }
     ]
 
