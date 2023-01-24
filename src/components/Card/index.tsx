@@ -1,4 +1,3 @@
-import { globalColors } from '@/global/styles'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 
 type CardProps = {
@@ -27,9 +26,9 @@ export function CardIncoming({ title = 'Entradas', value }: CardProps) {
     <ContainerCard>
       <div className="flex items-center justify-between">
         <span className="text-gray-700 text-base">{title}</span>
-        <ArrowCircleUp size={32} className="text-green-500" />
+        <ArrowCircleUp size={32} className="text-green-default" />
       </div>
-      <span className="text-4xl font-bold  text-gray-700">{value}</span>
+      <span className="text-4xl font-bold  text-text-default">{value}</span>
     </ContainerCard>
   )
 }
@@ -39,16 +38,16 @@ export function CardOutgoing({ title = 'Saídas', value }: CardProps) {
     <ContainerCard>
       <div className="flex items-center justify-between">
         <span className="text-gray-700 text-base">{title}</span>
-        <ArrowCircleDown size={32} className="text-red-500" />
+        <ArrowCircleDown size={32} className="text-red-default" />
       </div>
-      <span className="text-4xl font-bold text-gray-700">{value}</span>
+      <span className="text-4xl font-bold text-text-default">{value}</span>
     </ContainerCard>
   )
 }
 
 export function CardTotal({ title = 'Total', value }: CardProps) {
   return (
-    <ContainerCard bgColor={`bg-[${globalColors.green}]`}>
+    <ContainerCard bgColor={'bg-green-default'}>
       <div className="flex items-center justify-between">
         <span className="text-white text-base">{title}</span>
         <CurrencyDollar size={32} className="text-white rounded-full p-1" />
