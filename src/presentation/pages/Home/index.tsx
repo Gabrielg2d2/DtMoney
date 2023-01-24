@@ -25,7 +25,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 1000,
                 type: 'income',
                 category: 'Salário',
                 date: '10/10/2021'
@@ -33,7 +33,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Aluguel',
-                amount: 'R$ 200,00',
+                amount: 200,
                 type: 'income',
                 category: 'Casa',
                 date: '10/10/2021'
@@ -41,7 +41,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 1000,
                 type: 'withdrawn',
                 category: 'Salário',
                 date: '10/10/2021'
@@ -49,7 +49,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 1000,
                 type: 'income',
                 category: 'Salário',
                 date: '10/10/2021'
@@ -57,7 +57,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Aluguel',
-                amount: 'R$ 200,00',
+                amount: 200,
                 type: 'income',
                 category: 'Casa',
                 date: '10/10/2021'
@@ -65,7 +65,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 200,
                 type: 'withdrawn',
                 category: 'Salário',
                 date: '10/10/2021'
@@ -73,7 +73,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 200,
                 type: 'income',
                 category: 'Salário',
                 date: '10/10/2021'
@@ -81,7 +81,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Aluguel',
-                amount: 'R$ 200,00',
+                amount: 100,
                 type: 'income',
                 category: 'Casa',
                 date: '10/10/2021'
@@ -89,7 +89,7 @@ export function Home() {
               {
                 id: '132',
                 name: 'Salário',
-                amount: 'R$ 1000,00',
+                amount: 350,
                 type: 'withdrawn',
                 category: 'Salário',
                 date: '10/10/2021'
