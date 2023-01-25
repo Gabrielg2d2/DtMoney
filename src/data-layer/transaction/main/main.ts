@@ -17,24 +17,45 @@ import {
 export class MainTransaction {
   url = `${process.env.REACT_APP_API_URL}/transactions`
 
+  handleFormatDate(date: string) {
+    const formatDate = new Date(date)
+    const format = new Intl.DateTimeFormat('pt-BR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      timeZone: 'UTC'
+    })
+
+    return format.format(formatDate)
+  }
+
+  handleFormatMoneyPtBr(value: number) {
+    const formatMoney = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
+
+    return formatMoney.format(value)
+  }
+
   handleTotalTransactions(transactions: TransactionDataAPI[]) {
     const totalTransactions = new TotalTransactions()
     const total = totalTransactions.filterTotalTransactions(transactions)
-    return total
+    return this.handleFormatMoneyPtBr(total)
   }
 
   handleTotalIncomingTransactions(transactions: TransactionDataAPI[]) {
     const totalIncomingTransactions = new TotalIncomingTransactions()
     const total =
       totalIncomingTransactions.filterTotalIncomingTransactions(transactions)
-    return total
+    return this.handleFormatMoneyPtBr(total)
   }
 
   handleTotalOutgoingTransactions(transactions: TransactionDataAPI[]) {
     const totalOutgoingTransactions = new TotalOutgoingTransactions()
     const total =
       totalOutgoingTransactions.filterTotalOutgoingTransactions(transactions)
-    return total
+    return this.handleFormatMoneyPtBr(total)
   }
 
   async handleListTransactions() {
@@ -42,11 +63,20 @@ export class MainTransaction {
 
     const response = await listTransactions.execute()
 
-    this.handleTotalTransactions(response.data)
-    this.handleTotalIncomingTransactions(response.data)
-    this.handleTotalOutgoingTransactions(response.data)
+    const totalTransactions = this.handleTotalTransactions(response.data)
+    const totalIncomingTransactions = this.handleTotalIncomingTransactions(
+      response.data
+    )
+    const totalOutgoingTransactions = this.handleTotalOutgoingTransactions(
+      response.data
+    )
 
-    return response
+    return {
+      data: response.data,
+      totalTransactions,
+      totalIncomingTransactions,
+      totalOutgoingTransactions
+    }
   }
 
   async handleCreateTransaction(data: TransactionData) {
@@ -58,7 +88,7 @@ export class MainTransaction {
       const responseUpdateListTransaction = await this.handleListTransactions()
       return {
         status: response.status,
-        data: responseUpdateListTransaction.data
+        ...responseUpdateListTransaction
       }
     }
 
@@ -78,7 +108,7 @@ export class MainTransaction {
       const responseUpdateListTransaction = await this.handleListTransactions()
       return {
         status: response.status,
-        data: responseUpdateListTransaction.data
+        ...responseUpdateListTransaction
       }
     }
 
@@ -98,7 +128,7 @@ export class MainTransaction {
       const responseUpdateListTransaction = await this.handleListTransactions()
       return {
         status: response.status,
-        data: responseUpdateListTransaction.data
+        ...responseUpdateListTransaction
       }
     }
 
