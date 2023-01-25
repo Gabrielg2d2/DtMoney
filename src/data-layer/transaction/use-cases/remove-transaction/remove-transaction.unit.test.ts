@@ -13,7 +13,7 @@ describe('RemoveTransaction', () => {
     expect(methodDeleteTransactionSpy).toHaveBeenCalledTimes(1)
   })
 
-  it('should call methodDeleteTransaction with correct params', async () => {
+  it('should return a new status 201, received by parameter', async () => {
     const { sut, urlSpy, transactionIdSpy } = makeSutDeleteTransaction({
       statusSpy: 201
     })
@@ -25,7 +25,7 @@ describe('RemoveTransaction', () => {
     expect(response.status).toBe(201)
   })
 
-  it('should return a new status 201, received by parameter', async () => {
+  it('should return promise status 200', async () => {
     const { sut, urlSpy, transactionIdSpy } = makeSutDeleteTransaction()
 
     const urlDelete = `${urlSpy}/${transactionIdSpy}`
