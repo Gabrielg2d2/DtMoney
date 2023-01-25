@@ -8,6 +8,20 @@ describe('ListTransactions', () => {
     expect(methodGetSpy).toHaveBeenCalledWith(urlSpy)
   })
 
+  it('should receive the url and the get method as a parameter', async () => {
+    const urlSpy = 'any_url_jest'
+    const methodGetSpy = jest.fn()
+
+    const { sut } = makeSutListTransactions({
+      url: urlSpy,
+      methodGet: methodGetSpy
+    })
+    await sut.execute()
+
+    expect(methodGetSpy).toHaveBeenCalledWith(urlSpy)
+    expect(methodGetSpy).toHaveBeenCalledTimes(1)
+  })
+
   it('should return a ListTransactionsReturn on success, status 200', async () => {
     const { sut } = makeSutListTransactions()
     const response = await sut.execute()
