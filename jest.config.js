@@ -1,9 +1,11 @@
 module.exports = {
   roots: ['<rootDir>/src'],
+  setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '\\.(css|less|scss)$': 'identity-obj-proxy'
   },
+  testEnvironment: 'jsdom',
   transformIgnorePatterns: ['/node_modules/'],
   preset: 'ts-jest',
   clearMocks: true,
@@ -26,7 +28,6 @@ module.exports = {
     }
   },
   maxWorkers: '50%',
-  setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   testMatch: ['**/?(*.)+(spec|test).(js|jsx|ts|tsx)'],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
