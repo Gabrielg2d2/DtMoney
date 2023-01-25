@@ -26,14 +26,16 @@ describe('Transaction - List', () => {
           name: 'any_name',
           amount: 10,
           type: 'withdraw',
-          category: 'any_category'
+          category: 'any_category',
+          date: '2021-05-01T00:00:00.000Z'
         },
         {
           id: 'any_id2',
           name: 'any_name2',
           amount: 200,
           type: 'deposit',
-          category: 'any_category2'
+          category: 'any_category2',
+          date: '2021-05-01T00:00:00.000Z'
         }
       ]
     })
@@ -78,7 +80,8 @@ describe('Transaction - Create', () => {
       name: 'any_name',
       amount: 10,
       type: 'withdraw',
-      category: 'any_category'
+      category: 'any_category',
+      date: '2021-05-01T00:00:00.000Z'
     })
 
     expect(response.status).toEqual(201)
@@ -121,7 +124,8 @@ describe('Transaction - Create', () => {
       name: 'any_name',
       amount: 10,
       type: 'withdraw',
-      category: 'any_category'
+      category: 'any_category',
+      date: '2021-05-01T00:00:00.000Z'
     })
 
     expect(response.status).toEqual(201)

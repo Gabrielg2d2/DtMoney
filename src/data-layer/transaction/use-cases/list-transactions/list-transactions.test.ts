@@ -20,7 +20,8 @@ describe('ListTransactions', () => {
           name: 'any_name',
           amount: 10,
           type: 'deposit',
-          category: 'any_category'
+          category: 'any_category',
+          date: '2021-05-01T00:00:00.000Z'
         }
       ]
     })

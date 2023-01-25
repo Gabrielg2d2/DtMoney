@@ -19,7 +19,8 @@ export const makeSutUpdateNewTransactions = (params?: SutTypes) => {
     name: 'any_name',
     amount: 100,
     type: 'deposit',
-    category: 'any_category'
+    category: 'any_category',
+    date: '2021-05-01T00:00:00.000Z'
   }
 
   const sut = new UpdateNewTransactions(urlSpy, methodPutSpy)
