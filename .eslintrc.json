@@ -29,6 +29,7 @@
     "react-in-jsx-scope": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/indent": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
