@@ -1,4 +1,4 @@
-import { TransactionDataAPI } from '@/domain/transaction/types/global/transactions'
+import { TransactionDataAPIFormat } from '@/domain/transaction/types/global/transactions'
 import { useMemo } from 'react'
 
 type BoxProps = {
@@ -29,7 +29,7 @@ function Header() {
 }
 
 type ListTransactionsProps = {
-  list: TransactionDataAPI[]
+  list: TransactionDataAPIFormat[]
 }
 
 export function ListTransactions({ list }: ListTransactionsProps) {
@@ -45,18 +45,20 @@ export function ListTransactions({ list }: ListTransactionsProps) {
                 : 'text-green-default'
             }`}
           >
-            {transaction.amount}
+            {transaction.type === 'withdrawn'
+              ? `-${transaction.amountFormat}`
+              : transaction.amountFormat}
           </span>
           <span className="max-sm:hidden text-title-default">
             {transaction.category}
           </span>
           <span className="max-sm:hidden text-title-default">
-            {transaction.date}
+            {transaction.dateFormat}
           </span>
 
           <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
             <span className="text-title-default">{transaction.category}</span>
-            <span className="text-title-default">{transaction.date}</span>
+            <span className="text-title-default">{transaction.dateFormat}</span>
           </div>
         </Box>
       )),

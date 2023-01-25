@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react'
 import {
   CardIncoming,
   CardOutgoing,
@@ -6,96 +7,48 @@ import {
   Header,
   ListTransactions
 } from '@/components'
+import { MainTransaction } from '@/data-layer/transaction/main/main'
+import { DataTransactionFormatProps } from '@/domain/transaction/use-cases/list-transactions/model'
+
+type TransactionProps = {
+  data: DataTransactionFormatProps[]
+  totalTransactions: string
+  totalIncomingTransactions: string
+  totalOutgoingTransactions: string
+}
 
 export function Home() {
+  const [transactions, setTransactions] = useState<TransactionProps | null>(
+    null
+  )
+
+  const listTransactions = useCallback(async () => {
+    const mainTransaction = new MainTransaction()
+    const response = await mainTransaction.handleListTransactions()
+    setTransactions(response)
+  }, [])
+
+  useEffect(() => {
+    void listTransactions()
+  }, [listTransactions])
+
   return (
     <Container>
       <Header />
 
       <main className="max-w-screen-xl mx-auto mt-[-48px]">
         <section className="flex items-center gap-8 max-sm:px-4 overflow-x-auto">
-          <CardIncoming value="R$ 1000,00" />
-          <CardOutgoing value="R$ 100,00" />
-          <CardTotal value="R$ 9000,00" />
+          <CardIncoming
+            value={transactions?.totalIncomingTransactions ?? 'R$0,00'}
+          />
+          <CardOutgoing
+            value={transactions?.totalOutgoingTransactions ?? 'R$0,00'}
+          />
+          <CardTotal value={transactions?.totalTransactions ?? 'R$0,00'} />
         </section>
 
         <section className="mt-10">
-          <ListTransactions
-            list={[
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 1000,
-                type: 'income',
-                category: 'Salário',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Aluguel',
-                amount: 200,
-                type: 'income',
-                category: 'Casa',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 1000,
-                type: 'withdrawn',
-                category: 'Salário',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 1000,
-                type: 'income',
-                category: 'Salário',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Aluguel',
-                amount: 200,
-                type: 'income',
-                category: 'Casa',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 200,
-                type: 'withdrawn',
-                category: 'Salário',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 200,
-                type: 'income',
-                category: 'Salário',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Aluguel',
-                amount: 100,
-                type: 'income',
-                category: 'Casa',
-                date: '10/10/2021'
-              },
-              {
-                id: '132',
-                name: 'Salário',
-                amount: 350,
-                type: 'withdrawn',
-                category: 'Salário',
-                date: '10/10/2021'
-              }
-            ]}
-          />
+          <ListTransactions list={transactions?.data ?? []} />
         </section>
       </main>
     </Container>

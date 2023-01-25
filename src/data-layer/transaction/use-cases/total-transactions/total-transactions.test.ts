@@ -23,7 +23,7 @@ describe('TotalTransactions', () => {
       {
         id: '3',
         name: 'Salary',
-        type: 'withdraw',
+        type: 'withdrawn',
         category: 'Salary',
         amount: 1000,
         date: '2021-05-01T00:00:00.000Z'
@@ -31,13 +31,13 @@ describe('TotalTransactions', () => {
       {
         id: '4',
         name: 'Salary',
-        type: 'withdraw',
+        type: 'withdrawn',
         category: 'Salary',
         amount: 100,
         date: '2021-05-01T00:00:00.000Z'
       }
     ]
     const total = totalTransactions.filterTotalTransactions(transactions)
-    expect(total).toBe(3100)
+    expect(total).toBe(900)
   })
 })

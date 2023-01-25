@@ -32,7 +32,7 @@ describe('TotalIncomingTransactions', () => {
       {
         id: '4',
         name: 'Salary',
-        type: 'withdraw',
+        type: 'withdrawn',
         category: 'Salary',
         amount: 1000,
         date: '2021-01-01'

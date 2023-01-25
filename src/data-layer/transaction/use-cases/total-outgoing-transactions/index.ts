@@ -4,7 +4,7 @@ import { ITotalOutgoingTransactions } from '../../../../domain/transaction/use-c
 export class TotalOutgoingTransactions implements ITotalOutgoingTransactions {
   filterTotalOutgoingTransactions(transactions: TransactionDataAPI[]) {
     const total = transactions.reduce((acc, transaction) => {
-      if (transaction.type === 'withdraw') {
+      if (transaction.type === 'withdrawn') {
         return acc + transaction.amount
       }
 

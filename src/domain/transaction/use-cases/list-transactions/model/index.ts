@@ -1,11 +1,11 @@
-export type DataTransactionProps = {
-  id: string
-  name: string
-  amount: number
-  type: string
-  category: string
-  date: string
-}
+import {
+  TransactionDataAPI,
+  TransactionDataAPIFormat
+} from '@/domain/transaction/types/global/transactions'
+
+export type DataTransactionProps = TransactionDataAPI
+
+export type DataTransactionFormatProps = TransactionDataAPIFormat
 
 export type ListTransactionsReturn = {
   status: number

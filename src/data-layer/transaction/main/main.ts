@@ -15,7 +15,7 @@ import {
 } from '../use-cases'
 
 export class MainTransaction {
-  url = `${process.env.REACT_APP_API_URL}/transactions`
+  url = '/transactions'
 
   handleFormatDate(date: string) {
     const formatDate = new Date(date)
@@ -23,10 +23,12 @@ export class MainTransaction {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
       timeZone: 'UTC'
-    })
+    }).format(formatDate)
 
-    return format.format(formatDate)
+    return format
   }
 
   handleFormatMoneyPtBr(value: number) {
@@ -63,6 +65,16 @@ export class MainTransaction {
 
     const response = await listTransactions.execute()
 
+    const responseFormat = response.data.map(
+      (transaction: TransactionDataAPI) => {
+        return {
+          ...transaction,
+          dateFormat: this.handleFormatDate(transaction.date),
+          amountFormat: this.handleFormatMoneyPtBr(transaction.amount)
+        }
+      }
+    )
+
     const totalTransactions = this.handleTotalTransactions(response.data)
     const totalIncomingTransactions = this.handleTotalIncomingTransactions(
       response.data
@@ -72,7 +84,7 @@ export class MainTransaction {
     )
 
     return {
-      data: response.data,
+      data: responseFormat,
       totalTransactions,
       totalIncomingTransactions,
       totalOutgoingTransactions

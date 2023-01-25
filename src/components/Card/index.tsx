@@ -3,7 +3,6 @@ import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 type CardProps = {
   title?: string
   value: string
-  icon?: React.ReactNode
 }
 
 type ContainerCardProps = {

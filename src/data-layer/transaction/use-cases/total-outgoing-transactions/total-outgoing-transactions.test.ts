@@ -23,7 +23,7 @@ describe('TotalOutgoingTransactions', () => {
       {
         id: '3',
         name: 'Salary',
-        type: 'withdraw', // <--- This is the only difference
+        type: 'withdrawn', // <--- This is the only difference
         category: 'Salary',
         amount: 100,
         date: '2021-05-01T00:00:00.000Z'
@@ -31,7 +31,7 @@ describe('TotalOutgoingTransactions', () => {
       {
         id: '4',
         name: 'Salary',
-        type: 'withdraw', // <--- This is the only difference
+        type: 'withdrawn', // <--- This is the only difference
         category: 'Salary',
         amount: 1000,
         date: '2021-05-01T00:00:00.000Z'

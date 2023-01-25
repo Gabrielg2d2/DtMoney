@@ -2,10 +2,34 @@ import { TransactionDataAPI } from '../../../../domain/transaction/types/global/
 import { ITotalTransactions } from '../../../../domain/transaction/use-cases/total-transactions'
 
 export class TotalTransactions implements ITotalTransactions {
-  filterTotalTransactions(transactions: TransactionDataAPI[]) {
+  filterTotalIncomingTransactions(transactions: TransactionDataAPI[]) {
     const total = transactions.reduce((acc, transaction) => {
-      return acc + transaction.amount
+      if (transaction.type === 'deposit') {
+        return acc + transaction.amount
+      }
+
+      return acc
     }, 0)
+
+    return total
+  }
+
+  filterTotalOutgoingTransactions(transactions: TransactionDataAPI[]) {
+    const total = transactions.reduce((acc, transaction) => {
+      if (transaction.type === 'withdrawn') {
+        return acc + transaction.amount
+      }
+
+      return acc
+    }, 0)
+
+    return total
+  }
+
+  filterTotalTransactions(transactions: TransactionDataAPI[]) {
+    const total =
+      this.filterTotalIncomingTransactions(transactions) -
+      this.filterTotalOutgoingTransactions(transactions)
 
     return total
   }
