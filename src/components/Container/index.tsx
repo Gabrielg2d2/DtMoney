@@ -3,5 +3,5 @@ type ContainerProps = {
 }
 
 export function Container({ children }: ContainerProps) {
-  return <div className="bg-slate-100 h-screen">{children}</div>
+  return <div className="bg-slate-200 h-screen">{children}</div>
 }
