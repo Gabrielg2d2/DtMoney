@@ -46,19 +46,21 @@ export function ListTransactions({ list }: ListTransactionsProps) {
             }`}
           >
             {transaction.type === 'withdrawn'
-              ? `-${transaction.amountFormat}`
-              : transaction.amountFormat}
+              ? `-${transaction.amountFormatted}`
+              : transaction.amountFormatted}
           </span>
           <span className="max-sm:hidden text-title-default">
             {transaction.category}
           </span>
           <span className="max-sm:hidden text-title-default">
-            {transaction.dateFormat}
+            {transaction.dateFormatted}
           </span>
 
           <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
             <span className="text-title-default">{transaction.category}</span>
-            <span className="text-title-default">{transaction.dateFormat}</span>
+            <span className="text-title-default">
+              {transaction.dateFormatted}
+            </span>
           </div>
         </Box>
       )),

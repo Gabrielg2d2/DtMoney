@@ -1,5 +1,8 @@
 import { MainTransaction } from './main'
-import { data_transactions_mock } from '../../../mock/transactions'
+import {
+  responseTransactionsMock,
+  dataTransactionsMock
+} from '../../../mock/transactions'
 import { cleanup } from '@testing-library/react'
 
 describe('Transaction - List', () => {
@@ -11,10 +14,7 @@ describe('Transaction - List', () => {
     const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleListTransactions')
 
-    mainSpy.mockResolvedValueOnce({
-      status: 200,
-      data: data_transactions_mock
-    })
+    mainSpy.mockResolvedValueOnce(responseTransactionsMock)
 
     const response = await mainTransaction.handleListTransactions()
 
@@ -27,7 +27,9 @@ describe('Transaction - List', () => {
           amount: 10,
           type: 'withdrawn',
           category: 'any_category',
-          date: '2021-05-01T00:00:00.000Z'
+          date: '2021-05-01T00:00:00.000Z',
+          dateFormatted: '01/05/2021',
+          amountFormatted: 'R$ 10,00'
         },
         {
           id: 'any_id2',
@@ -35,9 +37,14 @@ describe('Transaction - List', () => {
           amount: 200,
           type: 'deposit',
           category: 'any_category2',
-          date: '2021-05-01T00:00:00.000Z'
+          date: '2021-05-01T00:00:00.000Z',
+          dateFormatted: '01/05/2021',
+          amountFormatted: 'R$ 200,00'
         }
-      ]
+      ],
+      totalTransactions: 'R$ 190,00',
+      totalIncomingTransactions: 'R$ 200,00',
+      totalOutgoingTransactions: 'R$ 10,00'
     })
   })
 
@@ -45,10 +52,7 @@ describe('Transaction - List', () => {
     const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleListTransactions')
 
-    mainSpy.mockResolvedValueOnce({
-      status: 200,
-      data: data_transactions_mock
-    })
+    mainSpy.mockResolvedValueOnce(responseTransactionsMock)
 
     await mainTransaction.handleListTransactions()
 
@@ -64,11 +68,11 @@ describe('Transaction - Create', () => {
   it('should add a new transaction', async () => {
     const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleCreateTransaction')
-    const { id, ...dataMock } = data_transactions_mock[0]
+    const { id, ...dataMock } = dataTransactionsMock[0]
 
     mainSpy.mockResolvedValueOnce({
       status: 201,
-      data: data_transactions_mock
+      data: dataTransactionsMock
     })
 
     const response = await mainTransaction.handleCreateTransaction(dataMock)
@@ -81,7 +85,9 @@ describe('Transaction - Create', () => {
       amount: 10,
       type: 'withdrawn',
       category: 'any_category',
-      date: '2021-05-01T00:00:00.000Z'
+      date: '2021-05-01T00:00:00.000Z',
+      dateFormatted: '01/05/2021',
+      amountFormatted: 'R$ 10,00'
     })
 
     expect(response.status).toEqual(201)
@@ -93,11 +99,11 @@ describe('Transaction - Create', () => {
 
     mainSpy.mockResolvedValueOnce({
       status: 400,
-      data: data_transactions_mock
+      data: dataTransactionsMock
     })
 
     const response = await mainTransaction.handleCreateTransaction(
-      data_transactions_mock[0]
+      dataTransactionsMock[0]
     )
 
     expect(mainSpy).toHaveBeenCalledTimes(1)
@@ -112,11 +118,11 @@ describe('Transaction - Create', () => {
 
     mainSpy.mockResolvedValueOnce({
       status: 201,
-      data: data_transactions_mock
+      data: dataTransactionsMock
     })
 
     const response = await mainTransaction.handleCreateTransaction(
-      data_transactions_mock[0]
+      dataTransactionsMock[0]
     )
 
     expect(response.data[0]).toEqual({
@@ -125,7 +131,9 @@ describe('Transaction - Create', () => {
       amount: 10,
       type: 'withdrawn',
       category: 'any_category',
-      date: '2021-05-01T00:00:00.000Z'
+      date: '2021-05-01T00:00:00.000Z',
+      dateFormatted: '01/05/2021',
+      amountFormatted: 'R$ 10,00'
     })
 
     expect(response.status).toEqual(201)
@@ -143,7 +151,7 @@ describe('Transaction - Remove', () => {
 
     mainSpy.mockResolvedValueOnce({
       status: 200,
-      data: data_transactions_mock
+      data: dataTransactionsMock
     })
 
     const response = await mainTransaction.handleDeleteTransaction('any_id')
@@ -176,12 +184,12 @@ describe('Transaction - Update', () => {
 
     mainSpy.mockResolvedValueOnce({
       status: 200,
-      data: data_transactions_mock
+      data: dataTransactionsMock
     })
 
     const response = await mainTransaction.handleUpdateTransaction(
       'any_id',
-      data_transactions_mock[0]
+      dataTransactionsMock[0]
     )
 
     expect(mainSpy).toHaveBeenCalledTimes(1)
@@ -201,7 +209,7 @@ describe('Transaction - Update', () => {
 
     const response = await mainTransaction.handleUpdateTransaction(
       'any_id',
-      data_transactions_mock[0]
+      dataTransactionsMock[0]
     )
 
     expect(response.status).toEqual(400)

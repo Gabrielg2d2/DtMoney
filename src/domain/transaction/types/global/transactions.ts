@@ -19,9 +19,9 @@ export type TransactionDataAPIFormat = {
   id: string
   name: string
   amount: number
-  amountFormat: string
   type: string
   category: string
   date: string
-  dateFormat: string
+  dateFormatted: string
+  amountFormatted: string
 }

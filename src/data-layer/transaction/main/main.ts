@@ -69,8 +69,8 @@ export class MainTransaction {
       (transaction: TransactionDataAPI) => {
         return {
           ...transaction,
-          dateFormat: this.handleFormatDate(transaction.date),
-          amountFormat: this.handleFormatMoneyPtBr(transaction.amount)
+          dateFormatted: this.handleFormatDate(transaction.date),
+          amountFormatted: this.handleFormatMoneyPtBr(transaction.amount)
         }
       }
     )
@@ -84,6 +84,7 @@ export class MainTransaction {
     )
 
     return {
+      status: response.status,
       data: responseFormat,
       totalTransactions,
       totalIncomingTransactions,
