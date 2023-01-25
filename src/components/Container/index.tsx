@@ -3,5 +3,9 @@ type ContainerProps = {
 }
 
 export function Container({ children }: ContainerProps) {
-  return <div className="bg-slate-200 h-screen">{children}</div>
+  return (
+    <div data-testid="container_id" className="bg-slate-200 h-screen">
+      {children}
+    </div>
+  )
 }
