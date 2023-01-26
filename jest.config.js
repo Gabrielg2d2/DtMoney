@@ -17,7 +17,8 @@ module.exports = {
     '!src/index.tsx', // app
     '!src/components/index.ts', // export
     '!src/domain/**', // interfaces
-    '!src/data-layer/transaction/use-cases/index.ts' // export files
+    '!src/data-layer/transaction/use-cases/index.ts', // export files
+    '!src/data-layer/transaction/main/main.ts' // integration with stub
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
