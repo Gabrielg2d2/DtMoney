@@ -27,7 +27,12 @@ export function CardIncoming({ title = 'Entradas', value }: CardProps) {
         <span className="text-gray-700 text-base">{title}</span>
         <ArrowCircleUp size={32} className="text-green-default" />
       </div>
-      <span className="text-4xl font-bold  text-text-default">{value}</span>
+      <span
+        data-testid="card_incoming_value"
+        className="text-4xl font-bold  text-text-default"
+      >
+        {value}
+      </span>
     </ContainerCard>
   )
 }
@@ -39,7 +44,12 @@ export function CardOutgoing({ title = 'Saídas', value }: CardProps) {
         <span className="text-gray-700 text-base">{title}</span>
         <ArrowCircleDown size={32} className="text-red-default" />
       </div>
-      <span className="text-4xl font-bold text-text-default">{value}</span>
+      <span
+        data-testid="card_outgoing_value"
+        className="text-4xl font-bold text-text-default"
+      >
+        {value}
+      </span>
     </ContainerCard>
   )
 }
@@ -51,7 +61,12 @@ export function CardTotal({ title = 'Total', value }: CardProps) {
         <span className="text-white text-base">{title}</span>
         <CurrencyDollar size={32} className="text-white rounded-full p-1" />
       </div>
-      <span className="text-4xl font-bold text-white">{value}</span>
+      <span
+        data-testid="card_total_value"
+        className="text-4xl font-bold text-white"
+      >
+        {value}
+      </span>
     </ContainerCard>
   )
 }

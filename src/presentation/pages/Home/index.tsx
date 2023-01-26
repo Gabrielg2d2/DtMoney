@@ -20,11 +20,14 @@ export function Home() {
     <Container>
       <Header />
 
-      <main className="max-w-screen-xl mx-auto mt-[-48px]">
+      <main
+        data-testid="main_page_home_id"
+        className="max-w-screen-xl mx-auto mt-[-48px]"
+      >
         <section className="flex items-center gap-8 max-sm:px-4 overflow-x-auto">
-          <CardIncoming value={totalIncomingTransactions ?? 'R$0,00'} />
-          <CardOutgoing value={totalOutgoingTransactions ?? 'R$0,00'} />
-          <CardTotal value={totalTransactions ?? 'R$0,00'} />
+          <CardIncoming value={totalIncomingTransactions ?? 'R$ 0,00'} />
+          <CardOutgoing value={totalOutgoingTransactions ?? 'R$ 0,00'} />
+          <CardTotal value={totalTransactions ?? 'R$ 0,00'} />
         </section>
 
         <section className="mt-10">

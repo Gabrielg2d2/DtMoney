@@ -16,7 +16,10 @@ function Box({ children }: BoxProps) {
 function Header() {
   return (
     <>
-      <div className="text-title-default rounded-sm grid grid-cols-4 items-center pl-8 h-16 min-h-16 max-sm:hidden">
+      <div
+        data-testid="header_list_transactions"
+        className="text-title-default rounded-sm grid grid-cols-4 items-center pl-8 h-16 min-h-16 max-sm:hidden"
+      >
         <span>Título</span>
         <span>Preço</span>
         <span>Categoria</span>
@@ -67,10 +70,25 @@ export function ListTransactions({ list }: ListTransactionsProps) {
     [list]
   )
 
+  if (!list.length) {
+    return (
+      <>
+        <div className="flex justify-center items-center h-96">
+          <span className="text-title-default text-2xl">
+            Nenhuma transação encontrada
+          </span>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <Header />
-      <div className="max-sm:mt-4 max-sm:px-4 max-h-[500px] overflow-y-auto">
+      <div
+        data-testid="list_transactions_id"
+        className="max-sm:mt-4 max-sm:px-4 max-h-[500px] overflow-y-auto"
+      >
         <div className="flex flex-col gap-4">{listTransactions}</div>
       </div>
     </>

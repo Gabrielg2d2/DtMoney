@@ -59,7 +59,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "scripts": {
-    "start": "webpack serve --mode=development --open",
+    "server": "json-server --watch ./data/db.json --port 3333",
+    "dev": "webpack serve --mode=development --open",
+    "start": "npm run server && npm run dev",
     "build": "export NODE_ENV=production && webpack",
     "tscheck": "tsc",
     "test": "jest --passWithNoTests",
@@ -71,7 +73,6 @@
     "test:cov": "npm run test -- --coverage",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --max-warnings=0",
     "commit": "git-cz",
-    "prepare": "husky install",
-    "server": "json-server --watch ./data/db.json --port 3333"
+    "prepare": "husky install"
   }
 }

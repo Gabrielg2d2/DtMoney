@@ -14,6 +14,8 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
     '!**/*.d.ts', // config types
+    '!src/index.tsx', // app
+    '!src/components/index.ts', // export
     '!src/domain/**', // interfaces
     '!src/data-layer/transaction/use-cases/index.ts' // export files
   ],
