@@ -25,13 +25,13 @@ export function Home() {
         className="max-w-screen-xl mx-auto mt-[-48px]"
       >
         <section className="flex items-center gap-8 max-sm:px-4 overflow-x-auto">
-          <CardIncoming value={totalIncomingTransactions ?? 'R$ 0,00'} />
-          <CardOutgoing value={totalOutgoingTransactions ?? 'R$ 0,00'} />
-          <CardTotal value={totalTransactions ?? 'R$ 0,00'} />
+          <CardIncoming value={totalIncomingTransactions} />
+          <CardOutgoing value={totalOutgoingTransactions} />
+          <CardTotal value={totalTransactions} />
         </section>
 
         <section className="mt-10">
-          <ListTransactions list={transactions ?? []} />
+          <ListTransactions list={transactions} />
         </section>
       </main>
     </Container>
