@@ -61,7 +61,7 @@
   "scripts": {
     "server": "json-server --watch ./data/db.json --port 3333",
     "dev": "webpack serve --mode=development --open",
-    "start": "npm run server && npm run dev",
+    "start": "npm run server & npm run dev",
     "build": "export NODE_ENV=production && webpack",
     "tscheck": "tsc",
     "test": "jest --passWithNoTests",
