@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 export function useDialogNewTransaction() {
   const [isEdit] = useState(false)
   const [type, setType] = useState('withdrawn')
 
-  function handleType(type: string) {
+  const handleType = useCallback((type: string) => {
     setType(type)
-  }
+  }, [])
 
-  const make = () => {
+  const make = useCallback(() => {
     const title = isEdit ? 'Editar transação' : 'Cadastrar transação'
     const description = isEdit
       ? 'Edite os dados da transação'
@@ -28,7 +28,7 @@ export function useDialogNewTransaction() {
       description,
       buttonOpen
     }
-  }
+  }, [isEdit])
 
   return {
     isEdit,
