@@ -18,7 +18,7 @@ export function DialogCustom({
     <Dialog.Root>
       <Dialog.Trigger asChild>{buttonOpen}</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+        <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-[2px]" />
         <Dialog.Content className="bg-white fixed top-28 left-1/2 -translate-x-1/2 w-1/4 max-w-md p-4 pb-8 shadow-lg rounded-md">
           <Dialog.Title className="text-text-default text-xl">
             {title}
