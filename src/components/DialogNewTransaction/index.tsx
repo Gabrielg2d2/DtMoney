@@ -3,17 +3,36 @@ import { useState } from 'react'
 import { DialogCustom } from '../Dialog'
 
 export function DialogNewTransaction() {
+  const [isEdit] = useState(false)
   const [type, setType] = useState('withdraw')
+
+  const make = (isEdit: boolean) => {
+    const title = isEdit ? 'Editar transação' : 'Cadastrar transação'
+    const description = isEdit
+      ? 'Edite os dados da transação'
+      : 'Insira os dados para nova transação'
+    const buttonOpen = isEdit ? (
+      <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold">
+        Editar transação
+      </button>
+    ) : (
+      <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold">
+        Nova transação
+      </button>
+    )
+
+    return {
+      title,
+      description,
+      buttonOpen
+    }
+  }
 
   return (
     <DialogCustom
-      title="Cadastrar transação"
-      description="Insira os dados para nova transação"
-      buttonOpen={
-        <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold">
-          Nova transação
-        </button>
-      }
+      title={make(isEdit).title}
+      description={make(isEdit).description}
+      buttonOpen={make(isEdit).buttonOpen}
     >
       <form className="flex flex-col gap-4 pb-4 px-2">
         <input
