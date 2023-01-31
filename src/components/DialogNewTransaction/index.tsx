@@ -59,7 +59,7 @@ export function DialogNewTransaction() {
 
         <button
           type="submit"
-          className="p-4 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md mt-2"
+          className="p-4 bg-[#33CC95] hover:bg-[#20b37d] transition-all text-white rounded-md mt-2"
         >
           Cadastrar
         </button>
