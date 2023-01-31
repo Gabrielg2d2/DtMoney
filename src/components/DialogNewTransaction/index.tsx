@@ -1,3 +1,4 @@
+import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
 import { useState } from 'react'
 import { DialogCustom } from '../Dialog'
 
@@ -29,24 +30,30 @@ export function DialogNewTransaction() {
         <div className="flex gap-2">
           <button
             type="submit"
-            className={`p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
+            className={`
+            flex items-center justify-center gap-2 transition-all
+            p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
               type === 'deposit' ? 'border-green-500' : ''
             }`}
             onClick={() => {
               setType('deposit')
             }}
           >
+            <ArrowCircleUp size={26} className="text-green-default" />
             Entrada
           </button>
           <button
             type="submit"
-            className={`p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
+            className={`
+            flex items-center justify-center gap-2 transition-all
+            p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
               type === 'withdraw' ? 'border-red-500' : ''
             }`}
             onClick={() => {
               setType('withdraw')
             }}
           >
+            <ArrowCircleDown size={26} className="text-red-default" />
             Saída
           </button>
         </div>
