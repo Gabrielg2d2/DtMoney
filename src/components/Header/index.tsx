@@ -1,5 +1,5 @@
 import { CurrencyDollar } from 'phosphor-react'
-import { DialogNewTransaction } from '@/components'
+import { DialogTransaction } from '@/components'
 
 export function Header() {
   return (
@@ -12,7 +12,7 @@ export function Header() {
           />
           <h1 className="text-2xl text-white font-bold">dt money</h1>
         </div>
-        <DialogNewTransaction />
+        <DialogTransaction />
       </div>
     </header>
   )

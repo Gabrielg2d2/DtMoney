@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import { DialogNewTransaction } from '.'
+import { DialogTransaction } from '.'
 
-describe('DialogNewTransaction', () => {
-  it('should render component DialogNewTransaction close, just the button', () => {
-    render(<DialogNewTransaction />)
+describe('DialogTransaction', () => {
+  it('should render component DialogTransaction close, just the button', () => {
+    render(<DialogTransaction />)
 
     expect(screen.getByText(/nova transação/i)).toBeInTheDocument()
   })
 
-  it('should render component DialogNewTransaction open, with the form', () => {
-    render(<DialogNewTransaction />)
+  it('should render component DialogTransaction open, with the form', () => {
+    render(<DialogTransaction />)
 
     const buttonOpen = screen.getByText(/nova transação/i)
 
@@ -46,7 +46,7 @@ describe('DialogNewTransaction', () => {
   })
 
   it('should allow closing the modal when clicking on the "x" close button', () => {
-    render(<DialogNewTransaction />)
+    render(<DialogTransaction />)
 
     const buttonOpen = screen.getByText(/nova transação/i)
 
@@ -65,8 +65,8 @@ describe('DialogNewTransaction', () => {
     expect(screen.queryByText(/cadastrar transação/i)).not.toBeInTheDocument()
   })
 
-  it('should render component DialogNewTransaction with button withdrawn selection default', () => {
-    render(<DialogNewTransaction />)
+  it('should render component DialogTransaction with button withdrawn selection default', () => {
+    render(<DialogTransaction />)
 
     const buttonOpen = screen.getByText(/nova transação/i)
 

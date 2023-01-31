@@ -1,13 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
+import { useForm } from 'react-hook-form'
 
-export function useDialogNewTransaction() {
-  const [isEdit] = useState(false)
-  const [type, setType] = useState('withdrawn')
-
-  const handleType = useCallback((type: string) => {
-    setType(type)
-  }, [])
-
+export function useDialogTransaction(isEdit = false) {
   const make = useCallback(() => {
     const title = isEdit ? 'Editar transação' : 'Cadastrar transação'
     const description = isEdit
@@ -30,10 +24,34 @@ export function useDialogNewTransaction() {
     }
   }, [isEdit])
 
+  const { register, handleSubmit, watch, setValue } = useForm({
+    defaultValues: {
+      name: '',
+      price: '',
+      type: 'withdrawn',
+      category: ''
+    }
+  })
+
+  const handleType = useCallback(
+    (type: string) => {
+      setValue('type', type)
+    },
+    [setValue]
+  )
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+
+  console.log(watch()) // watch input value by passing the name of it
+
   return {
-    isEdit,
-    type,
     handleType,
-    make
+    make,
+    register,
+    handleSubmit,
+    onSubmit,
+    watch
   }
 }
