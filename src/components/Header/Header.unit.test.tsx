@@ -6,10 +6,9 @@ describe('Header', () => {
     render(<Header />)
     expect(screen.getByText('dt money')).toBeInTheDocument()
     expect(screen.getByText('Nova transação')).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', {
-        name: /Nova transação/i
-      })
-    ).toBeInTheDocument()
+
+    expect(screen.getByRole('button', { name: 'Nova transação' })).toHaveClass(
+      'bg-violet-500'
+    )
   })
 })
