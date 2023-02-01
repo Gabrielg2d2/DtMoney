@@ -21,13 +21,13 @@ export function DialogTransaction() {
           type="text"
           placeholder="Nome"
           className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('name')}
+          {...register('name', { required: true, min: 2 })}
         />
         <input
           type="text"
           placeholder="Preço"
           className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('price')}
+          {...register('price', { required: true, min: 1 })}
         />
 
         <div className="flex gap-2">
@@ -65,7 +65,7 @@ export function DialogTransaction() {
           type="text"
           placeholder="Categoria"
           className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('category')}
+          {...register('category', { required: true, min: 2 })}
         />
 
         <button

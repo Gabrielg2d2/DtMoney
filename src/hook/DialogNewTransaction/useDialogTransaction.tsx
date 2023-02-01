@@ -44,8 +44,6 @@ export function useDialogTransaction(isEdit = false) {
     console.log(data)
   }
 
-  console.log(watch()) // watch input value by passing the name of it
-
   return {
     handleType,
     make,
