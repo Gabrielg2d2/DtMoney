@@ -1,5 +1,21 @@
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
+type DataForm = {
+  name: string
+  price: string
+  type: string
+  category: string
+}
+
+const schema = z.object({
+  name: z.string().min(1, { message: 'Obrigatório' }),
+  price: z.string().min(1, { message: 'Obrigatório' }),
+  type: z.string().min(1, { message: 'Obrigatório' }),
+  category: z.string().min(1, { message: 'Obrigatório' })
+})
 
 export function useDialogTransaction(isEdit = false) {
   const make = useCallback(() => {
@@ -24,13 +40,14 @@ export function useDialogTransaction(isEdit = false) {
     }
   }, [isEdit])
 
-  const { register, handleSubmit, watch, setValue } = useForm({
+  const { register, handleSubmit, watch, setValue } = useForm<DataForm>({
     defaultValues: {
       name: '',
       price: '',
       type: 'withdrawn',
       category: ''
-    }
+    },
+    resolver: zodResolver(schema)
   })
 
   const handleType = useCallback(
@@ -40,7 +57,7 @@ export function useDialogTransaction(isEdit = false) {
     [setValue]
   )
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: DataForm) => {
     console.log(data)
   }
 

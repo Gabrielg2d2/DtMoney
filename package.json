@@ -4,6 +4,7 @@
   "description": "",
   "main": "./src/main/index.tsx",
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^2.9.10",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-select": "^1.2.0",
