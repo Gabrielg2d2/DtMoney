@@ -1,6 +1,7 @@
 import { useDialogTransaction } from '@/hook/DialogNewTransaction/useDialogTransaction'
 import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
 import { DialogCustom } from '../Dialog'
+import { Input } from '../Input'
 
 export function DialogTransaction() {
   const { handleType, make, register, handleSubmit, onSubmit, watch } =
@@ -17,18 +18,8 @@ export function DialogTransaction() {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit(onSubmit)}
       >
-        <input
-          type="text"
-          placeholder="Nome"
-          className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('name')}
-        />
-        <input
-          type="text"
-          placeholder="Preço"
-          className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('price')}
-        />
+        <Input placeholder="Nome" register={register('name')} />
+        <Input placeholder="Preço" register={register('price')} />
 
         <div className="flex gap-2">
           <button
@@ -61,12 +52,7 @@ export function DialogTransaction() {
           </button>
         </div>
 
-        <input
-          type="text"
-          placeholder="Categoria"
-          className="bg-slate-200 p-4 w-full text-text-default rounded-md"
-          {...register('category')}
-        />
+        <Input placeholder="Categoria" register={register('category')} />
 
         <button
           type="submit"
