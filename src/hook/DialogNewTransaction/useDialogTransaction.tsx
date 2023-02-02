@@ -12,7 +12,16 @@ type DataForm = {
 
 const schema = z.object({
   name: z.string().min(1, { message: 'Obrigatório' }),
-  price: z.string().min(1, { message: 'Obrigatório' }),
+  price: z
+    .string()
+    .min(1, { message: 'Obrigatório' })
+    .refine(
+      (value) => {
+        const price = Number(value) ?? 0
+        return price > 0
+      },
+      { message: 'O valor deve ser maior que 0' }
+    ),
   type: z.string().min(1, { message: 'Obrigatório' }),
   category: z.string().min(1, { message: 'Obrigatório' })
 })

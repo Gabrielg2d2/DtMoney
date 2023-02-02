@@ -18,8 +18,18 @@ export function DialogTransaction() {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input placeholder="Nome" {...register('name')} errors={errors} />
-        <Input placeholder="Preço" {...register('price')} errors={errors} />
+        <Input
+          placeholder="Nome"
+          name="name"
+          errors={errors}
+          register={register('name')}
+        />
+        <Input
+          name="price"
+          placeholder="Preço"
+          errors={errors}
+          register={register('price')}
+        />
 
         <div className="flex gap-2">
           <button
@@ -53,8 +63,9 @@ export function DialogTransaction() {
         </div>
 
         <Input
+          name="category"
           placeholder="Categoria"
-          {...register('category')}
+          register={register('category')}
           errors={errors}
         />
 

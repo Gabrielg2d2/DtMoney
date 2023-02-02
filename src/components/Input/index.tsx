@@ -13,7 +13,6 @@ export function Input({ register, errors, ...props }: InputProps) {
   return (
     <>
       <input
-        type="text"
         className={`bg-slate-200 p-4 w-full text-text-default rounded-md border-2 ${borderError}`}
         {...props}
         {...register}
