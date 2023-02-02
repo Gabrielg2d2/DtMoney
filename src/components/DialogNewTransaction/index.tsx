@@ -4,7 +4,7 @@ import { DialogCustom } from '../Dialog'
 import { Input } from '../Input'
 
 export function DialogTransaction() {
-  const { handleType, make, register, handleSubmit, onSubmit, watch } =
+  const { handleType, make, register, handleSubmit, onSubmit, watch, errors } =
     useDialogTransaction()
 
   return (
@@ -18,8 +18,8 @@ export function DialogTransaction() {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input placeholder="Nome" register={register('name')} />
-        <Input placeholder="Preço" register={register('price')} />
+        <Input placeholder="Nome" {...register('name')} errors={errors} />
+        <Input placeholder="Preço" {...register('price')} errors={errors} />
 
         <div className="flex gap-2">
           <button
@@ -52,7 +52,11 @@ export function DialogTransaction() {
           </button>
         </div>
 
-        <Input placeholder="Categoria" register={register('category')} />
+        <Input
+          placeholder="Categoria"
+          {...register('category')}
+          errors={errors}
+        />
 
         <button
           type="submit"

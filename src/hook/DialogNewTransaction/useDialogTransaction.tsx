@@ -40,14 +40,21 @@ export function useDialogTransaction(isEdit = false) {
     }
   }, [isEdit])
 
-  const { register, handleSubmit, watch, setValue } = useForm<DataForm>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useForm<DataForm>({
     defaultValues: {
       name: '',
       price: '',
       type: 'withdrawn',
       category: ''
     },
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    mode: 'onBlur'
   })
 
   const handleType = useCallback(
@@ -67,6 +74,7 @@ export function useDialogTransaction(isEdit = false) {
     register,
     handleSubmit,
     onSubmit,
-    watch
+    watch,
+    errors
   }
 }
