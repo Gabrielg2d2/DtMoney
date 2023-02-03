@@ -2,17 +2,18 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { MainTransaction } from '@/data-layer/transaction/main/main'
 
 type DataForm = {
   name: string
-  price: string
+  amount: string
   type: string
   category: string
 }
 
 const schema = z.object({
   name: z.string().min(1, { message: 'Obrigatório' }),
-  price: z
+  amount: z
     .string()
     .min(1, { message: 'Obrigatório' })
     .refine(
@@ -54,11 +55,12 @@ export function useDialogTransaction(isEdit = false) {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors }
   } = useForm<DataForm>({
     defaultValues: {
       name: '',
-      price: '',
+      amount: '',
       type: 'withdrawn',
       category: ''
     },
@@ -73,8 +75,29 @@ export function useDialogTransaction(isEdit = false) {
     [setValue]
   )
 
-  const onSubmit = (data: DataForm) => {
-    console.log(data)
+  const onSubmit = async (data: DataForm) => {
+    const { name, amount, type, category } = data
+
+    const obj = {
+      name,
+      amount: Number(amount),
+      type,
+      category,
+      date: new Date().toISOString()
+    }
+
+    const mainTransaction = new MainTransaction()
+
+    const response = await mainTransaction.handleCreateTransaction(obj)
+
+    console.log(response)
+
+    if (response.status === 200) {
+      reset()
+      return
+    }
+
+    alert('Erro, ao cadastrar transação!')
   }
 
   return {

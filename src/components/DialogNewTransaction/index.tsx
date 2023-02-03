@@ -25,10 +25,10 @@ export function DialogTransaction() {
           register={register('name')}
         />
         <Input
-          name="price"
+          name="amount"
           placeholder="Preço"
           errors={errors}
-          register={register('price')}
+          register={register('amount')}
         />
 
         <div className="flex gap-2">
