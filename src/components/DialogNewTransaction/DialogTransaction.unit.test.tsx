@@ -102,4 +102,62 @@ describe('DialogTransaction', () => {
     expect(buttonWithdrawn).toHaveClass('border-red-500')
     expect(buttonDeposit).not.toHaveClass('border-green-500')
   })
+
+  it('should click on the input button, and check if it has been activated, represented with a green border', async () => {
+    render(
+      <TransactionsProvider>
+        <DialogTransaction />
+      </TransactionsProvider>
+    )
+
+    const buttonOpen = screen.getByText(/nova transação/i)
+
+    act(() => {
+      buttonOpen.click()
+    })
+
+    const buttonWithdrawn = screen.getByRole('button', {
+      name: /saída/i
+    })
+
+    const buttonDeposit = screen.getByRole('button', {
+      name: /entrada/i
+    })
+
+    act(() => {
+      buttonDeposit.click()
+    })
+
+    expect(buttonWithdrawn).not.toHaveClass('border-red-500')
+    expect(buttonDeposit).toHaveClass('border-green-500')
+  })
+
+  it('should click on the exit button, and check if it has been activated, represented with a red border', () => {
+    render(
+      <TransactionsProvider>
+        <DialogTransaction />
+      </TransactionsProvider>
+    )
+
+    const buttonOpen = screen.getByText(/nova transação/i)
+
+    act(() => {
+      buttonOpen.click()
+    })
+
+    const buttonWithdrawn = screen.getByRole('button', {
+      name: /saída/i
+    })
+
+    const buttonDeposit = screen.getByRole('button', {
+      name: /entrada/i
+    })
+
+    act(() => {
+      buttonWithdrawn.click()
+    })
+
+    expect(buttonWithdrawn).toHaveClass('border-red-500')
+    expect(buttonDeposit).not.toHaveClass('border-green-500')
+  })
 })
