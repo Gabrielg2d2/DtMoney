@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react'
-import { Home } from '.'
+import { HomeTemplate } from '.'
+import { TransactionsProvider } from '@/context/transactions'
 
-describe('Home', () => {
-  it('should render component Home', () => {
-    render(<Home />)
+describe('HomeTemplate', () => {
+  it('should render component HomeTemplate', () => {
+    render(
+      <TransactionsProvider>
+        <HomeTemplate />
+      </TransactionsProvider>
+    )
 
     expect(screen.getByText(/dt money/i)).toBeInTheDocument()
     expect(screen.getByText('Nova transação')).toBeInTheDocument()
@@ -18,7 +23,11 @@ describe('Home', () => {
   })
 
   it('should render component Cards with texts Entradas, Saídas, Total', () => {
-    render(<Home />)
+    render(
+      <TransactionsProvider>
+        <HomeTemplate />
+      </TransactionsProvider>
+    )
 
     expect(screen.getByText('Entradas')).toBeInTheDocument()
     expect(screen.getByText('Saídas')).toBeInTheDocument()

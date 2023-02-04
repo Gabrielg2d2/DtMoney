@@ -10,8 +10,9 @@ describe('Transaction - List', () => {
     cleanup()
   })
 
+  const mainTransaction = MainTransaction
+
   it('should spy on the handleListTransactions function, and inject the mock', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleListTransactions')
 
     mainSpy.mockResolvedValueOnce(responseTransactionsMock)
@@ -49,7 +50,6 @@ describe('Transaction - List', () => {
   })
 
   it('should call the function only once', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleListTransactions')
 
     mainSpy.mockResolvedValueOnce(responseTransactionsMock)
@@ -65,8 +65,10 @@ describe('Transaction - Create', () => {
   afterEach(() => {
     cleanup()
   })
+
+  const mainTransaction = MainTransaction
+
   it('should add a new transaction', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleCreateTransaction')
     const { id, ...dataMock } = dataTransactionsMock[0]
 
@@ -94,7 +96,6 @@ describe('Transaction - Create', () => {
   })
 
   it('should error with status different 201', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleCreateTransaction')
 
     mainSpy.mockResolvedValueOnce({
@@ -113,7 +114,6 @@ describe('Transaction - Create', () => {
   })
 
   it("should call the method 'handleListTransactions' after adding a new transaction", async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleCreateTransaction')
 
     mainSpy.mockResolvedValueOnce({
@@ -145,8 +145,9 @@ describe('Transaction - Remove', () => {
     cleanup()
   })
 
+  const mainTransaction = MainTransaction
+
   it('should delete a transaction', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleDeleteTransaction')
 
     mainSpy.mockResolvedValueOnce({
@@ -163,7 +164,6 @@ describe('Transaction - Remove', () => {
   })
 
   it('it should return status 400 when any error occurs when deleting', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleDeleteTransaction')
 
     mainSpy.mockResolvedValueOnce({
@@ -178,8 +178,9 @@ describe('Transaction - Remove', () => {
 })
 
 describe('Transaction - Update', () => {
+  const mainTransaction = MainTransaction
+
   it('should update a transaction', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleUpdateTransaction')
 
     mainSpy.mockResolvedValueOnce({
@@ -199,7 +200,6 @@ describe('Transaction - Update', () => {
   })
 
   it('should return status 400 when any error occurs when updating', async () => {
-    const mainTransaction = new MainTransaction()
     const mainSpy = jest.spyOn(mainTransaction, 'handleUpdateTransaction')
 
     mainSpy.mockResolvedValueOnce({

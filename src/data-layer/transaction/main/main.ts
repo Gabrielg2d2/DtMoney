@@ -14,8 +14,13 @@ import {
   TotalOutgoingTransactions
 } from '../use-cases'
 
-export class MainTransaction {
+class Main {
   url = '/transactions'
+
+  transactions = []
+  totalIncomingTransactions = 'R$0,00'
+  totalOutgoingTransactions = 'R$0,00'
+  totalTransactions = 'R$0,00'
 
   handleFormatDate(date: string) {
     const formatDate = new Date(date)
@@ -43,6 +48,7 @@ export class MainTransaction {
   handleTotalTransactions(transactions: TransactionDataAPI[]) {
     const totalTransactions = new TotalTransactions()
     const total = totalTransactions.filterTotalTransactions(transactions)
+    this.totalTransactions = this.handleFormatMoneyPtBr(total)
     return this.handleFormatMoneyPtBr(total)
   }
 
@@ -50,6 +56,7 @@ export class MainTransaction {
     const totalIncomingTransactions = new TotalIncomingTransactions()
     const total =
       totalIncomingTransactions.filterTotalIncomingTransactions(transactions)
+    this.totalIncomingTransactions = this.handleFormatMoneyPtBr(total)
     return this.handleFormatMoneyPtBr(total)
   }
 
@@ -57,6 +64,7 @@ export class MainTransaction {
     const totalOutgoingTransactions = new TotalOutgoingTransactions()
     const total =
       totalOutgoingTransactions.filterTotalOutgoingTransactions(transactions)
+    this.totalOutgoingTransactions = this.handleFormatMoneyPtBr(total)
     return this.handleFormatMoneyPtBr(total)
   }
 
@@ -83,6 +91,8 @@ export class MainTransaction {
       response.data
     )
 
+    this.transactions = responseFormat
+
     return {
       status: response.status,
       data: responseFormat,
@@ -99,6 +109,14 @@ export class MainTransaction {
 
     if (response.status === 201) {
       const responseUpdateListTransaction = await this.handleListTransactions()
+
+      this.transactions = responseUpdateListTransaction.data
+      this.totalIncomingTransactions =
+        responseUpdateListTransaction.totalIncomingTransactions
+      this.totalOutgoingTransactions =
+        responseUpdateListTransaction.totalOutgoingTransactions
+      this.totalTransactions = responseUpdateListTransaction.totalTransactions
+
       return {
         status: response.status,
         ...responseUpdateListTransaction
@@ -119,6 +137,14 @@ export class MainTransaction {
 
     if (response.status === 200) {
       const responseUpdateListTransaction = await this.handleListTransactions()
+
+      this.transactions = responseUpdateListTransaction.data
+      this.totalIncomingTransactions =
+        responseUpdateListTransaction.totalIncomingTransactions
+      this.totalOutgoingTransactions =
+        responseUpdateListTransaction.totalOutgoingTransactions
+      this.totalTransactions = responseUpdateListTransaction.totalTransactions
+
       return {
         status: response.status,
         ...responseUpdateListTransaction
@@ -139,6 +165,14 @@ export class MainTransaction {
 
     if (response.status === 200) {
       const responseUpdateListTransaction = await this.handleListTransactions()
+
+      this.transactions = responseUpdateListTransaction.data
+      this.totalIncomingTransactions =
+        responseUpdateListTransaction.totalIncomingTransactions
+      this.totalOutgoingTransactions =
+        responseUpdateListTransaction.totalOutgoingTransactions
+      this.totalTransactions = responseUpdateListTransaction.totalTransactions
+
       return {
         status: response.status,
         ...responseUpdateListTransaction
@@ -151,3 +185,11 @@ export class MainTransaction {
     }
   }
 }
+
+let MainTransaction: Main | null = null
+
+if (!MainTransaction) {
+  MainTransaction = new Main()
+}
+
+export { MainTransaction }

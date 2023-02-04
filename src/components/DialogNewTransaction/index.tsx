@@ -1,11 +1,18 @@
-import { useDialogTransaction } from '@/hook/DialogNewTransaction/useDialogTransaction'
+import { useTransactionsContext } from '@/context/transactions'
 import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
 import { DialogCustom } from '../Dialog'
 import { Input } from '../Input'
 
 export function DialogTransaction() {
-  const { handleType, make, register, handleSubmit, onSubmit, watch, errors } =
-    useDialogTransaction()
+  const { make, onSubmit, methods } = useTransactionsContext()
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors }
+  } = methods
 
   return (
     <DialogCustom
@@ -40,7 +47,7 @@ export function DialogTransaction() {
               watch('type') === 'deposit' ? 'border-green-500' : ''
             }`}
             onClick={() => {
-              handleType('deposit')
+              setValue('type', 'deposit')
             }}
           >
             <ArrowCircleUp size={26} className="text-green-default" />
@@ -54,7 +61,7 @@ export function DialogTransaction() {
               watch('type') === 'withdrawn' ? 'border-red-500' : ''
             }`}
             onClick={() => {
-              handleType('withdrawn')
+              setValue('type', 'withdrawn')
             }}
           >
             <ArrowCircleDown size={26} className="text-red-default" />

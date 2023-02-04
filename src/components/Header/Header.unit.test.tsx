@@ -1,9 +1,14 @@
+import { TransactionsProvider } from '@/context/transactions'
 import { render, screen } from '@testing-library/react'
 import { Header } from '.'
 
 describe('Header', () => {
   it('should render component Header', () => {
-    render(<Header />)
+    render(
+      <TransactionsProvider>
+        <Header />
+      </TransactionsProvider>
+    )
     expect(screen.getByText('dt money')).toBeInTheDocument()
     expect(screen.getByText('Nova transação')).toBeInTheDocument()
 

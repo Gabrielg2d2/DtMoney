@@ -1,14 +1,40 @@
-import { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useCallback,
+  useEffect
+} from 'react'
+import { useForm, UseFormReturn } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { MainTransaction } from '@/data-layer/transaction/main/main'
+
+// Transactions - trocar pelo nome correto do contexto
 
 type DataForm = {
   name: string
   amount: string
   type: string
   category: string
+}
+
+type TransactionsType = {
+  children: ReactNode
+}
+
+type TransactionsContextType = {
+  loading: boolean
+  setLoading: (loading: boolean) => void
+  make: () => {
+    title: string
+    description: string
+    buttonOpen: JSX.Element
+  }
+  methods: UseFormReturn<DataForm, any>
+  onSubmit: (data: DataForm) => Promise<void>
+  mainTransaction: typeof MainTransaction
 }
 
 const schema = z.object({
@@ -27,8 +53,14 @@ const schema = z.object({
   category: z.string().min(1, { message: 'Obrigatório' })
 })
 
-export function useDialogTransaction(isEdit = false) {
-  const make = useCallback(() => {
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+const TransactionsContext = createContext({} as TransactionsContextType)
+
+export function TransactionsProvider({ children }: TransactionsType) {
+  const mainTransaction = MainTransaction
+  const [loading, setLoading] = useState(false)
+
+  const make = useCallback((isEdit = false) => {
     const title = isEdit ? 'Editar transação' : 'Cadastrar transação'
     const description = isEdit
       ? 'Edite os dados da transação'
@@ -48,16 +80,9 @@ export function useDialogTransaction(isEdit = false) {
       description,
       buttonOpen
     }
-  }, [isEdit])
+  }, [])
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    reset,
-    formState: { errors }
-  } = useForm<DataForm>({
+  const methods = useForm<DataForm>({
     defaultValues: {
       name: '',
       amount: '',
@@ -67,13 +92,6 @@ export function useDialogTransaction(isEdit = false) {
     resolver: zodResolver(schema),
     mode: 'onBlur'
   })
-
-  const handleType = useCallback(
-    (type: string) => {
-      setValue('type', type)
-    },
-    [setValue]
-  )
 
   const onSubmit = async (data: DataForm) => {
     const { name, amount, type, category } = data
@@ -86,27 +104,43 @@ export function useDialogTransaction(isEdit = false) {
       date: new Date().toISOString()
     }
 
-    const mainTransaction = new MainTransaction()
-
     const response = await mainTransaction.handleCreateTransaction(obj)
 
-    console.log(response)
-
     if (response.status === 200) {
-      reset()
+      methods.reset()
       return
     }
 
     alert('Erro, ao cadastrar transação!')
   }
 
-  return {
-    handleType,
-    make,
-    register,
-    handleSubmit,
-    onSubmit,
-    watch,
-    errors
-  }
+  const listTransactions = useCallback(async () => {
+    setLoading(true)
+    await mainTransaction.handleListTransactions()
+    setLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    void listTransactions()
+  }, [listTransactions])
+
+  return (
+    <TransactionsContext.Provider
+      value={{
+        loading,
+        setLoading,
+        make,
+        methods,
+        onSubmit,
+        mainTransaction
+      }}
+    >
+      {children}
+    </TransactionsContext.Provider>
+  )
+}
+
+export function useTransactionsContext() {
+  return useContext(TransactionsContext)
 }
