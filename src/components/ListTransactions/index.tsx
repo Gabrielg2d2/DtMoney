@@ -1,4 +1,5 @@
 import { TransactionDataAPIFormat } from '@/domain/transaction/types/global/transactions'
+import { Trash } from 'phosphor-react'
 import { useMemo } from 'react'
 
 type BoxProps = {
@@ -7,8 +8,11 @@ type BoxProps = {
 
 function Box({ children }: BoxProps) {
   return (
-    <div className="bg-white text-text-default rounded-sm grid grid-cols-4 items-center pl-8 h-16 min-h-16 max-sm:flex max-sm:flex-col max-sm:h-36 max-sm:min-h-36 max-sm:items-start max-sm:pt-4">
+    <div className="relative bg-white text-text-default rounded-sm grid grid-cols-4 items-center pl-8 h-16 min-h-16 max-sm:flex max-sm:flex-col max-sm:h-36 max-sm:min-h-36 max-sm:items-start max-sm:pt-4">
       {children}
+      <button className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-green-100 rounded-lg p-1">
+        <Trash size={20} />
+      </button>
     </div>
   )
 }
