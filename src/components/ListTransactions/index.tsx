@@ -4,13 +4,20 @@ import { useMemo } from 'react'
 
 type BoxProps = {
   children: React.ReactNode
+  id: string
 }
 
-function Box({ children }: BoxProps) {
+function Box({ children, id }: BoxProps) {
   return (
     <div className="relative bg-white text-text-default rounded-sm grid grid-cols-4 items-center pl-8 h-16 min-h-16 max-sm:flex max-sm:flex-col max-sm:h-36 max-sm:min-h-36 max-sm:items-start max-sm:pt-4">
       {children}
-      <button className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-green-100 rounded-lg p-1">
+      <button
+        title="Deletar"
+        className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-green-100 rounded-lg p-1"
+        onClick={() => {
+          console.log(id)
+        }}
+      >
         <Trash size={20} />
       </button>
     </div>
@@ -43,7 +50,7 @@ export function ListTransactions({ list }: ListTransactionsProps) {
   const listTransactions = useMemo(
     () =>
       list.map((transaction) => (
-        <Box key={transaction.id}>
+        <Box key={transaction.id} id={transaction.id}>
           <span>{transaction.name}</span>
           <span
             className={`max-sm:mt-2 max-sm:text-xl ${
