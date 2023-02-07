@@ -35,6 +35,7 @@ type TransactionsContextType = {
   methods: UseFormReturn<DataForm, any>
   onSubmit: (data: DataForm) => Promise<void>
   mainTransaction: typeof MainTransaction
+  deleteTransaction: (id: string) => Promise<void>
 }
 
 const schema = z.object({
@@ -94,30 +95,54 @@ export function TransactionsProvider({ children }: TransactionsType) {
   })
 
   const onSubmit = async (data: DataForm) => {
-    const { name, amount, type, category } = data
+    try {
+      setLoading(true)
+      const { name, amount, type, category } = data
 
-    const obj = {
-      name,
-      amount: Number(amount),
-      type,
-      category,
-      date: new Date().toISOString()
+      const obj = {
+        name,
+        amount: Number(amount),
+        type,
+        category,
+        date: new Date().toISOString()
+      }
+
+      const response = await mainTransaction.handleCreateTransaction(obj)
+
+      if (response.status === 200) {
+        methods.reset()
+        return
+      }
+    } catch (error) {
+      alert('Erro, ao cadastrar transação!')
+    } finally {
+      setLoading(false)
     }
-
-    const response = await mainTransaction.handleCreateTransaction(obj)
-
-    if (response.status === 200) {
-      methods.reset()
-      return
-    }
-
-    alert('Erro, ao cadastrar transação!')
   }
 
+  const deleteTransaction = useCallback(
+    async (id: string) => {
+      try {
+        setLoading(true)
+        await mainTransaction.handleDeleteTransaction(id)
+      } catch (error) {
+        alert('Erro ao deletar transação')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [mainTransaction, setLoading]
+  )
+
   const listTransactions = useCallback(async () => {
-    setLoading(true)
-    await mainTransaction.handleListTransactions()
-    setLoading(false)
+    try {
+      setLoading(true)
+      await mainTransaction.handleListTransactions()
+    } catch (error) {
+      alert('Erro ao listar transações')
+    } finally {
+      setLoading(false)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -133,7 +158,8 @@ export function TransactionsProvider({ children }: TransactionsType) {
         make,
         methods,
         onSubmit,
-        mainTransaction
+        mainTransaction,
+        deleteTransaction
       }}
     >
       {children}
