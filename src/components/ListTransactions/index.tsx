@@ -1,6 +1,7 @@
 import { TransactionDataAPIFormat } from '@/domain/transaction/types/global/transactions'
 import { Trash } from 'phosphor-react'
 import { useMemo } from 'react'
+import { DialogTransaction } from '../DialogNewTransaction'
 
 type BoxProps = {
   children: React.ReactNode
@@ -70,9 +71,10 @@ export function ListTransactions({
               {transaction.dateFormatted}
             </span>
           </div>
+          <DialogTransaction isEdit />
           <button
             title="Deletar"
-            className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-green-100 rounded-lg p-1"
+            className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
             onClick={async () => {
               await deleteTransaction(transaction.id)
             }}

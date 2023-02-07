@@ -10,6 +10,7 @@ import { useForm, UseFormReturn } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { MainTransaction } from '@/data-layer/transaction/main/main'
+import { Pencil } from 'phosphor-react'
 
 // Transactions - trocar pelo nome correto do contexto
 
@@ -27,7 +28,7 @@ type TransactionsType = {
 type TransactionsContextType = {
   loading: boolean
   setLoading: (loading: boolean) => void
-  make: () => {
+  make: (isEdit: boolean) => {
     title: string
     description: string
     buttonOpen: JSX.Element
@@ -67,8 +68,8 @@ export function TransactionsProvider({ children }: TransactionsType) {
       ? 'Edite os dados da transação'
       : 'Insira os dados para nova transação'
     const buttonOpen = isEdit ? (
-      <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold">
-        Editar transação
+      <button className="absolute top-auto right-14 hover:bg-gray-100 p-1 rounded-lg">
+        <Pencil size={20} />
       </button>
     ) : (
       <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold">

@@ -3,7 +3,11 @@ import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
 import { DialogCustom } from '../Dialog'
 import { Input } from '../Input'
 
-export function DialogTransaction() {
+type DialogTransactionProps = {
+  isEdit?: boolean
+}
+
+export function DialogTransaction({ isEdit = false }: DialogTransactionProps) {
   const { make, onSubmit, methods } = useTransactionsContext()
 
   const {
@@ -16,9 +20,9 @@ export function DialogTransaction() {
 
   return (
     <DialogCustom
-      title={make().title}
-      description={make().description}
-      buttonOpen={make().buttonOpen}
+      title={make(isEdit).title}
+      description={make(isEdit).description}
+      buttonOpen={make(isEdit).buttonOpen}
     >
       <form
         className="flex flex-col gap-4 pb-4 px-2"
