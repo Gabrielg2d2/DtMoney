@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import { ListTransactions } from '.'
 
 describe('ListTransactions', () => {
@@ -96,5 +96,61 @@ describe('ListTransactions', () => {
     render(<ListTransactions list={[]} />)
 
     expect(screen.getByText('Nenhuma transação encontrada')).toBeInTheDocument()
+  })
+
+  it('should render component ListTransactions with button of icon delete transaction', () => {
+    render(
+      <ListTransactions
+        list={[
+          {
+            id: '1',
+            name: 'Jest_Name',
+            type: 'withdrawn',
+            category: 'Jest_Category',
+            amount: 10,
+            date: '2021-03-01T00:00:00.000Z',
+            dateFormatted: '01/03/2021',
+            amountFormatted: 'R$ 10,00'
+          }
+        ]}
+      />
+    )
+
+    screen.logTestingPlaygroundURL()
+
+    expect(
+      screen.getByRole('button', {
+        name: /deletar/i
+      })
+    ).toBeInTheDocument()
+  })
+
+  fit('should be possible to click the delete transaction button', () => {
+    render(
+      <ListTransactions
+        list={[
+          {
+            id: '1',
+            name: 'Jest_Name',
+            type: 'withdrawn',
+            category: 'Jest_Category',
+            amount: 10,
+            date: '2021-03-01T00:00:00.000Z',
+            dateFormatted: '01/03/2021',
+            amountFormatted: 'R$ 10,00'
+          }
+        ]}
+      />
+    )
+
+    const buttonDeleteIcon = screen.getByRole('button', {
+      name: /deletar/i
+    })
+
+    act(() => {
+      buttonDeleteIcon.click()
+    })
+
+    expect(buttonDeleteIcon).toBeInTheDocument()
   })
 })
