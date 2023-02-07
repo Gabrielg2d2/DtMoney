@@ -136,8 +136,6 @@ describe('ListTransactions', () => {
       </TransactionsProvider>
     )
 
-    screen.logTestingPlaygroundURL()
-
     expect(
       screen.getByRole('button', {
         name: /deletar/i
