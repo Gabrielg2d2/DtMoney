@@ -125,7 +125,7 @@ describe('ListTransactions', () => {
     ).toBeInTheDocument()
   })
 
-  fit('should be possible to click the delete transaction button', () => {
+  it('should be possible to click the delete transaction button', () => {
     render(
       <ListTransactions
         list={[
