@@ -9,7 +9,8 @@ import {
 import { useTransactionsContext } from '@/context/transactions'
 
 export function HomeTemplate() {
-  const { mainTransaction, loading } = useTransactionsContext()
+  const { mainTransaction, deleteTransaction, loading } =
+    useTransactionsContext()
 
   return (
     <Container>
@@ -27,7 +28,10 @@ export function HomeTemplate() {
 
         <section className="mt-10">
           {loading && <p>Carregando...</p>}
-          <ListTransactions list={mainTransaction.transactions} />
+          <ListTransactions
+            list={mainTransaction.transactions}
+            deleteTransaction={deleteTransaction}
+          />
         </section>
       </main>
     </Container>

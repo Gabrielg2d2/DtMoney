@@ -3,10 +3,13 @@ import { act, render, screen } from '@testing-library/react'
 import { ListTransactions } from '.'
 
 describe('ListTransactions', () => {
+  const mockDeleteTransaction = jest.fn()
+
   it('should render component ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -31,6 +34,7 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -57,6 +61,7 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -81,6 +86,7 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -102,7 +108,9 @@ describe('ListTransactions', () => {
   })
 
   it('should render component ListTransactions with array empty', () => {
-    render(<ListTransactions list={[]} />)
+    render(
+      <ListTransactions deleteTransaction={mockDeleteTransaction} list={[]} />
+    )
 
     expect(screen.getByText('Nenhuma transação encontrada')).toBeInTheDocument()
   })
@@ -111,6 +119,7 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -140,6 +149,7 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
+          deleteTransaction={mockDeleteTransaction}
           list={[
             {
               id: '1',
@@ -164,6 +174,6 @@ describe('ListTransactions', () => {
       buttonDeleteIcon.click()
     })
 
-    expect(buttonDeleteIcon).toBeInTheDocument()
+    expect(mockDeleteTransaction).toHaveBeenCalled()
   })
 })

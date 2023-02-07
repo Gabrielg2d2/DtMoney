@@ -1,4 +1,3 @@
-import { useTransactionsContext } from '@/context/transactions'
 import { TransactionDataAPIFormat } from '@/domain/transaction/types/global/transactions'
 import { Trash } from 'phosphor-react'
 import { useMemo } from 'react'
@@ -35,11 +34,13 @@ function Header() {
 
 type ListTransactionsProps = {
   list: TransactionDataAPIFormat[]
+  deleteTransaction: (id: string) => Promise<void>
 }
 
-export function ListTransactions({ list }: ListTransactionsProps) {
-  const { deleteTransaction } = useTransactionsContext()
-
+export function ListTransactions({
+  list,
+  deleteTransaction
+}: ListTransactionsProps) {
   const listTransactions = useMemo(
     () =>
       list.map((transaction) => (
