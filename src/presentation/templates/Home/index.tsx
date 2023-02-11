@@ -9,12 +9,16 @@ import {
 import { useTransactionsContext } from '@/context/transactions'
 
 export function HomeTemplate() {
-  const { mainTransaction, deleteTransaction, loading } =
-    useTransactionsContext()
+  const {
+    mainTransaction,
+    deleteTransaction,
+    handleOpenModalTransaction,
+    loading
+  } = useTransactionsContext()
 
   return (
     <Container>
-      <Header />
+      <Header handleOpenModalTransaction={handleOpenModalTransaction} />
 
       <main
         data-testid="main_page_home_id"

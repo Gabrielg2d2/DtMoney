@@ -5,9 +5,15 @@ import { Input } from '../Input'
 
 type DialogTransactionProps = {
   isEdit?: boolean
+  open: boolean
+  close: () => void
 }
 
-export function DialogTransaction({ isEdit = false }: DialogTransactionProps) {
+export function DialogTransaction({
+  isEdit = false,
+  open,
+  close
+}: DialogTransactionProps) {
   const { make, onSubmit, methods } = useTransactionsContext()
 
   const {
@@ -22,7 +28,8 @@ export function DialogTransaction({ isEdit = false }: DialogTransactionProps) {
     <DialogCustom
       title={make(isEdit).title}
       description={make(isEdit).description}
-      buttonOpen={make(isEdit).buttonOpen}
+      open={open}
+      close={close}
     >
       <form
         className="flex flex-col gap-4 pb-4 px-2"

@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { MainTransaction } from '@/data-layer/transaction/main/main'
 import { Pencil } from 'phosphor-react'
+import { DialogTransaction } from '@/components'
 
 // Transactions - trocar pelo nome correto do contexto
 
@@ -37,6 +38,7 @@ type TransactionsContextType = {
   onSubmit: (data: DataForm) => Promise<void>
   mainTransaction: typeof MainTransaction
   deleteTransaction: (id: string) => Promise<void>
+  handleOpenModalTransaction: () => void
 }
 
 const schema = z.object({
@@ -60,6 +62,7 @@ const TransactionsContext = createContext({} as TransactionsContextType)
 
 export function TransactionsProvider({ children }: TransactionsType) {
   const mainTransaction = MainTransaction
+  const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const make = useCallback((isEdit = false) => {
@@ -147,6 +150,14 @@ export function TransactionsProvider({ children }: TransactionsType) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  function handleOpenModalTransaction() {
+    setOpen(true)
+  }
+
+  function handleCloseModalTransaction() {
+    setOpen(false)
+  }
+
   useEffect(() => {
     void listTransactions()
   }, [listTransactions])
@@ -160,10 +171,12 @@ export function TransactionsProvider({ children }: TransactionsType) {
         methods,
         onSubmit,
         mainTransaction,
-        deleteTransaction
+        deleteTransaction,
+        handleOpenModalTransaction
       }}
     >
       {children}
+      <DialogTransaction open={open} close={handleCloseModalTransaction} />
     </TransactionsContext.Provider>
   )
 }

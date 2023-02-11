@@ -1,7 +1,10 @@
 import { CurrencyDollar } from 'phosphor-react'
-import { DialogTransaction } from '@/components'
 
-export function Header() {
+type HeaderProps = {
+  handleOpenModalTransaction: () => void
+}
+
+export function Header({ handleOpenModalTransaction }: HeaderProps) {
   return (
     <header className="bg-violet-800 h-48 p-8 flex items-start justify-center">
       <div className="flex items-center justify-between flex-1 max-w-screen-xl">
@@ -12,7 +15,12 @@ export function Header() {
           />
           <h1 className="text-2xl text-white font-bold">dt money</h1>
         </div>
-        <DialogTransaction />
+        <button
+          onClick={handleOpenModalTransaction}
+          className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring py-3 px-8 rounded-md text-white font-bold"
+        >
+          Nova transação
+        </button>
       </div>
     </header>
   )
