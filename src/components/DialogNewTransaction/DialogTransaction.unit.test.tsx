@@ -4,28 +4,12 @@ import { DialogTransaction } from '.'
 import { TransactionsProvider } from '@/context/transactions'
 
 describe('DialogTransaction', () => {
-  it('should render component DialogTransaction close, just the button', () => {
-    render(
-      <TransactionsProvider>
-        <DialogTransaction />
-      </TransactionsProvider>
-    )
-
-    expect(screen.getByText(/nova transação/i)).toBeInTheDocument()
-  })
-
   it('should render component DialogTransaction open, with the form', () => {
     render(
       <TransactionsProvider>
-        <DialogTransaction />
+        <DialogTransaction open close={() => {}} />
       </TransactionsProvider>
     )
-
-    const buttonOpen = screen.getByText(/nova transação/i)
-
-    act(() => {
-      buttonOpen.click()
-    })
 
     expect(screen.getByText(/cadastrar transação/i)).toBeInTheDocument()
     expect(
@@ -57,23 +41,9 @@ describe('DialogTransaction', () => {
   it('should allow closing the modal when clicking on the "x" close button', () => {
     render(
       <TransactionsProvider>
-        <DialogTransaction />
+        <DialogTransaction open={false} close={() => {}} />
       </TransactionsProvider>
     )
-
-    const buttonOpen = screen.getByText(/nova transação/i)
-
-    act(() => {
-      buttonOpen.click()
-    })
-
-    const buttonClose = screen.getByRole('button', {
-      name: /close dialog/i
-    })
-
-    act(() => {
-      buttonClose.click()
-    })
 
     expect(screen.queryByText(/cadastrar transação/i)).not.toBeInTheDocument()
   })
@@ -81,15 +51,9 @@ describe('DialogTransaction', () => {
   it('should render component DialogTransaction with button withdrawn selection default', () => {
     render(
       <TransactionsProvider>
-        <DialogTransaction />
+        <DialogTransaction open close={() => {}} />
       </TransactionsProvider>
     )
-
-    const buttonOpen = screen.getByText(/nova transação/i)
-
-    act(() => {
-      buttonOpen.click()
-    })
 
     const buttonWithdrawn = screen.getByRole('button', {
       name: /saída/i
@@ -106,15 +70,9 @@ describe('DialogTransaction', () => {
   it('should click on the input button, and check if it has been activated, represented with a green border', async () => {
     render(
       <TransactionsProvider>
-        <DialogTransaction />
+        <DialogTransaction open close={() => {}} />
       </TransactionsProvider>
     )
-
-    const buttonOpen = screen.getByText(/nova transação/i)
-
-    act(() => {
-      buttonOpen.click()
-    })
 
     const buttonWithdrawn = screen.getByRole('button', {
       name: /saída/i
@@ -135,15 +93,9 @@ describe('DialogTransaction', () => {
   it('should click on the exit button, and check if it has been activated, represented with a red border', () => {
     render(
       <TransactionsProvider>
-        <DialogTransaction />
+        <DialogTransaction open close={() => {}} />
       </TransactionsProvider>
     )
-
-    const buttonOpen = screen.getByText(/nova transação/i)
-
-    act(() => {
-      buttonOpen.click()
-    })
 
     const buttonWithdrawn = screen.getByRole('button', {
       name: /saída/i
