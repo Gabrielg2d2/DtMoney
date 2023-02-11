@@ -53,7 +53,7 @@ const schema = z.object({
       },
       { message: 'O valor deve ser maior que 0' }
     ),
-  type: z.string().min(1, { message: 'Obrigatório' }),
+  type: z.enum(['withdrawn', 'deposit']),
   category: z.string().min(1, { message: 'Obrigatório' })
 })
 
