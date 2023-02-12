@@ -11,7 +11,7 @@ import { useTransactionsContext } from '@/context/transactions'
 export function HomeTemplate() {
   const {
     mainTransaction,
-    deleteTransaction,
+    handleDeleteTransaction,
     handleOpenModalTransaction,
     handleOpenModalTransactionToEdit,
     loading
@@ -35,8 +35,8 @@ export function HomeTemplate() {
           {loading && <p>Carregando...</p>}
           <ListTransactions
             list={mainTransaction.transactions}
-            deleteTransaction={deleteTransaction}
-            updateTransaction={handleOpenModalTransactionToEdit}
+            handleDeleteTransaction={handleDeleteTransaction}
+            handleOpenModalTransactionToEdit={handleOpenModalTransactionToEdit}
           />
         </section>
       </main>

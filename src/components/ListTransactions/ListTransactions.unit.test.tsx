@@ -4,12 +4,14 @@ import { ListTransactions } from '.'
 
 describe('ListTransactions', () => {
   const mockDeleteTransaction = jest.fn()
+  const mockOpenModalTransactionToEdit = jest.fn()
 
   it('should render component ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',
@@ -34,7 +36,8 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',
@@ -61,7 +64,8 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',
@@ -86,7 +90,8 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',
@@ -109,7 +114,11 @@ describe('ListTransactions', () => {
 
   it('should render component ListTransactions with array empty', () => {
     render(
-      <ListTransactions deleteTransaction={mockDeleteTransaction} list={[]} />
+      <ListTransactions
+        handleDeleteTransaction={mockDeleteTransaction}
+        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
+        list={[]}
+      />
     )
 
     expect(screen.getByText('Nenhuma transação encontrada')).toBeInTheDocument()
@@ -119,7 +128,8 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',
@@ -147,7 +157,8 @@ describe('ListTransactions', () => {
     render(
       <TransactionsProvider>
         <ListTransactions
-          deleteTransaction={mockDeleteTransaction}
+          handleDeleteTransaction={mockDeleteTransaction}
+          handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
           list={[
             {
               id: '1',

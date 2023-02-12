@@ -37,14 +37,14 @@ function Header() {
 
 type ListTransactionsProps = {
   list: TransactionDataAPIFormat[]
-  deleteTransaction: (id: string) => Promise<void>
-  updateTransaction: (transaction: TransactionDataAPI) => void
+  handleDeleteTransaction: (id: string) => Promise<void>
+  handleOpenModalTransactionToEdit: (transaction: TransactionDataAPI) => void
 }
 
 export function ListTransactions({
   list,
-  deleteTransaction,
-  updateTransaction
+  handleDeleteTransaction,
+  handleOpenModalTransactionToEdit
 }: ListTransactionsProps) {
   const listTransactions = useMemo(
     () =>
@@ -79,7 +79,7 @@ export function ListTransactions({
             title="Editar"
             className="absolute top-4 right-16"
             onClick={() => {
-              updateTransaction(transaction)
+              handleOpenModalTransactionToEdit(transaction)
             }}
           >
             <Pencil size={20} />
@@ -88,14 +88,14 @@ export function ListTransactions({
             title="Deletar"
             className="absolute top-3 right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
             onClick={async () => {
-              await deleteTransaction(transaction.id)
+              await handleDeleteTransaction(transaction.id)
             }}
           >
             <Trash size={20} />
           </button>
         </Box>
       )),
-    [deleteTransaction, list, updateTransaction]
+    [handleDeleteTransaction, handleOpenModalTransactionToEdit, list]
   )
 
   if (!list.length) {

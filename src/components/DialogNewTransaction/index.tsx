@@ -33,7 +33,6 @@ export function DialogTransaction({
     >
       <form
         className="flex flex-col gap-4 pb-4 px-2"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

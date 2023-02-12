@@ -16,7 +16,7 @@ import {
 import { formatMoneyPtBr } from '@/global/functions/formatMoneyPtBr/formatMoneyPtBr'
 import { formatDatePtBr } from '@/global/functions/formatDate/formatDatePtBr'
 
-class Main {
+export class Main {
   url = '/transactions'
 
   transactions = []
