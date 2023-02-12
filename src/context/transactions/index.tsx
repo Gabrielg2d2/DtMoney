@@ -169,6 +169,8 @@ export function TransactionsProvider({ children }: TransactionsType) {
     [handleOpenModalTransaction, methods]
   )
 
+  console.log('methods: ', methods.getValues('type'))
+
   const onSubmit = async (data: DataForm) => {
     if (isEdit) {
       const { name, amount, category, type } = data

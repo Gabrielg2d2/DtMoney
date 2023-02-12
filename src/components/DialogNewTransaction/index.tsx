@@ -51,7 +51,7 @@ export function DialogTransaction({
 
         <div className="flex gap-2">
           <button
-            type="submit"
+            type="button"
             className={`
             flex items-center justify-center gap-2 transition-all
             p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
@@ -65,7 +65,7 @@ export function DialogTransaction({
             Entrada
           </button>
           <button
-            type="submit"
+            type="button"
             className={`
             flex items-center justify-center gap-2 transition-all
             p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default ${
