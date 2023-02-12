@@ -13,6 +13,8 @@ import {
   TotalIncomingTransactions,
   TotalOutgoingTransactions
 } from '../use-cases'
+import { formatMoneyPtBr } from '@/global/functions/formatMoneyPtBr/formatMoneyPtBr'
+import { formatDatePtBr } from '@/global/functions/formatDate/formatDatePtBr'
 
 class Main {
   url = '/transactions'
@@ -23,25 +25,15 @@ class Main {
   totalTransactions = 'R$0,00'
 
   handleFormatDate(date: string) {
-    const formatDate = new Date(date)
-    const format = new Intl.DateTimeFormat('pt-BR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(formatDate)
+    const formatDate = formatDatePtBr(date)
 
-    return format
+    return formatDate
   }
 
   handleFormatMoneyPtBr(value: number) {
-    const formatMoney = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    })
+    const formatMoney = formatMoneyPtBr(value)
 
-    return formatMoney.format(value)
+    return formatMoney
   }
 
   handleTotalTransactions(transactions: TransactionDataAPI[]) {
