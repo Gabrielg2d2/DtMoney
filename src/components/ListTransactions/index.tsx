@@ -1,7 +1,9 @@
-import { TransactionDataAPIFormat } from '@/domain/transaction/types/global/transactions'
-import { Trash } from 'phosphor-react'
+import {
+  TransactionDataAPI,
+  TransactionDataAPIFormat
+} from '@/domain/transaction/types/global/transactions'
+import { Pencil, Trash } from 'phosphor-react'
 import { useMemo } from 'react'
-import { DialogTransaction } from '../DialogNewTransaction'
 
 type BoxProps = {
   children: React.ReactNode
@@ -36,11 +38,13 @@ function Header() {
 type ListTransactionsProps = {
   list: TransactionDataAPIFormat[]
   deleteTransaction: (id: string) => Promise<void>
+  updateTransaction: (transaction: TransactionDataAPI) => void
 }
 
 export function ListTransactions({
   list,
-  deleteTransaction
+  deleteTransaction,
+  updateTransaction
 }: ListTransactionsProps) {
   const listTransactions = useMemo(
     () =>
@@ -71,10 +75,18 @@ export function ListTransactions({
               {transaction.dateFormatted}
             </span>
           </div>
-          <DialogTransaction isEdit />
+          <button
+            title="Editar"
+            className="absolute top-4 right-16"
+            onClick={() => {
+              updateTransaction(transaction)
+            }}
+          >
+            <Pencil size={20} />
+          </button>
           <button
             title="Deletar"
-            className="absolute top-auto right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
+            className="absolute top-3 right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
             onClick={async () => {
               await deleteTransaction(transaction.id)
             }}
@@ -83,7 +95,7 @@ export function ListTransactions({
           </button>
         </Box>
       )),
-    [deleteTransaction, list]
+    [deleteTransaction, list, updateTransaction]
   )
 
   if (!list.length) {

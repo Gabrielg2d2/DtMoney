@@ -13,6 +13,7 @@ export function HomeTemplate() {
     mainTransaction,
     deleteTransaction,
     handleOpenModalTransaction,
+    handleOpenModalTransactionToEdit,
     loading
   } = useTransactionsContext()
 
@@ -35,6 +36,7 @@ export function HomeTemplate() {
           <ListTransactions
             list={mainTransaction.transactions}
             deleteTransaction={deleteTransaction}
+            updateTransaction={handleOpenModalTransactionToEdit}
           />
         </section>
       </main>

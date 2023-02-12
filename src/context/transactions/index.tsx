@@ -12,10 +12,10 @@ import * as z from 'zod'
 import { MainTransaction } from '@/data-layer/transaction/main/main'
 import { Pencil } from 'phosphor-react'
 import { DialogTransaction } from '@/components'
-
-// Transactions - trocar pelo nome correto do contexto
+import { TransactionDataAPI } from '@/domain/transaction/types/global/transactions'
 
 type DataForm = {
+  id?: string
   name: string
   amount: string
   type: string
@@ -38,7 +38,9 @@ type TransactionsContextType = {
   onSubmit: (data: DataForm) => Promise<void>
   mainTransaction: typeof MainTransaction
   deleteTransaction: (id: string) => Promise<void>
+  updateTransaction: (transaction: TransactionDataAPI) => Promise<void>
   handleOpenModalTransaction: () => void
+  handleOpenModalTransactionToEdit: (body: TransactionDataAPI) => void
 }
 
 const schema = z.object({
@@ -51,7 +53,7 @@ const schema = z.object({
         const price = Number(value) ?? 0
         return price > 0
       },
-      { message: 'O valor deve ser maior que 0' }
+      { message: 'Somente número positivo' }
     ),
   type: z.enum(['withdrawn', 'deposit']),
   category: z.string().min(1, { message: 'Obrigatório' })
@@ -64,6 +66,7 @@ export function TransactionsProvider({ children }: TransactionsType) {
   const mainTransaction = MainTransaction
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
 
   const make = useCallback((isEdit = false) => {
     const title = isEdit ? 'Editar transação' : 'Cadastrar transação'
@@ -89,6 +92,7 @@ export function TransactionsProvider({ children }: TransactionsType) {
 
   const methods = useForm<DataForm>({
     defaultValues: {
+      id: '',
       name: '',
       amount: '',
       type: 'withdrawn',
@@ -98,31 +102,22 @@ export function TransactionsProvider({ children }: TransactionsType) {
     mode: 'onBlur'
   })
 
-  const onSubmit = async (data: DataForm) => {
-    try {
-      setLoading(true)
-      const { name, amount, type, category } = data
-
-      const obj = {
-        name,
-        amount: Number(amount),
-        type,
-        category,
-        date: new Date().toISOString()
+  const updateTransaction = useCallback(
+    async (transaction: TransactionDataAPI) => {
+      try {
+        setLoading(true)
+        await mainTransaction.handleUpdateTransaction(
+          transaction.id,
+          transaction
+        )
+      } catch (error) {
+        alert('Erro ao editar a transação')
+      } finally {
+        setLoading(false)
       }
-
-      const response = await mainTransaction.handleCreateTransaction(obj)
-
-      if (response.status === 200) {
-        methods.reset()
-        return
-      }
-    } catch (error) {
-      alert('Erro, ao cadastrar transação!')
-    } finally {
-      setLoading(false)
-    }
-  }
+    },
+    [mainTransaction, setLoading]
+  )
 
   const deleteTransaction = useCallback(
     async (id: string) => {
@@ -150,12 +145,73 @@ export function TransactionsProvider({ children }: TransactionsType) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleOpenModalTransaction() {
+  const handleOpenModalTransaction = useCallback(() => {
     setOpen(true)
-  }
+  }, [])
 
-  function handleCloseModalTransaction() {
+  const handleCloseModalTransaction = useCallback(() => {
+    setIsEdit(false)
     setOpen(false)
+  }, [])
+
+  const handleOpenModalTransactionToEdit = useCallback(
+    (transaction: TransactionDataAPI) => {
+      setIsEdit(true)
+
+      methods.setValue('id', transaction.id)
+      methods.setValue('name', transaction.name)
+      methods.setValue('amount', String(transaction.amount))
+      methods.setValue('type', transaction.type)
+      methods.setValue('category', transaction.category)
+
+      handleOpenModalTransaction()
+    },
+    [handleOpenModalTransaction, methods]
+  )
+
+  const onSubmit = async (data: DataForm) => {
+    if (isEdit) {
+      const { name, amount, category, type } = data
+
+      const obj = {
+        id: methods.getValues().id,
+        name,
+        amount: Number(amount),
+        type,
+        category,
+        date: new Date().toISOString()
+      }
+
+      await updateTransaction(obj)
+
+      methods.reset()
+      handleCloseModalTransaction()
+      return
+    }
+
+    try {
+      setLoading(true)
+      const { name, amount, type, category } = data
+
+      const obj = {
+        name,
+        amount: Number(amount),
+        type,
+        category,
+        date: new Date().toISOString()
+      }
+
+      const response = await mainTransaction.handleCreateTransaction(obj)
+
+      if (response.status === 200) {
+        methods.reset()
+        return
+      }
+    } catch (error) {
+      alert('Erro, ao cadastrar transação!')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -172,11 +228,17 @@ export function TransactionsProvider({ children }: TransactionsType) {
         onSubmit,
         mainTransaction,
         deleteTransaction,
-        handleOpenModalTransaction
+        updateTransaction,
+        handleOpenModalTransaction,
+        handleOpenModalTransactionToEdit
       }}
     >
       {children}
-      <DialogTransaction open={open} close={handleCloseModalTransaction} />
+      <DialogTransaction
+        isEdit={isEdit}
+        open={open}
+        close={handleCloseModalTransaction}
+      />
     </TransactionsContext.Provider>
   )
 }
