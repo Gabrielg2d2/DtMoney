@@ -111,7 +111,8 @@ export function TransactionsProvider({ children }: TransactionsType) {
       setLoading,
       mainTransaction
     })
-  }, [mainTransaction])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <TransactionsContext.Provider
