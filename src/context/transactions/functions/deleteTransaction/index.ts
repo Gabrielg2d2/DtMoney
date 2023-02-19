@@ -9,7 +9,7 @@ export async function deleteTransaction({
     setLoading(true)
     await mainTransactionDelete(id)
   } catch (error) {
-    alert('Erro ao deletar transação')
+    return new Error('error')
   } finally {
     setLoading(false)
   }

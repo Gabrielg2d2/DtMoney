@@ -3,31 +3,14 @@ import { deleteTransaction } from '.'
 describe('deleteTransaction', () => {
   const setLoading = jest.fn()
   const id = 'id_jest'
-
-  const makeSutMainTransaction = () => {
-    const mainTransactionSpy = {
-      handleFormatDate: jest.fn(),
-      handleFormatMoneyPtBr: jest.fn(),
-      handleTotalTransactions: jest.fn(),
-      handleTotalIncomingTransactions: jest.fn(),
-      handleTotalOutgoingTransactions: jest.fn(),
-      handleCreateTransaction: jest.fn(),
-      handleUpdateTransaction: jest.fn(),
-      handleDeleteTransaction: jest.fn(),
-      transactions: [],
-      totalTransactions: 0,
-      totalIncomingTransactions: 0,
-      totalOutgoingTransactions: 0
-    }
-
-    return {
-      mainTransactionSpy
-    }
+  const mainTransactionSpy = {
+    handleDeleteTransaction: jest.fn()
+  }
+  const mainTransactionErrorSpy = {
+    handleDeleteTransaction: jest.fn().mockRejectedValue(new Error('error'))
   }
 
   it('should call setLoading with true and false', async () => {
-    const { mainTransactionSpy } = makeSutMainTransaction()
-
     await deleteTransaction({
       setLoading,
       mainTransactionDelete: mainTransactionSpy.handleDeleteTransaction,
@@ -36,10 +19,9 @@ describe('deleteTransaction', () => {
 
     expect(setLoading).toHaveBeenCalledWith(true)
     expect(setLoading).toHaveBeenCalledWith(false)
+    expect(setLoading).toHaveBeenCalledTimes(2)
   })
   it('should call mainTransaction.handleDeleteTransaction with id', async () => {
-    const { mainTransactionSpy } = makeSutMainTransaction()
-
     await deleteTransaction({
       setLoading,
       mainTransactionDelete: mainTransactionSpy.handleDeleteTransaction,
@@ -49,5 +31,19 @@ describe('deleteTransaction', () => {
     expect(mainTransactionSpy.handleDeleteTransaction).toHaveBeenCalledWith(
       'id_jest'
     )
+  })
+
+  it('should call setLoading with true and false and throw error', async () => {
+    const response = await deleteTransaction({
+      setLoading,
+      mainTransactionDelete: mainTransactionErrorSpy.handleDeleteTransaction,
+      id
+    })
+
+    expect(setLoading).toHaveBeenCalledWith(true)
+    expect(setLoading).toHaveBeenCalledWith(false)
+    expect(setLoading).toHaveBeenCalledTimes(2)
+
+    expect(response).toEqual(new Error('error'))
   })
 })
