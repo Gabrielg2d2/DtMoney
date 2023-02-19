@@ -2,14 +2,14 @@ import { DeleteTransactionTypes } from '../../types'
 
 export async function deleteTransaction({
   setLoading,
-  mainTransactionDelete,
+  mainTransaction,
   id
 }: DeleteTransactionTypes) {
   try {
     setLoading(true)
-    await mainTransactionDelete(id)
+    await mainTransaction.handleDeleteTransaction(id)
   } catch (error) {
-    return new Error('error')
+    throw new Error('error')
   } finally {
     setLoading(false)
   }

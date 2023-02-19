@@ -75,7 +75,7 @@ export function TransactionsProvider({ children }: TransactionsType) {
     async (id: string) => {
       await deleteTransaction({
         setLoading,
-        mainTransactionDelete: mainTransaction.handleDeleteTransaction,
+        mainTransaction,
         id
       })
     },

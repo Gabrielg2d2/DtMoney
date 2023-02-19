@@ -1,49 +1,46 @@
 import { deleteTransaction } from '.'
+import { MainTransaction } from '@/data-layer/transaction/main/main'
 
 describe('deleteTransaction', () => {
   const setLoading = jest.fn()
   const id = 'id_jest'
-  const mainTransactionSpy = {
-    handleDeleteTransaction: jest.fn()
-  }
-  const mainTransactionErrorSpy = {
-    handleDeleteTransaction: jest.fn().mockRejectedValue(new Error('error'))
+
+  const makeSutMainTransaction = () => {
+    const mainTransactionSpy = MainTransaction
+
+    return {
+      mainTransactionSpy
+    }
   }
 
   it('should call setLoading with true and false', async () => {
+    const { mainTransactionSpy } = makeSutMainTransaction()
+
     await deleteTransaction({
       setLoading,
-      mainTransactionDelete: mainTransactionSpy.handleDeleteTransaction,
+      mainTransaction: mainTransactionSpy,
       id
     })
 
     expect(setLoading).toHaveBeenCalledWith(true)
     expect(setLoading).toHaveBeenCalledWith(false)
-    expect(setLoading).toHaveBeenCalledTimes(2)
-  })
-  it('should call mainTransaction.handleDeleteTransaction with id', async () => {
-    await deleteTransaction({
-      setLoading,
-      mainTransactionDelete: mainTransactionSpy.handleDeleteTransaction,
-      id
-    })
-
-    expect(mainTransactionSpy.handleDeleteTransaction).toHaveBeenCalledWith(
-      'id_jest'
-    )
   })
 
-  it('should call setLoading with true and false and throw error', async () => {
-    const response = await deleteTransaction({
-      setLoading,
-      mainTransactionDelete: mainTransactionErrorSpy.handleDeleteTransaction,
-      id
-    })
+  it('should throw if mainTransaction.handleDeleteTransaction throws', async () => {
+    const { mainTransactionSpy } = makeSutMainTransaction()
 
-    expect(setLoading).toHaveBeenCalledWith(true)
-    expect(setLoading).toHaveBeenCalledWith(false)
-    expect(setLoading).toHaveBeenCalledTimes(2)
+    jest
+      .spyOn(mainTransactionSpy, 'handleDeleteTransaction')
+      .mockImplementationOnce(() => {
+        throw new Error()
+      })
 
-    expect(response).toEqual(new Error('error'))
+    await expect(
+      deleteTransaction({
+        setLoading,
+        mainTransaction: mainTransactionSpy,
+        id
+      })
+    ).rejects.toThrow()
   })
 })

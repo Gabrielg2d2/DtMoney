@@ -11,11 +11,12 @@ export class RemoveTransaction implements IRemoveTransaction {
   async removeTransaction(url: string) {
     try {
       const response = await this.methodDeleteTransaction(url)
-      return response
+      return {
+        status: response.status
+      }
     } catch (error) {
       return {
-        status: 400,
-        data: []
+        status: 400
       }
     }
   }
