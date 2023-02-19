@@ -24,7 +24,9 @@ export type SetLoadingTypes = Dispatch<SetStateAction<boolean>>
 
 export type DeleteTransactionTypes = {
   id: string
-  mainTransaction: Main
+  mainTransactionDelete: (id: string) => Promise<{
+    status: number
+  }>
   setLoading: SetLoadingTypes
 }
 

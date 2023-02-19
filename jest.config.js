@@ -18,6 +18,7 @@ module.exports = {
     '!src/components/index.ts', // export
     '!src/domain/**', // interfaces
     '!src/data-layer/transaction/use-cases/index.ts', // export files
+    '!src/context/transactions/functions/index.ts', // export files
     '!src/data-layer/transaction/main/main.ts' // integration with stub
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
