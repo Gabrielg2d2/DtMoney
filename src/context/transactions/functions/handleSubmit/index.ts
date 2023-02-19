@@ -1,12 +1,16 @@
-import { DataForm, MethodsTypes, SetLoadingTypes } from '../../types'
-import { UpdateTypes } from '../../functions/updateTransaction'
-import { Main } from '@/data-layer/transaction/main/main'
+import {
+  DataForm,
+  MethodsTypes,
+  SetLoadingTypes,
+  UpdateTypes
+} from '../../types'
+import { MainTransaction } from '@/data-layer/transaction/main/main'
 
 type HandleSubmitType = {
   data: DataForm
   isEdit: boolean
   methods: MethodsTypes
-  mainTransaction: Main
+  mainTransaction: MainTransaction
   handleCloseModalTransaction: () => void
   setLoading: SetLoadingTypes
   updateTransaction: ({

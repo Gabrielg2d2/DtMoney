@@ -4,7 +4,8 @@ import {
   ReactNode,
   useState,
   useCallback,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -36,7 +37,7 @@ type TransactionsContextType = {
   }
   methods: MethodsTypes
   onSubmit: (data: DataForm) => Promise<void>
-  mainTransaction: typeof MainTransaction
+  mainTransaction: MainTransaction
   handleDeleteTransaction: (id: string) => Promise<void>
   handleOpenModalTransaction: () => void
   handleOpenModalTransactionToEdit: (transaction: TransactionDataAPI) => void
@@ -45,7 +46,7 @@ type TransactionsContextType = {
 const TransactionsContext = createContext({} as TransactionsContextType)
 
 export function TransactionsProvider({ children }: TransactionsType) {
-  const mainTransaction = MainTransaction
+  const mainTransaction = useMemo(() => new MainTransaction(), [])
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isEdit, setIsEdit] = useState(false)

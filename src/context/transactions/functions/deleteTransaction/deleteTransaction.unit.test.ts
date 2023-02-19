@@ -6,7 +6,7 @@ describe('deleteTransaction', () => {
   const id = 'id_jest'
 
   const makeSutMainTransaction = () => {
-    const mainTransactionSpy = MainTransaction
+    const mainTransactionSpy = new MainTransaction()
 
     return {
       mainTransactionSpy

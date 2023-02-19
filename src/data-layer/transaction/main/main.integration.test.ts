@@ -10,7 +10,7 @@ describe('Transaction - List', () => {
     cleanup()
   })
 
-  const mainTransaction = MainTransaction
+  const mainTransaction = new MainTransaction()
 
   it('should spy on the handleListTransactions function, and inject the mock', async () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleListTransactions')
@@ -66,7 +66,7 @@ describe('Transaction - Create', () => {
     cleanup()
   })
 
-  const mainTransaction = MainTransaction
+  const mainTransaction = new MainTransaction()
 
   it('should add a new transaction', async () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleCreateTransaction')
@@ -145,7 +145,7 @@ describe('Transaction - Remove', () => {
     cleanup()
   })
 
-  const mainTransaction = MainTransaction
+  const mainTransaction = new MainTransaction()
 
   it('should delete a transaction', async () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleDeleteTransaction')
@@ -176,7 +176,7 @@ describe('Transaction - Remove', () => {
 })
 
 describe('Transaction - Update', () => {
-  const mainTransaction = MainTransaction
+  const mainTransaction = new MainTransaction()
 
   it('should update a transaction', async () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleUpdateTransaction')

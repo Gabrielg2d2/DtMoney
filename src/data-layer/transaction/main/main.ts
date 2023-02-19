@@ -16,7 +16,7 @@ import {
 import { formatMoneyPtBr } from '@/global/functions/formatMoneyPtBr/formatMoneyPtBr'
 import { formatDatePtBr } from '@/global/functions/formatDate/formatDatePtBr'
 
-export class Main {
+export class MainTransaction {
   url = '/transactions'
 
   transactions = []
@@ -174,11 +174,3 @@ export class Main {
     }
   }
 }
-
-let MainTransaction: Main | null = null
-
-if (!MainTransaction) {
-  MainTransaction = new Main()
-}
-
-export { MainTransaction }
