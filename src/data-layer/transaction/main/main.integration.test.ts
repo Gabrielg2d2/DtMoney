@@ -151,8 +151,7 @@ describe('Transaction - Remove', () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleDeleteTransaction')
 
     mainSpy.mockResolvedValueOnce({
-      status: 200,
-      data: dataTransactionsMock
+      status: 200
     })
 
     const response = await mainTransaction.handleDeleteTransaction('any_id')
@@ -167,8 +166,7 @@ describe('Transaction - Remove', () => {
     const mainSpy = jest.spyOn(mainTransaction, 'handleDeleteTransaction')
 
     mainSpy.mockResolvedValueOnce({
-      status: 400,
-      data: []
+      status: 400
     })
 
     const response = await mainTransaction.handleDeleteTransaction('any_id')

@@ -137,14 +137,12 @@ export class Main {
       this.totalTransactions = responseUpdateListTransaction.totalTransactions
 
       return {
-        status: response.status,
-        ...responseUpdateListTransaction
+        status: response.status
       }
     }
 
     return {
-      status: 400,
-      data: []
+      status: 400
     }
   }
 
