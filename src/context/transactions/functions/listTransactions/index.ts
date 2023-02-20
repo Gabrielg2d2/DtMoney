@@ -8,7 +8,7 @@ export async function listTransactions({
     setLoading(true)
     await mainTransaction.handleListTransactions()
   } catch (error) {
-    alert('Erro ao listar transações')
+    throw new Error('error function listTransactions')
   } finally {
     setLoading(false)
   }
