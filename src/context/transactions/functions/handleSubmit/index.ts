@@ -53,7 +53,7 @@ export async function handleSubmit({
       handleCloseModalTransaction()
       return
     } catch (error) {
-      alert('Erro, ao editar transação!')
+      throw new Error('Erro, ao editar transação!')
     } finally {
       setLoading(false)
     }
@@ -78,7 +78,7 @@ export async function handleSubmit({
       return
     }
   } catch (error) {
-    alert('Erro, ao cadastrar transação!')
+    throw new Error('Erro, ao criar transação!')
   } finally {
     setLoading(false)
   }
