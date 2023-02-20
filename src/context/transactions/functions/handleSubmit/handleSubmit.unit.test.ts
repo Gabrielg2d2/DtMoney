@@ -1,44 +1,68 @@
 import { handleSubmit } from '.'
 
-describe('handleSubmit success', () => {
-  const makeSut = () => {
-    const isEdit = false
+type SutTypes = {
+  isEdit?: boolean
+  data?: {
+    name: string
+    amount: string
+    type: string
+    category: string
+  }
+  methods?: any
+  mainTransaction?: any
+  setLoading?: () => void
+  handleCloseModalTransaction?: () => void
+  updateTransaction?: () => Promise<void>
+}
 
-    const data = {
-      name: 'Test',
-      amount: '100',
-      type: 'income',
-      category: 'Test'
-    }
+const makeSutHandleSubmit = (props?: SutTypes) => {
+  const isEdit = props?.isEdit || false
 
-    const methods = {
+  const data = props?.data || {
+    name: 'Test',
+    amount: '100',
+    type: 'income',
+    category: 'Test'
+  }
+
+  const methods =
+    props?.methods ||
+    ({
       getValues: jest.fn().mockReturnValue({
         id: '123'
       }),
       reset: jest.fn()
-    } as any
+    } as any)
 
-    const mainTransaction = {
+  const mainTransaction =
+    props?.mainTransaction ||
+    ({
       handleCreateTransaction: jest.fn().mockResolvedValueOnce({
         status: 200
       })
-    } as any
-    const handleCloseModalTransaction = jest.fn()
-    const updateTransaction = jest.fn()
-    const setLoading = jest.fn()
+    } as any)
 
-    return {
-      isEdit,
-      data,
-      methods,
-      mainTransaction,
-      setLoading,
-      handleCloseModalTransaction,
-      updateTransaction,
-      handleSubmit
-    }
+  const handleCloseModalTransaction = jest.fn()
+  const updateTransaction =
+    props?.updateTransaction ||
+    jest.fn().mockResolvedValueOnce({
+      status: 200
+    })
+  const setLoading = jest.fn()
+
+  return {
+    isEdit,
+    data,
+    methods,
+    mainTransaction,
+    setLoading,
+    handleCloseModalTransaction,
+    updateTransaction,
+    handleSubmit
   }
+}
 
+describe('handleSubmit new transaction', () => {
   it('should be able to submit a new transaction', async () => {
     const {
       isEdit,
@@ -48,7 +72,7 @@ describe('handleSubmit success', () => {
       setLoading,
       handleCloseModalTransaction,
       updateTransaction
-    } = makeSut()
+    } = makeSutHandleSubmit()
 
     await handleSubmit({
       isEdit,
@@ -64,46 +88,6 @@ describe('handleSubmit success', () => {
     expect(setLoading).toHaveBeenCalledWith(true)
     expect(setLoading).toHaveBeenCalledWith(false)
   })
-})
-
-describe('handleSubmit failed', () => {
-  const makeSut = () => {
-    const isEdit = false
-
-    const data = {
-      name: 'Test',
-      amount: '100',
-      type: 'income',
-      category: 'Test'
-    }
-
-    const methods = {
-      getValues: jest.fn().mockReturnValue({
-        id: '123'
-      }),
-      reset: jest.fn()
-    } as any
-
-    const mainTransaction = {
-      handleCreateTransaction: jest.fn().mockRejectedValueOnce({
-        status: 400
-      })
-    } as any
-    const handleCloseModalTransaction = jest.fn()
-    const updateTransaction = jest.fn()
-    const setLoading = jest.fn()
-
-    return {
-      isEdit,
-      data,
-      methods,
-      mainTransaction,
-      setLoading,
-      handleCloseModalTransaction,
-      updateTransaction,
-      handleSubmit
-    }
-  }
 
   it('should return an error when submitting the data', async () => {
     const {
@@ -114,7 +98,13 @@ describe('handleSubmit failed', () => {
       setLoading,
       handleCloseModalTransaction,
       updateTransaction
-    } = makeSut()
+    } = makeSutHandleSubmit({
+      mainTransaction: {
+        handleCreateTransaction: jest.fn().mockRejectedValueOnce({
+          status: 400
+        })
+      }
+    })
 
     await expect(
       handleSubmit({
@@ -132,47 +122,7 @@ describe('handleSubmit failed', () => {
   })
 })
 
-describe('handleSubmit edit failed', () => {
-  const makeSut = () => {
-    const isEdit = true
-
-    const data = {
-      name: 'Test',
-      amount: '100',
-      type: 'income',
-      category: 'Test'
-    }
-
-    const methods = {
-      getValues: jest.fn().mockReturnValue({
-        id: '123'
-      }),
-      reset: jest.fn()
-    } as any
-
-    const mainTransaction = {
-      handleCreateTransaction: jest.fn().mockRejectedValueOnce({
-        status: 400
-      })
-    } as any
-    const handleCloseModalTransaction = jest.fn()
-    const updateTransaction = jest.fn().mockRejectedValueOnce({
-      status: 400
-    })
-    const setLoading = jest.fn()
-
-    return {
-      isEdit,
-      data,
-      methods,
-      mainTransaction,
-      setLoading,
-      handleCloseModalTransaction,
-      updateTransaction,
-      handleSubmit
-    }
-  }
-
+describe('handleSubmit edit', () => {
   it('should return an error when submitting the data for edit', async () => {
     const {
       isEdit,
@@ -182,7 +132,12 @@ describe('handleSubmit edit failed', () => {
       setLoading,
       handleCloseModalTransaction,
       updateTransaction
-    } = makeSut()
+    } = makeSutHandleSubmit({
+      isEdit: true,
+      updateTransaction: jest.fn().mockRejectedValueOnce({
+        status: 400
+      })
+    })
 
     await expect(
       handleSubmit({
@@ -198,48 +153,6 @@ describe('handleSubmit edit failed', () => {
     expect(setLoading).toHaveBeenCalledWith(true)
     expect(setLoading).toHaveBeenCalledWith(false)
   })
-})
-
-describe('handleSubmit edit success', () => {
-  const makeSut = () => {
-    const isEdit = true
-
-    const data = {
-      name: 'Test',
-      amount: '100',
-      type: 'income',
-      category: 'Test'
-    }
-
-    const methods = {
-      getValues: jest.fn().mockReturnValue({
-        id: '123'
-      }),
-      reset: jest.fn()
-    } as any
-
-    const mainTransaction = {
-      handleCreateTransaction: jest.fn().mockRejectedValueOnce({
-        status: 400
-      })
-    } as any
-    const handleCloseModalTransaction = jest.fn()
-    const updateTransaction = jest.fn().mockResolvedValueOnce({
-      status: 200
-    })
-    const setLoading = jest.fn()
-
-    return {
-      isEdit,
-      data,
-      methods,
-      mainTransaction,
-      setLoading,
-      handleCloseModalTransaction,
-      updateTransaction,
-      handleSubmit
-    }
-  }
 
   it('should return an success when submitting the data for edit', async () => {
     const {
@@ -250,7 +163,9 @@ describe('handleSubmit edit success', () => {
       setLoading,
       handleCloseModalTransaction,
       updateTransaction
-    } = makeSut()
+    } = makeSutHandleSubmit({
+      isEdit: true
+    })
 
     await handleSubmit({
       isEdit,
@@ -264,6 +179,8 @@ describe('handleSubmit edit success', () => {
 
     expect(setLoading).toHaveBeenCalledWith(true)
     expect(setLoading).toHaveBeenCalledWith(false)
+
+    expect(methods.reset).toHaveBeenCalled()
     expect(handleCloseModalTransaction).toHaveBeenCalled()
   })
 })
