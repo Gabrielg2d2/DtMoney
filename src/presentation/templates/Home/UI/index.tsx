@@ -6,11 +6,14 @@ import {
   Header,
   ListTransactions
 } from '@/components'
-import { TransactionDataAPI } from '@/domain/transaction/types/global/transactions'
+import {
+  TransactionDataAPI,
+  TransactionDataAPIFormat
+} from '@/domain/transaction/types/global/transactions'
 
 type MainTransactionTypes = {
   url: string
-  transactions: TransactionDataAPI[]
+  transactions: TransactionDataAPIFormat[]
   totalIncomingTransactions: string
   totalOutgoingTransactions: string
   totalTransactions: string
