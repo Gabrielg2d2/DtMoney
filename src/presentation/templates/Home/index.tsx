@@ -1,12 +1,5 @@
-import {
-  CardIncoming,
-  CardOutgoing,
-  CardTotal,
-  Container,
-  Header,
-  ListTransactions
-} from '@/components'
 import { useTransactionsContext } from '@/context/transactions'
+import { HomeTemplateUI } from './UI'
 
 export function HomeTemplate() {
   const {
@@ -18,28 +11,12 @@ export function HomeTemplate() {
   } = useTransactionsContext()
 
   return (
-    <Container>
-      <Header handleOpenModalTransaction={handleOpenModalTransaction} />
-
-      <main
-        data-testid="main_page_home_id"
-        className="max-w-screen-xl mx-auto mt-[-48px]"
-      >
-        <section className="flex items-center gap-8 max-sm:px-4 overflow-x-auto">
-          <CardIncoming value={mainTransaction.totalIncomingTransactions} />
-          <CardOutgoing value={mainTransaction.totalOutgoingTransactions} />
-          <CardTotal value={mainTransaction.totalTransactions} />
-        </section>
-
-        <section className="mt-10">
-          {loading && <p>Carregando...</p>}
-          <ListTransactions
-            list={mainTransaction.transactions}
-            handleDeleteTransaction={handleDeleteTransaction}
-            handleOpenModalTransactionToEdit={handleOpenModalTransactionToEdit}
-          />
-        </section>
-      </main>
-    </Container>
+    <HomeTemplateUI
+      mainTransaction={mainTransaction}
+      handleDeleteTransaction={handleDeleteTransaction}
+      handleOpenModalTransaction={handleOpenModalTransaction}
+      handleOpenModalTransactionToEdit={handleOpenModalTransactionToEdit}
+      loading={loading}
+    />
   )
 }

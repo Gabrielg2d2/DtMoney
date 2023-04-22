@@ -1,13 +1,24 @@
 import { render, screen } from '@testing-library/react'
-import { HomeTemplate } from '.'
-import { TransactionsProvider } from '@/context/transactions'
+import { HomeTemplateUI } from '.'
 
 describe('HomeTemplate', () => {
   it('should render component HomeTemplate', () => {
     render(
-      <TransactionsProvider>
-        <HomeTemplate />
-      </TransactionsProvider>
+      <HomeTemplateUI
+        mainTransaction={{
+          url: '/transactions',
+          transactions: [],
+          totalIncomingTransactions: 'R$0,00',
+          totalOutgoingTransactions: 'R$0,00',
+          totalTransactions: 'R$0,00'
+        }}
+        handleDeleteTransaction={async () => {
+          await Promise.resolve()
+        }}
+        handleOpenModalTransaction={() => {}}
+        handleOpenModalTransactionToEdit={() => {}}
+        loading={false}
+      />
     )
 
     expect(screen.getByText(/dt money/i)).toBeInTheDocument()
@@ -24,9 +35,21 @@ describe('HomeTemplate', () => {
 
   it('should render component Cards with texts Entradas, Saídas, Total', () => {
     render(
-      <TransactionsProvider>
-        <HomeTemplate />
-      </TransactionsProvider>
+      <HomeTemplateUI
+        mainTransaction={{
+          url: '/transactions',
+          transactions: [],
+          totalIncomingTransactions: 'R$0,00',
+          totalOutgoingTransactions: 'R$0,00',
+          totalTransactions: 'R$0,00'
+        }}
+        handleDeleteTransaction={async () => {
+          await Promise.resolve()
+        }}
+        handleOpenModalTransaction={() => {}}
+        handleOpenModalTransactionToEdit={() => {}}
+        loading={false}
+      />
     )
 
     expect(screen.getByText('Entradas')).toBeInTheDocument()
