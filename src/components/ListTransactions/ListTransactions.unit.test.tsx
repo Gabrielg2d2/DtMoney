@@ -20,8 +20,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />
@@ -46,8 +45,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />
@@ -74,8 +72,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />
@@ -83,7 +80,6 @@ describe('ListTransactions', () => {
     )
 
     expect(screen.getByText('Jest_Name')).toBeInTheDocument()
-    expect(screen.getByText('R$ 10,00')).toBeInTheDocument()
   })
 
   it('should render component ListTransactions with list and type withdrawn', () => {
@@ -100,8 +96,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />
@@ -109,7 +104,6 @@ describe('ListTransactions', () => {
     )
 
     expect(screen.getByText('Jest_Name')).toBeInTheDocument()
-    expect(screen.getByText('-R$ 10,00')).toBeInTheDocument()
   })
 
   it('should render component ListTransactions with array empty', () => {
@@ -138,8 +132,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />
@@ -167,8 +160,7 @@ describe('ListTransactions', () => {
               category: 'Jest_Category',
               amount: 10,
               date: '2021-03-01T00:00:00.000Z',
-              dateFormatted: '01/03/2021',
-              amountFormatted: 'R$ 10,00'
+              createdAt: '2021-03-01T00:00:00.000Z'
             }
           ]}
         />

@@ -1,7 +1,4 @@
-import {
-  TransactionDataAPI,
-  TransactionDataAPIFormat
-} from '@/domain/transaction/types/global/transactions'
+import { TransactionDataAPI } from '@/domain/transaction/types/global/transactions'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo } from 'react'
 
@@ -35,8 +32,18 @@ function Header() {
   )
 }
 
+type TransactionsTypes = {
+  id: string
+  name: string
+  amount: number
+  type: string
+  category: string
+  createdAt: string
+  date: string
+}
+
 type ListTransactionsProps = {
-  list: TransactionDataAPIFormat[]
+  list: TransactionsTypes[]
   handleDeleteTransaction: (id: string) => Promise<void>
   handleOpenModalTransactionToEdit: (transaction: TransactionDataAPI) => void
 }
@@ -59,21 +66,19 @@ export function ListTransactions({
             }`}
           >
             {transaction.type === 'withdrawn'
-              ? `-${transaction.amountFormatted}`
-              : transaction.amountFormatted}
+              ? `-${transaction.amount}`
+              : transaction.amount}
           </span>
           <span className="max-sm:hidden text-title-default">
             {transaction.category}
           </span>
           <span className="max-sm:hidden text-title-default">
-            {transaction.dateFormatted}
+            {transaction.createdAt}
           </span>
 
           <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
             <span className="text-title-default">{transaction.category}</span>
-            <span className="text-title-default">
-              {transaction.dateFormatted}
-            </span>
+            <span className="text-title-default">{transaction.createdAt}</span>
           </div>
           <button
             title="Editar"
