@@ -1,4 +1,3 @@
-import { TransactionDataAPI } from '@/domain/transaction/types/global/transactions'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo } from 'react'
 
@@ -38,14 +37,13 @@ type TransactionsTypes = {
   amount: number
   type: string
   category: string
-  createdAt: string
   date: string
 }
 
 type ListTransactionsProps = {
   list: TransactionsTypes[]
   handleDeleteTransaction: (id: string) => Promise<void>
-  handleOpenModalTransactionToEdit: (transaction: TransactionDataAPI) => void
+  handleOpenModalTransactionToEdit: (transaction: TransactionsTypes) => void
 }
 
 export function ListTransactions({
@@ -73,12 +71,12 @@ export function ListTransactions({
             {transaction.category}
           </span>
           <span className="max-sm:hidden text-title-default">
-            {transaction.createdAt}
+            {transaction.date}
           </span>
 
           <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
             <span className="text-title-default">{transaction.category}</span>
-            <span className="text-title-default">{transaction.createdAt}</span>
+            <span className="text-title-default">{transaction.date}</span>
           </div>
           <button
             title="Editar"

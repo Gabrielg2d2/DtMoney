@@ -6,7 +6,6 @@ type TransactionsTypes = {
   amount: number
   type: string
   category: string
-  createdAt: string
   date: string
 }
 

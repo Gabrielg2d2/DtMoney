@@ -1,4 +1,3 @@
-import { Container } from '@/components'
 import {
   SectionCardsTransactions,
   SectionCardsTransactionsTypes
@@ -9,6 +8,7 @@ import {
 } from './SectionListTransactions'
 import { Main } from './Main'
 import { Header, HeaderTypes } from './Header'
+import { Container } from './Container'
 
 export type HomeTemplateUITypes = {
   header: HeaderTypes
