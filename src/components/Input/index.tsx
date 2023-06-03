@@ -1,27 +1,21 @@
-import { UseFormRegisterReturn } from 'react-hook-form'
+type InputTypes = {
+  error?: boolean
+  message?: string
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-type InputProps = {
-  register?: UseFormRegisterReturn
-  errors?: object
-} & JSX.IntrinsicElements['input']
-
-export function Input({ register, errors, ...props }: InputProps) {
-  const borderError = errors?.[props?.name]
-    ? 'border-red-500'
-    : 'border-transparent'
+export function Input({ error, message, ...props }: InputTypes) {
+  const borderError = error ? 'border-red-500' : 'border-transparent'
+  const helperText = error ? (
+    <span className="text-red-500 text-sm">{message}</span>
+  ) : null
 
   return (
     <>
       <input
         className={`bg-slate-200 p-4 w-full text-text-default rounded-md border-2 ${borderError}`}
         {...props}
-        {...register}
       />
-      {errors && props.name ? (
-        <span className="text-red-500 text-sm">
-          {errors[props.name]?.message}
-        </span>
-      ) : null}
+      {helperText}
     </>
   )
 }
