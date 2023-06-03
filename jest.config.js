@@ -13,13 +13,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
-    '!**/*.d.ts', // config types
-    '!src/index.tsx', // app
-    '!src/components/index.ts', // export
-    '!src/domain/**', // interfaces
-    '!src/data-layer/transaction/use-cases/index.ts', // export files
-    '!src/context/transactions/functions/index.ts', // export files
-    '!src/data-layer/transaction/main/main.ts' // integration with stub
+    '!**/*.d.ts' // config types
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
