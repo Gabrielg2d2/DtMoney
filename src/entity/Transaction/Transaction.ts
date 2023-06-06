@@ -1,16 +1,16 @@
-type TransactionType = 'withdrawn' | 'deposit'
+export type TransactionType = 'withdrawn' | 'deposit'
 
 export class Transaction {
   private readonly id: string | null
   private readonly amount: number
-  private readonly date: Date
+  private readonly date: string
   private readonly description: string
   private readonly type: TransactionType
 
   constructor(
     id: string | null,
     amount: number,
-    date: Date,
+    date: string,
     description: string,
     type: TransactionType
   ) {
@@ -29,8 +29,8 @@ export class Transaction {
     return (
       this.amount > 0 &&
       this.description.length > 2 &&
-      this.type &&
-      this.date instanceof Date
+      !!this.type &&
+      !!this.date
     )
   }
 
@@ -42,7 +42,7 @@ export class Transaction {
     return this.amount
   }
 
-  public getDate(): Date {
+  public getDate(): string {
     return this.date
   }
 
