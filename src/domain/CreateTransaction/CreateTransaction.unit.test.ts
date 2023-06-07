@@ -1,31 +1,39 @@
+import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
 import { CreateTransaction } from './CreateTransaction'
 
 describe('CreateTransaction', () => {
-  it('should create a transaction', () => {
-    const createTransaction = new CreateTransaction(
-      100,
-      new Date('2020-01-01').toISOString(),
-      'any_description',
-      'deposit'
-    )
-    const transaction = createTransaction.execute()
-    expect(transaction).toEqual({
-      id: null,
+  it('should create a transaction', async () => {
+    const createTransactionAPISpy = jest.fn().mockResolvedValue(true)
+    const transaction: TransactionDataTypes = {
+      id: 'jest_id',
       amount: 100,
-      date: '2020-01-01T00:00:00.000Z',
-      description: 'any_description',
+      date: '2021-01-01',
+      description: 'jest_description',
       type: 'deposit'
-    })
+    }
+    const createTransaction = new CreateTransaction(
+      transaction,
+      createTransactionAPISpy
+    )
+    const response = await createTransaction.execute()
+    expect(createTransactionAPISpy).toHaveBeenCalledWith(transaction)
+    expect(response).toBe(true)
   })
 
-  it('should not create a transaction with invalid amount', () => {
+  it('should throw an error if amount is not provided', async () => {
+    const createTransactionAPISpy = jest.fn()
+    const transaction: TransactionDataTypes = {
+      id: 'jest_id',
+      amount: 0,
+      date: '2021-01-01',
+      description: 'jest_description',
+      type: 'deposit'
+    }
     const createTransaction = new CreateTransaction(
-      0,
-      new Date('2020-01-01').toISOString(),
-      'any_description',
-      'deposit'
+      transaction,
+      createTransactionAPISpy
     )
-    expect(() => createTransaction.execute()).toThrowError(
+    await expect(createTransaction.execute()).rejects.toThrow(
       'Invalid transaction'
     )
   })

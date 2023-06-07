@@ -1,25 +1,25 @@
-import { Transaction, TransactionType } from '@/entity/Transaction/Transaction'
+import {
+  Transaction,
+  TransactionDataTypes
+} from '@/entity/Transaction/Transaction'
+
+type CreateTransactionAPI = (transaction: Transaction) => Promise<boolean>
 
 export class CreateTransaction {
   constructor(
-    private readonly amount: number,
-    private readonly date: string,
-    private readonly description: string,
-    private readonly type: TransactionType
-  ) {
-    this.amount = amount
-    this.date = date
-    this.description = description
-    this.type = type
-  }
+    private readonly transaction: TransactionDataTypes,
+    private readonly createTransactionApi: CreateTransactionAPI
+  ) {}
 
-  execute() {
-    return new Transaction(
-      null,
-      this.amount,
-      this.date,
-      this.description,
-      this.type
+  async execute() {
+    const transaction = new Transaction(
+      this.transaction.id,
+      this.transaction.amount,
+      this.transaction.date,
+      this.transaction.description,
+      this.transaction.type
     )
+
+    return await this.createTransactionApi(transaction)
   }
 }
