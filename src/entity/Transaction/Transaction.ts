@@ -1,6 +1,6 @@
-export type TransactionType = 'withdrawn' | 'deposit'
+type TransactionType = 'withdrawn' | 'deposit'
 export type TransactionDataTypes = {
-  id: string | null
+  id?: string
   amount: number
   date: string
   description: string
@@ -9,7 +9,7 @@ export type TransactionDataTypes = {
 
 export class Transaction {
   constructor(
-    private readonly id: string | null,
+    private readonly id: string,
     private readonly amount: number,
     private readonly date: string,
     private readonly description: string,
@@ -35,23 +35,13 @@ export class Transaction {
     )
   }
 
-  public getId(): string | null {
-    return this.id
-  }
-
-  public getAmount(): number {
-    return this.amount
-  }
-
-  public getDate(): string {
-    return this.date
-  }
-
-  public getDescription(): string {
-    return this.description
-  }
-
-  public getType(): TransactionType {
-    return this.type
+  execute(): TransactionDataTypes {
+    return {
+      id: this.id,
+      amount: this.amount,
+      date: this.date,
+      description: this.description,
+      type: this.type
+    }
   }
 }

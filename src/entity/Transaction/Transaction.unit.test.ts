@@ -53,20 +53,4 @@ describe('Transaction', () => {
       )
     }).toThrowError('Invalid transaction')
   })
-
-  it('should return all transaction data', () => {
-    const transaction = new Transaction(
-      '12345',
-      100,
-      new Date('2023-05-01').toISOString(),
-      'A valid transaction',
-      'deposit'
-    )
-
-    expect(transaction.getId()).toBe('12345')
-    expect(transaction.getAmount()).toBe(100)
-    expect(transaction.getDate()).toBe('2023-05-01T00:00:00.000Z')
-    expect(transaction.getDescription()).toBe('A valid transaction')
-    expect(transaction.getType()).toBe('deposit')
-  })
 })
