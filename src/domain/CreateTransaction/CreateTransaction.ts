@@ -1,16 +1,11 @@
 import { Transaction, TransactionType } from '@/entity/Transaction/Transaction'
 
 export class CreateTransaction {
-  private readonly amount: number
-  private readonly date: string
-  private readonly description: string
-  private readonly type: TransactionType
-
   constructor(
-    amount: number,
-    date: string,
-    description: string,
-    type: TransactionType
+    private readonly amount: number,
+    private readonly date: string,
+    private readonly description: string,
+    private readonly type: TransactionType
   ) {
     this.amount = amount
     this.date = date
