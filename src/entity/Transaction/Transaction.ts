@@ -1,18 +1,19 @@
 export type TransactionType = 'withdrawn' | 'deposit'
+export type TransactionDataTypes = {
+  id: string | null
+  amount: number
+  date: string
+  description: string
+  type: TransactionType
+}
 
 export class Transaction {
-  private readonly id: string | null
-  private readonly amount: number
-  private readonly date: string
-  private readonly description: string
-  private readonly type: TransactionType
-
   constructor(
-    id: string | null,
-    amount: number,
-    date: string,
-    description: string,
-    type: TransactionType
+    private readonly id: string | null,
+    private readonly amount: number,
+    private readonly date: string,
+    private readonly description: string,
+    private readonly type: TransactionType
   ) {
     this.id = id
     this.amount = amount
