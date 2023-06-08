@@ -3,7 +3,7 @@ import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
 
 export type SectionListTransactionsTypes = {
   list: TransactionDataTypes[]
-  handleDeleteTransaction: (id: string) => Promise<void>
+  deleteTransaction: (id: string) => Promise<void>
   handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => void
   loading: boolean
 }
@@ -13,7 +13,7 @@ export function SectionListTransactions(props: SectionListTransactionsTypes) {
       {props.loading && <p>Carregando...</p>}
       <ListTransactions
         list={props.list}
-        handleDeleteTransaction={props.handleDeleteTransaction}
+        deleteTransaction={props.deleteTransaction}
         handleOpenModalTransactionToEdit={
           props.handleOpenModalTransactionToEdit
         }

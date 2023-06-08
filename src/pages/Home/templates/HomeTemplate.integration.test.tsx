@@ -4,7 +4,9 @@ import { HomeTemplateUI, HomeTemplateUITypes } from '.'
 describe('Home - page', () => {
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      handleOpenModalTransaction: () => {}
+      submit: async () => {
+        await Promise.resolve()
+      }
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: 'R$ 0,00',
@@ -13,7 +15,7 @@ describe('Home - page', () => {
     },
     sectionListTransactions: {
       list: [],
-      handleDeleteTransaction: async () => {
+      deleteTransaction: async () => {
         await Promise.resolve()
       },
       handleOpenModalTransactionToEdit: () => {},

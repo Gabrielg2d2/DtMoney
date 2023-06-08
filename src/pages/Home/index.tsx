@@ -35,7 +35,7 @@ export function Home() {
     },
     sectionListTransactions: {
       list: transactions.getList,
-      handleDeleteTransaction,
+      deleteTransaction: handleDeleteTransaction,
       handleOpenModalTransactionToEdit: () => {},
       loading
     }

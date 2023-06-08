@@ -8,7 +8,7 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -17,8 +17,7 @@ describe('ListTransactions', () => {
             type: 'deposit',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
@@ -31,7 +30,7 @@ describe('ListTransactions', () => {
   it('should render component Header with texts', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -40,8 +39,7 @@ describe('ListTransactions', () => {
             type: 'deposit',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
@@ -56,7 +54,7 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with list', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -65,8 +63,7 @@ describe('ListTransactions', () => {
             type: 'deposit',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
@@ -78,7 +75,7 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with list and type withdrawn', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -87,8 +84,7 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
@@ -100,7 +96,7 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with array empty', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[]}
       />
@@ -112,7 +108,7 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with button of icon delete transaction', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -121,8 +117,7 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
@@ -138,7 +133,7 @@ describe('ListTransactions', () => {
   it('should be possible to click the delete transaction button', () => {
     render(
       <ListTransactions
-        handleDeleteTransaction={mockDeleteTransaction}
+        deleteTransaction={mockDeleteTransaction}
         handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
@@ -147,8 +142,7 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z',
-            createdAt: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z'
           }
         ]}
       />
