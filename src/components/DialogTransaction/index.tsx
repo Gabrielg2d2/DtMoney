@@ -1,7 +1,9 @@
-import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
 import { DialogCustom } from '../Dialog'
 import { Input } from '../Input'
 import { useState } from 'react'
+import { Form } from './Form'
+import { SelectedCategory } from './SelectedCategory'
+import { Submit } from './Submit'
 
 type DialogTransactionTypes = {
   title: string
@@ -39,40 +41,13 @@ export function DialogTransaction({
         open={openModalTransaction}
         close={handleCloseModalTransaction}
       >
-        <form className="flex flex-col gap-4 pb-4 px-2" onSubmit={handleSubmit}>
+        <Form handleSubmit={handleSubmit}>
           <Input name="name" placeholder="Nome" />
           <Input name="amount" placeholder="Preço" />
-
-          <div className="flex gap-2">
-            <button
-              type="button"
-              className={`
-            flex items-center justify-center gap-2 transition-all
-            p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default border-green-500`}
-            >
-              <ArrowCircleUp size={26} className="text-green-default" />
-              Entrada
-            </button>
-            <button
-              type="button"
-              className={`
-            flex items-center justify-center gap-2 transition-all
-            p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default border-red-500`}
-            >
-              <ArrowCircleDown size={26} className="text-red-default" />
-              Saída
-            </button>
-          </div>
-
+          <SelectedCategory outInput={() => {}} />
           <Input name="category" placeholder="Categoria" />
-
-          <button
-            type="submit"
-            className="p-4 bg-[#33CC95] hover:bg-[#20b37d] transition-all text-white rounded-md mt-2"
-          >
-            Cadastrar
-          </button>
-        </form>
+          <Submit />
+        </Form>
       </DialogCustom>
     </>
   )
