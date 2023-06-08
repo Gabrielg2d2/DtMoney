@@ -1,26 +1,26 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
 
 export function Home() {
-  const [transactions, setTransactions] = useState(
-    new FactoryTransaction().execute()
-  )
+  const [loading, setLoading] = useState(false)
+  const [transactions] = useState(new FactoryTransaction().execute())
 
   async function handleDeleteTransaction(id: string) {
-    const newTransactions = new FactoryTransaction().execute()
-    await newTransactions.delete(id)
-    setTransactions(newTransactions)
+    setLoading(true)
+    await transactions.delete(id)
+    setLoading(false)
   }
 
+  const listTransactions = useCallback(async () => {
+    setLoading(true)
+    await transactions.list()
+    setLoading(false)
+  }, [transactions])
+
   useEffect(() => {
-    async function amountTransactions() {
-      const newTransactions = new FactoryTransaction().execute()
-      await newTransactions.list()
-      setTransactions(newTransactions)
-    }
-    void amountTransactions()
-  }, [])
+    void listTransactions()
+  }, [listTransactions])
 
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
@@ -37,7 +37,7 @@ export function Home() {
       list: transactions.getList,
       handleDeleteTransaction,
       handleOpenModalTransactionToEdit: () => {},
-      loading: false
+      loading
     }
   }
 
