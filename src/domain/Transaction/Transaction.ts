@@ -48,13 +48,14 @@ export class Transaction implements ITransaction {
       transaction.category,
       transaction.type,
       transaction.name
-    ).execute()
+    ).create()
 
     await this.createTransactionApi(objTransaction)
     await this.list()
   }
 
   async delete(id: string) {
+    if (!id) throw new Error('Id is required to delete')
     await this.deleteTransactionApi(id)
     await this.list()
   }
@@ -67,7 +68,7 @@ export class Transaction implements ITransaction {
       transaction.category,
       transaction.type,
       transaction.name
-    ).execute()
+    ).update()
 
     await this.updateTransactionApi(objTransaction)
     await this.list()
