@@ -1,18 +1,10 @@
 import { ListTransactions } from '@/components'
-
-type TransactionsTypes = {
-  id: string
-  name: string
-  amount: number
-  type: string
-  category: string
-  date: string
-}
+import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
 
 export type SectionListTransactionsTypes = {
-  list: TransactionsTypes[]
+  list: TransactionDataTypes[]
   handleDeleteTransaction: (id: string) => Promise<void>
-  handleOpenModalTransactionToEdit: (transaction: TransactionsTypes) => void
+  handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => void
   loading: boolean
 }
 export function SectionListTransactions(props: SectionListTransactionsTypes) {

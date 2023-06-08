@@ -7,7 +7,8 @@ describe('Transaction - list', () => {
         id: '1',
         amount: 100,
         date: '2020-01-01',
-        description: 'test',
+        category: 'category',
+        name: 'name',
         type: 'deposit'
       }
     ])
@@ -27,7 +28,8 @@ describe('Transaction - list', () => {
         id: '1',
         amount: 100,
         date: '2020-01-01',
-        description: 'test',
+        category: 'category',
+        name: 'name',
         type: 'deposit'
       }
     ])
@@ -50,7 +52,8 @@ describe('Transaction - create', () => {
       id: '1',
       amount: 100,
       date: '2020-01-01',
-      description: 'test',
+      category: 'category',
+      name: 'name',
       type: 'deposit'
     })
 
@@ -58,7 +61,8 @@ describe('Transaction - create', () => {
       id: '1',
       amount: 100,
       date: '2020-01-01',
-      description: 'test',
+      category: 'category',
+      name: 'name',
       type: 'deposit'
     })
   })
@@ -98,7 +102,8 @@ describe('Transaction - update', () => {
       id: '1',
       amount: 100,
       date: '2020-01-01',
-      description: 'test',
+      category: 'category',
+      name: 'name',
       type: 'deposit'
     })
 
@@ -106,7 +111,8 @@ describe('Transaction - update', () => {
       id: '1',
       amount: 100,
       date: '2020-01-01',
-      description: 'test',
+      category: 'category',
+      name: 'name',
       type: 'deposit'
     })
   })
@@ -119,7 +125,8 @@ describe('Transaction - getList', () => {
         id: '1',
         amount: 100,
         date: '2020-01-01',
-        description: 'test',
+        category: 'category',
+        name: 'name',
         type: 'deposit'
       }
     ])
@@ -141,7 +148,8 @@ describe('Transaction - getList', () => {
         id: '1',
         amount: 100,
         date: '2020-01-01',
-        description: 'test',
+        category: 'category',
+        name: 'name',
         type: 'deposit'
       }
     ])

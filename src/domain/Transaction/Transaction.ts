@@ -20,10 +20,24 @@ export class Transaction implements ITransaction {
     private readonly updateTransactionApi: UpdateType
   ) {}
 
+  formatTransaction(transaction: TransactionDataTypes) {
+    return {
+      id: transaction.id,
+      amount: transaction.amount,
+      date: transaction.date,
+      category: transaction.category,
+      type: transaction.type,
+      name: transaction.name
+    }
+  }
+
   async list() {
     const listTransaction = await this.getTransactionListApi()
-    this.listTransaction = listTransaction
-    return listTransaction
+    const formatList = listTransaction.map((transaction) =>
+      this.formatTransaction(transaction)
+    )
+    this.listTransaction = formatList
+    return formatList
   }
 
   async create(transaction: TransactionDataTypes) {
@@ -31,8 +45,9 @@ export class Transaction implements ITransaction {
       transaction.id,
       transaction.amount,
       transaction.date,
-      transaction.description,
-      transaction.type
+      transaction.category,
+      transaction.type,
+      transaction.name
     ).execute()
 
     await this.createTransactionApi(objTransaction)
@@ -49,8 +64,9 @@ export class Transaction implements ITransaction {
       transaction.id,
       transaction.amount,
       transaction.date,
-      transaction.description,
-      transaction.type
+      transaction.category,
+      transaction.type,
+      transaction.name
     ).execute()
 
     await this.updateTransactionApi(objTransaction)

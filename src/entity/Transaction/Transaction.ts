@@ -3,8 +3,9 @@ export type TransactionDataTypes = {
   id?: string
   amount: number
   date: string
-  description: string
+  category: string
   type: TransactionType
+  name: string
 }
 
 export class Transaction {
@@ -12,15 +13,10 @@ export class Transaction {
     private readonly id: string,
     private readonly amount: number,
     private readonly date: string,
-    private readonly description: string,
-    private readonly type: TransactionType
+    private readonly category: string,
+    private readonly type: TransactionType,
+    private readonly name: string
   ) {
-    this.id = id
-    this.amount = amount
-    this.date = date
-    this.description = description
-    this.type = type
-
     if (!this.verifyCreateTransaction()) {
       throw new Error('Invalid transaction')
     }
@@ -28,10 +24,7 @@ export class Transaction {
 
   verifyCreateTransaction(): boolean {
     return (
-      this.amount > 0 &&
-      this.description.length > 2 &&
-      !!this.type &&
-      !!this.date
+      this.amount > 0 && this.category.length > 2 && !!this.type && !!this.date
     )
   }
 
@@ -40,8 +33,9 @@ export class Transaction {
       id: this.id,
       amount: this.amount,
       date: this.date,
-      description: this.description,
-      type: this.type
+      category: this.category,
+      type: this.type,
+      name: this.name
     }
   }
 }

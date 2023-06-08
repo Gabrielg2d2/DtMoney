@@ -1,6 +1,36 @@
+import { Transaction } from '@/domain/Transaction/Transaction'
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
+import { useEffect, useState } from 'react'
+import { getListTransactions } from './service/get/getListTransactions'
+import { createTransaction } from './service/create/createTransaction'
+import { deleteTransaction } from './service/delete/deleteTransaction'
+import { updateTransaction } from './service/update/updateTransaction'
 
 export function Home() {
+  const [transactions, setTransactions] = useState(
+    new Transaction(
+      getListTransactions,
+      createTransaction,
+      deleteTransaction,
+      updateTransaction
+    )
+  )
+
+  useEffect(() => {
+    async function amountTransactions() {
+      const currentTransaction = new Transaction(
+        getListTransactions,
+        createTransaction,
+        deleteTransaction,
+        updateTransaction
+      )
+
+      await currentTransaction.list()
+      setTransactions(currentTransaction)
+    }
+    void amountTransactions()
+  }, [])
+
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
       submit: async () => {
@@ -13,10 +43,8 @@ export function Home() {
       totalTransactions: 'R$ 0,00'
     },
     sectionListTransactions: {
-      list: [],
-      handleDeleteTransaction: async () => {
-        await Promise.resolve()
-      },
+      list: transactions.getList,
+      handleDeleteTransaction: transactions.delete,
       handleOpenModalTransactionToEdit: () => {},
       loading: false
     }

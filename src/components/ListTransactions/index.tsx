@@ -1,3 +1,4 @@
+import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo } from 'react'
 
@@ -31,19 +32,10 @@ function Header() {
   )
 }
 
-type TransactionsTypes = {
-  id: string
-  name: string
-  amount: number
-  type: string
-  category: string
-  date: string
-}
-
 type ListTransactionsProps = {
-  list: TransactionsTypes[]
+  list: TransactionDataTypes[]
   handleDeleteTransaction: (id: string) => Promise<void>
-  handleOpenModalTransactionToEdit: (transaction: TransactionsTypes) => void
+  handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => void
 }
 
 export function ListTransactions({
@@ -68,14 +60,14 @@ export function ListTransactions({
               : transaction.amount}
           </span>
           <span className="max-sm:hidden text-title-default">
-            {transaction.category}
+            {transaction.type}
           </span>
           <span className="max-sm:hidden text-title-default">
             {transaction.date}
           </span>
 
           <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
-            <span className="text-title-default">{transaction.category}</span>
+            <span className="text-title-default">{transaction.type}</span>
             <span className="text-title-default">{transaction.date}</span>
           </div>
           <button
