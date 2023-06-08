@@ -4,6 +4,8 @@ type MainTypes = {
 
 export function Main(props: MainTypes) {
   return (
-    <main className="max-w-screen-xl mx-auto mt-[-48px]">{props.children}</main>
+    <main className="max-w-screen-xl px-4 mx-auto mt-[-48px]">
+      {props.children}
+    </main>
   )
 }

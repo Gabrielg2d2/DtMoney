@@ -1,36 +1,23 @@
-import { Transaction } from '@/domain/Transaction/Transaction'
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useEffect, useState } from 'react'
-import { getListTransactions } from './service/get/getListTransactions'
-import { createTransaction } from './service/create/createTransaction'
-import { deleteTransaction } from './service/delete/deleteTransaction'
-import { updateTransaction } from './service/update/updateTransaction'
+import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
 
 export function Home() {
   const [transactions, setTransactions] = useState(
-    new Transaction(
-      getListTransactions,
-      createTransaction,
-      deleteTransaction,
-      updateTransaction
-    )
+    new FactoryTransaction().execute()
   )
 
   async function handleDeleteTransaction(id: string) {
-    await transactions.delete(id)
+    const newTransactions = new FactoryTransaction().execute()
+    await newTransactions.delete(id)
+    setTransactions(newTransactions)
   }
 
   useEffect(() => {
     async function amountTransactions() {
-      const currentTransaction = new Transaction(
-        getListTransactions,
-        createTransaction,
-        deleteTransaction,
-        updateTransaction
-      )
-
-      await currentTransaction.list()
-      setTransactions(currentTransaction)
+      const newTransactions = new FactoryTransaction().execute()
+      await newTransactions.list()
+      setTransactions(newTransactions)
     }
     void amountTransactions()
   }, [])
