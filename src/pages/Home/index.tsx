@@ -16,6 +16,10 @@ export function Home() {
     )
   )
 
+  async function handleDeleteTransaction(id: string) {
+    await transactions.delete(id)
+  }
+
   useEffect(() => {
     async function amountTransactions() {
       const currentTransaction = new Transaction(
@@ -44,7 +48,7 @@ export function Home() {
     },
     sectionListTransactions: {
       list: transactions.getList,
-      handleDeleteTransaction: transactions.delete,
+      handleDeleteTransaction,
       handleOpenModalTransactionToEdit: () => {},
       loading: false
     }

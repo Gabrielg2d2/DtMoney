@@ -4,8 +4,8 @@
       "id": "1",
       "name": "Transaction 1",
       "amount": 100,
-      "category": "Food",
-      "type": "withdrawn",
+      "category": "Salary",
+      "type": "deposit",
       "date": "2021-05-01T00:00:00.000Z"
     },
     {
@@ -23,6 +23,62 @@
       "type": "deposit",
       "category": "Salary",
       "date": "2023-02-12T00:41:39.194Z"
+    },
+    {
+      "id": "4",
+      "name": "Transaction 4",
+      "amount": 400,
+      "category": "Car",
+      "type": "withdrawn",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "name": "Transaction 5",
+      "amount": 500,
+      "category": "Salary",
+      "type": "deposit",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "name": "Transaction 6",
+      "amount": 600,
+      "category": "Food",
+      "type": "withdrawn",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "name": "Transaction 7",
+      "amount": 700,
+      "category": "Salary",
+      "type": "deposit",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "name": "Transaction 8",
+      "amount": 800,
+      "category": "Food",
+      "type": "withdrawn",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "name": "Transaction 9",
+      "amount": 900,
+      "category": "Salary",
+      "type": "deposit",
+      "date": "2021-05-01T00:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "name": "Transaction 10",
+      "amount": 1000,
+      "category": "Food",
+      "type": "withdrawn",
+      "date": "2021-05-01T00:00:00.000Z"
     }
   ]
 }
