@@ -1,6 +1,7 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
+import { DialogTransaction } from '@/components'
 
 export function Home() {
   const [loading, setLoading] = useState(false)
@@ -24,9 +25,15 @@ export function Home() {
 
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      submit: async () => {
-        await Promise.resolve()
-      }
+      dialogTransaction: (
+        <DialogTransaction
+          title="Nova transação"
+          description="
+          Preencha os campos abaixo para adicionar uma nova transação.
+        "
+          handleSubmit={async () => {}}
+        />
+      )
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: 'R$ 0,00',

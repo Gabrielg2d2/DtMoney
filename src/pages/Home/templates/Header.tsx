@@ -1,8 +1,7 @@
-import { DialogTransaction } from '@/components'
 import { CurrencyDollar } from 'phosphor-react'
 
 export type HeaderTypes = {
-  submit: () => void
+  dialogTransaction: React.ReactNode
 }
 
 export function Header(props: HeaderTypes) {
@@ -16,13 +15,7 @@ export function Header(props: HeaderTypes) {
           />
           <h1 className="text-2xl text-white font-bold">dt money</h1>
         </div>
-        <DialogTransaction
-          title="Nova transação"
-          description="
-          Preencha os campos abaixo para adicionar uma nova transação.
-        "
-          handleSubmit={props.submit}
-        />
+        {props.dialogTransaction}
       </div>
     </header>
   )
