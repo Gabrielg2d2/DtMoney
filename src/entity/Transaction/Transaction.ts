@@ -55,8 +55,8 @@ export class Transaction {
   }
 
   update(): TransactionDataTypes {
-    if (!this.id) throw new Error('Id is required to update')
     if (!this.verifyNewTransaction()) return
+    if (!this.id) throw new Error('Id is required to update')
     return {
       id: this.id,
       amount: this.amount,
