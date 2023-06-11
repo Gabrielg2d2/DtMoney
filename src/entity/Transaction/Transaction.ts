@@ -1,3 +1,5 @@
+import { AdapterZodTransaction } from './AdapterZodTransaction'
+
 type TransactionType = 'withdrawn' | 'deposit'
 export type TransactionDataTypes = {
   id?: string
@@ -24,8 +26,16 @@ export class Transaction {
         'Amount must be positive for input and negative for output'
       )
     }
+    const adapterZodTransaction = new AdapterZodTransaction()
+    const validationResult = adapterZodTransaction.validateNewTransaction({
+      amount: this.amount,
+      date: this.date,
+      category: this.category,
+      type: this.type,
+      name: this.name
+    })
 
-    if (!this.category || !this.type || !this.date || !this.name) {
+    if (!validationResult) {
       throw new Error('Invalid new transaction')
     }
 
@@ -45,8 +55,8 @@ export class Transaction {
   }
 
   update(): TransactionDataTypes {
-    if (!this.verifyNewTransaction()) return
     if (!this.id) throw new Error('Id is required to update')
+    if (!this.verifyNewTransaction()) return
     return {
       id: this.id,
       amount: this.amount,
