@@ -1,4 +1,4 @@
-import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { api } from '@/service/api'
 
 export async function getListTransactions() {

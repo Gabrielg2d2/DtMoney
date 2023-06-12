@@ -2,7 +2,7 @@ import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 
 type CardProps = {
   title?: string
-  value: string
+  value: number
 }
 
 type ContainerCardProps = {
@@ -20,7 +20,7 @@ function ContainerCard({ children, bgColor = 'bg-white' }: ContainerCardProps) {
   )
 }
 
-export function CardIncoming({ title = 'Entradas', value }: CardProps) {
+export function CardIncoming({ title = 'Entradas', value = 0 }: CardProps) {
   return (
     <ContainerCard>
       <div className="flex items-center justify-between">
@@ -37,7 +37,7 @@ export function CardIncoming({ title = 'Entradas', value }: CardProps) {
   )
 }
 
-export function CardOutgoing({ title = 'Saídas', value }: CardProps) {
+export function CardOutgoing({ title = 'Saídas', value = 0 }: CardProps) {
   return (
     <ContainerCard>
       <div className="flex items-center justify-between">
@@ -54,7 +54,7 @@ export function CardOutgoing({ title = 'Saídas', value }: CardProps) {
   )
 }
 
-export function CardTotal({ title = 'Total', value }: CardProps) {
+export function CardTotal({ title = 'Total', value = 0 }: CardProps) {
   return (
     <ContainerCard bgColor={'bg-green-default'}>
       <div className="flex items-center justify-between">

@@ -1,9 +1,9 @@
 import { CardIncoming, CardOutgoing, CardTotal } from '@/components'
 
 export type SectionCardsTransactionsTypes = {
-  totalIncomingTransactions: string
-  totalOutgoingTransactions: string
-  totalTransactions: string
+  totalIncomingTransactions: number
+  totalOutgoingTransactions: number
+  totalTransactions: number
 }
 
 export function SectionCardsTransactions(props: SectionCardsTransactionsTypes) {
