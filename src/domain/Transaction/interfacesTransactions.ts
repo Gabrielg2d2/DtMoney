@@ -1,4 +1,4 @@
-import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 
 export type CreateType = (transaction: TransactionDataTypes) => Promise<boolean>
 export type DeleteType = (id: string) => Promise<boolean>

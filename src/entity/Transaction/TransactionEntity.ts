@@ -1,8 +1,8 @@
 import { AdapterZodTransaction } from './AdapterZodTransaction'
 
-type TransactionType = 'withdrawn' | 'deposit'
+export type TransactionType = 'withdrawn' | 'deposit'
 export type TransactionDataTypes = {
-  id?: string
+  id: string | undefined
   amount: number
   date: string
   category: string
@@ -10,14 +10,15 @@ export type TransactionDataTypes = {
   name: string
 }
 
-export class Transaction {
+export class TransactionEntity {
   constructor(
-    private readonly id: string,
+    private readonly id: string | undefined,
     private readonly amount: number,
     private readonly date: string,
     private readonly category: string,
     private readonly type: TransactionType,
-    private readonly name: string
+    private readonly name: string,
+    private readonly adapterZodTransaction: AdapterZodTransaction
   ) {}
 
   verifyNewTransaction(): boolean {
@@ -26,8 +27,7 @@ export class Transaction {
         'Amount must be positive for input and negative for output'
       )
     }
-    const adapterZodTransaction = new AdapterZodTransaction()
-    const validationResult = adapterZodTransaction.validateNewTransaction({
+    const validationResult = this.adapterZodTransaction.validateNewTransaction({
       amount: this.amount,
       date: this.date,
       category: this.category,

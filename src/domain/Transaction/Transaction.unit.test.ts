@@ -1,3 +1,4 @@
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Transaction } from './Transaction'
 
 describe('Transaction - list', () => {
@@ -98,23 +99,17 @@ describe('Transaction - update', () => {
       deleteTransactionApiSpy,
       updateTransactionApiSpy
     )
-    await transaction.update({
+    const transactionProps: TransactionDataTypes = {
       id: '1',
       amount: 100,
       date: '2020-01-01',
       category: 'category',
       name: 'name',
       type: 'deposit'
-    })
+    }
+    await transaction.update(transactionProps)
 
-    expect(updateTransactionApiSpy).toHaveBeenCalledWith({
-      id: '1',
-      amount: 100,
-      date: '2020-01-01',
-      category: 'category',
-      name: 'name',
-      type: 'deposit'
-    })
+    expect(updateTransactionApiSpy).toHaveBeenCalledWith(transactionProps)
   })
 })
 

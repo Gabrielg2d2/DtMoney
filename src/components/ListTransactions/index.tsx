@@ -1,4 +1,4 @@
-import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo } from 'react'
 

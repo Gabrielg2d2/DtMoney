@@ -1,7 +1,4 @@
-import {
-  TransactionDataTypes,
-  Transaction as TransactionEntity
-} from '@/entity/Transaction/Transaction'
+import { FactoryTransactionEntity } from '@/entity/Transaction/FactoryTransactionEntity'
 import {
   CreateType,
   DeleteType,
@@ -9,6 +6,7 @@ import {
   ListType,
   UpdateType
 } from './interfacesTransactions'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 
 export class Transaction implements ITransaction {
   private listTransaction: TransactionDataTypes[] = []
@@ -41,16 +39,16 @@ export class Transaction implements ITransaction {
   }
 
   async create(transaction: TransactionDataTypes) {
-    const objTransaction = new TransactionEntity(
+    const objTransaction = new FactoryTransactionEntity(
       transaction.id,
       transaction.amount,
       transaction.date,
       transaction.category,
       transaction.type,
       transaction.name
-    ).create()
-
-    await this.createTransactionApi(objTransaction)
+    ).execute()
+    const newTransaction = objTransaction.create()
+    await this.createTransactionApi(newTransaction)
     await this.list()
   }
 
@@ -61,16 +59,17 @@ export class Transaction implements ITransaction {
   }
 
   async update(transaction: TransactionDataTypes) {
-    const objTransaction = new TransactionEntity(
+    const objTransaction = new FactoryTransactionEntity(
       transaction.id,
       transaction.amount,
       transaction.date,
       transaction.category,
       transaction.type,
       transaction.name
-    ).update()
+    ).execute()
 
-    await this.updateTransactionApi(objTransaction)
+    const newTransaction = objTransaction.update()
+    await this.updateTransactionApi(newTransaction)
     await this.list()
   }
 
