@@ -1,9 +1,13 @@
-type GetCardsAPIType = () => Promise<any>
+type GetCardsAPIType = () => Promise<{
+  totalIncomingTransactions: number
+  totalOutgoingTransactions: number
+  totalTransactions: number
+}>
 
 export class Cards {
-  private totalIncomingTransactions: 0
-  private totalOutgoingTransactions: 0
-  private totalTransactions: 0
+  private totalIncomingTransactions = 0
+  private totalOutgoingTransactions = 0
+  private totalTransactions = 0
 
   constructor(private readonly getCardsAPI: GetCardsAPIType) {}
 
