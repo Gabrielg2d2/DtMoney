@@ -1,5 +1,5 @@
 import { ListTransactions } from '@/components'
-import { TransactionDataTypes } from '@/entity/Transaction/Transaction'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 
 export type SectionListTransactionsTypes = {
   list: TransactionDataTypes[]

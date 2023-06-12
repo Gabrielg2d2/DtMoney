@@ -17,6 +17,7 @@ export class Cards {
       this.totalIncomingTransactions = 0
       this.totalOutgoingTransactions = 0
       this.totalTransactions = 0
+      throw new Error('Error getting cards')
     }
 
     this.totalIncomingTransactions = response.totalIncomingTransactions
