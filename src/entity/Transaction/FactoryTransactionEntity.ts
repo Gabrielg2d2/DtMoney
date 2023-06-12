@@ -2,7 +2,7 @@ import { AdapterZodTransaction } from './AdapterZodTransaction'
 import { TransactionType, TransactionEntity } from './TransactionEntity'
 
 export class FactoryTransactionEntity {
-  adapterZodTransaction = new AdapterZodTransaction()
+  adapterValidationTransaction = new AdapterZodTransaction()
 
   constructor(
     private readonly id: string | undefined,
@@ -21,7 +21,7 @@ export class FactoryTransactionEntity {
       this.category,
       this.type,
       this.name,
-      this.adapterZodTransaction
+      this.adapterValidationTransaction
     )
   }
 }

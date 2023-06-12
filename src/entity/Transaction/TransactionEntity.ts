@@ -18,7 +18,7 @@ export class TransactionEntity {
     private readonly category: string,
     private readonly type: TransactionType,
     private readonly name: string,
-    private readonly adapterZodTransaction: AdapterZodTransaction
+    private readonly adapterValidationTransaction: AdapterZodTransaction
   ) {}
 
   verifyNewTransaction(): boolean {
@@ -27,13 +27,14 @@ export class TransactionEntity {
         'Amount must be positive for input and negative for output'
       )
     }
-    const validationResult = this.adapterZodTransaction.validateNewTransaction({
-      amount: this.amount,
-      date: this.date,
-      category: this.category,
-      type: this.type,
-      name: this.name
-    })
+    const validationResult =
+      this.adapterValidationTransaction.validateNewTransaction({
+        amount: this.amount,
+        date: this.date,
+        category: this.category,
+        type: this.type,
+        name: this.name
+      })
 
     if (!validationResult) {
       throw new Error('Invalid new transaction')
