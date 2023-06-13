@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
 import { DialogTransaction, FormTypes } from '@/components'
 import { FactoryCards } from '@/domain/Cards/FactoryCards'
+import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 
 export function Home() {
   const [loading, setLoading] = useState(false)
@@ -23,8 +24,17 @@ export function Home() {
     setLoading(false)
   }, [cards, transactions])
 
-  function handleSubmit(data: FormTypes) {
-    console.log('handleSubmit: ', data)
+  async function handleSubmit(data: FormTypes) {
+    setLoading(true)
+    const obj = {
+      name: data.name,
+      amount: Number(data.amount),
+      category: data.category,
+      type: data.type,
+      date: new Date().toISOString()
+    }
+    await transactions.create(obj as TransactionDataTypes)
+    setLoading(false)
   }
 
   useEffect(() => {
