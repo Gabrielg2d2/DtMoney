@@ -6,15 +6,15 @@ type CategoryTypes = {
 }
 
 export function SelectedCategory(props: CategoryTypes) {
-  const [category, setCategory] = useState('deposit')
+  const [type, setType] = useState('deposit')
 
   function handleDeposit() {
-    setCategory('deposit')
+    setType('deposit')
     props.outInput('deposit')
   }
 
   function handleWithdraw() {
-    setCategory('withdraw')
+    setType('withdraw')
     props.outInput('withdraw')
   }
 
@@ -26,7 +26,7 @@ export function SelectedCategory(props: CategoryTypes) {
         className={`
         flex items-center justify-center gap-2 transition-all
         p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default  ${
-          category === 'deposit' ? 'border-green-500' : 'border-gray-200'
+          type === 'deposit' ? 'border-green-500' : 'border-gray-200'
         }`}
       >
         <ArrowCircleUp size={26} className="text-green-default" />
@@ -38,7 +38,7 @@ export function SelectedCategory(props: CategoryTypes) {
         className={`
         flex items-center justify-center gap-2 transition-all
         p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default 
-        ${category === 'withdraw' ? 'border-red-500' : 'border-gray-200'}
+        ${type === 'withdraw' ? 'border-red-500' : 'border-gray-200'}
         `}
       >
         <ArrowCircleDown size={26} className="text-red-default" />

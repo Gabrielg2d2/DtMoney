@@ -4,11 +4,19 @@ import { useState } from 'react'
 import { Form } from './Form'
 import { SelectedCategory } from './SelectedCategory'
 import { Submit } from './Submit'
+import { useForm } from 'react-hook-form'
 
 type DialogTransactionTypes = {
   title: string
   description: string
-  handleSubmit: () => void
+  handleSubmit: (data: any) => void
+}
+
+export type FormTypes = {
+  name: string
+  amount: string
+  category: string
+  type: string
 }
 
 export function DialogTransaction({
@@ -26,6 +34,19 @@ export function DialogTransaction({
     setOpenModalTransaction(true)
   }
 
+  const method = useForm<FormTypes>({
+    defaultValues: {
+      name: '',
+      amount: '',
+      category: '',
+      type: 'deposit'
+    }
+  })
+
+  function onSubmit(data: FormTypes) {
+    handleSubmit(data)
+  }
+
   return (
     <>
       <button
@@ -41,11 +62,18 @@ export function DialogTransaction({
         open={openModalTransaction}
         close={handleCloseModalTransaction}
       >
-        <Form handleSubmit={handleSubmit}>
-          <Input name="name" placeholder="Nome" />
-          <Input name="amount" placeholder="Preço" />
-          <SelectedCategory outInput={() => {}} />
-          <Input name="category" placeholder="Categoria" />
+        <Form onSubmit={method.handleSubmit(onSubmit)}>
+          <Input placeholder="Nome" register={method.register('name')} />
+          <Input placeholder="Preço" register={method.register('amount')} />
+          <SelectedCategory
+            outInput={(value) => {
+              method.setValue('type', value)
+            }}
+          />
+          <Input
+            placeholder="Categoria"
+            register={method.register('category')}
+          />
           <Submit />
         </Form>
       </DialogCustom>

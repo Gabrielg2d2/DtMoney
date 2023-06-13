@@ -1,7 +1,7 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
-import { DialogTransaction } from '@/components'
+import { DialogTransaction, FormTypes } from '@/components'
 import { FactoryCards } from '@/domain/Cards/FactoryCards'
 
 export function Home() {
@@ -23,6 +23,10 @@ export function Home() {
     setLoading(false)
   }, [cards, transactions])
 
+  function handleSubmit(data: FormTypes) {
+    console.log('handleSubmit: ', data)
+  }
+
   useEffect(() => {
     void listTransactions()
   }, [listTransactions])
@@ -35,7 +39,7 @@ export function Home() {
           description="
           Preencha os campos abaixo para adicionar uma nova transação.
         "
-          handleSubmit={async () => {}}
+          handleSubmit={handleSubmit}
         />
       )
     },
