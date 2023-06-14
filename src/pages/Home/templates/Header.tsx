@@ -1,7 +1,8 @@
+import { DialogNewTransaction, FormTypes } from '@/components'
 import { CurrencyDollar } from 'phosphor-react'
 
 export type HeaderTypes = {
-  dialogTransaction: React.ReactNode
+  submit: (data: FormTypes) => Promise<void>
 }
 
 export function Header(props: HeaderTypes) {
@@ -15,7 +16,7 @@ export function Header(props: HeaderTypes) {
           />
           <h1 className="text-2xl text-white font-bold">dt money</h1>
         </div>
-        {props.dialogTransaction}
+        <DialogNewTransaction handleSubmit={props.submit} />
       </div>
     </header>
   )

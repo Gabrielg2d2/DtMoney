@@ -3,11 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
 import { FactoryCards } from '@/domain/Cards/FactoryCards'
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
-import {
-  DialogEditTransaction,
-  DialogNewTransaction,
-  FormTypes
-} from '@/components'
+import { DialogEditTransaction, FormTypes } from '@/components'
 
 export function Home() {
   const [openEditTransaction, setOpenEditTransaction] = useState(false)
@@ -64,9 +60,7 @@ export function Home() {
 
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      dialogTransaction: (
-        <DialogNewTransaction handleSubmit={handleSubmitNewTransaction} />
-      )
+      submit: handleSubmitNewTransaction
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: cards.totalCards.totalIncomingTransactions,
