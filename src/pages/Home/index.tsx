@@ -37,7 +37,7 @@ export function Home() {
     setLoading(false)
   }, [cards, transactions])
 
-  async function handleSubmit(data: FormTypes) {
+  async function handleSubmitNewTransaction(data: FormTypes) {
     setLoading(true)
     const obj = {
       name: data.name,
@@ -64,7 +64,9 @@ export function Home() {
 
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      dialogTransaction: <DialogNewTransaction handleSubmit={handleSubmit} />
+      dialogTransaction: (
+        <DialogNewTransaction handleSubmit={handleSubmitNewTransaction} />
+      )
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: cards.totalCards.totalIncomingTransactions,
