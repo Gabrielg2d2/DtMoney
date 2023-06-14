@@ -9,6 +9,7 @@ import {
   TransactionType
 } from '@/entity/Transaction/TransactionEntity'
 import { useEffect } from 'react'
+import { InputMoney } from '../InputMoney'
 
 type DialogEditTransactionTypes = {
   handleSubmit: (data: any) => void
@@ -67,7 +68,14 @@ export function DialogEditTransaction({
     >
       <Form onSubmit={method.handleSubmit(onSubmit)}>
         <Input placeholder="Nome" register={method.register('name')} />
-        <Input placeholder="Preço" register={method.register('amount')} />
+        <InputMoney
+          name="amount"
+          placeholder="Preço"
+          valueMoney={String(transaction.amount)}
+          onChangeValueMoney={(value) => {
+            method.setValue('amount', value)
+          }}
+        />
         <SelectedCategory
           defaultValue={transaction.type}
           outInput={(value) => {

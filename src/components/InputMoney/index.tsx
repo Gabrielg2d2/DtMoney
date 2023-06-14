@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type InputTypes = {
   error?: boolean
   message?: string
+  valueMoney?: string
   onChangeValueMoney: (value: string) => void
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 export function InputMoney({
   error,
   message,
+  valueMoney,
   onChangeValueMoney,
   ...props
 }: InputTypes) {
@@ -34,6 +36,13 @@ export function InputMoney({
     setValue(valueMoneyPtBr)
     onChangeValueMoney(valueMoney)
   }
+
+  useEffect(() => {
+    if (valueMoney) {
+      const valueMoneyPtBr = formatValueMoneyPtBr(valueMoney)
+      setValue(valueMoneyPtBr)
+    }
+  }, [valueMoney])
 
   return (
     <>
