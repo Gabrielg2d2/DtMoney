@@ -6,9 +6,7 @@ import { SelectedCategory } from './SelectedCategory'
 import { Submit } from './Submit'
 import { useForm } from 'react-hook-form'
 
-type DialogTransactionTypes = {
-  title: string
-  description: string
+type DialogNewTransactionTypes = {
   handleSubmit: (data: any) => void
 }
 
@@ -19,11 +17,9 @@ export type FormTypes = {
   type: string
 }
 
-export function DialogTransaction({
-  title,
-  description,
+export function DialogNewTransaction({
   handleSubmit
-}: DialogTransactionTypes) {
+}: DialogNewTransactionTypes) {
   const [openModalTransaction, setOpenModalTransaction] = useState(false)
 
   function handleCloseModalTransaction() {
@@ -57,8 +53,10 @@ export function DialogTransaction({
       </button>
 
       <DialogCustom
-        title={title}
-        description={description}
+        title="Nova transação"
+        description="
+        Preencha os campos abaixo para adicionar uma nova transação.
+      "
         open={openModalTransaction}
         close={handleCloseModalTransaction}
       >

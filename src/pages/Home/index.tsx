@@ -1,11 +1,24 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
-import { DialogTransaction, FormTypes } from '@/components'
 import { FactoryCards } from '@/domain/Cards/FactoryCards'
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
+import {
+  DialogEditTransaction,
+  DialogNewTransaction,
+  FormTypes
+} from '@/components'
 
 export function Home() {
+  const [openEditTransaction, setOpenEditTransaction] = useState(false)
+  const [transaction, setTransaction] = useState<TransactionDataTypes>({
+    id: '',
+    name: '',
+    amount: 0,
+    category: '',
+    type: 'deposit',
+    date: ''
+  })
   const [loading, setLoading] = useState(false)
   const [transactions] = useState(new FactoryTransaction().execute())
   const [cards] = useState(new FactoryCards().execute())
@@ -34,6 +47,14 @@ export function Home() {
       date: new Date().toISOString()
     }
     await transactions.create(obj as TransactionDataTypes)
+    await cards.getCards()
+    setLoading(false)
+  }
+
+  async function handleSubmitEditTransaction(data: TransactionDataTypes) {
+    setLoading(true)
+    await transactions.update(data)
+    await cards.getCards()
     setLoading(false)
   }
 
@@ -43,15 +64,7 @@ export function Home() {
 
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      dialogTransaction: (
-        <DialogTransaction
-          title="Nova transação"
-          description="
-          Preencha os campos abaixo para adicionar uma nova transação.
-        "
-          handleSubmit={handleSubmit}
-        />
-      )
+      dialogTransaction: <DialogNewTransaction handleSubmit={handleSubmit} />
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: cards.totalCards.totalIncomingTransactions,
@@ -61,10 +74,26 @@ export function Home() {
     sectionListTransactions: {
       list: transactions.getList,
       deleteTransaction: handleDeleteTransaction,
-      handleOpenModalTransactionToEdit: () => {},
+      handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => {
+        console.log(transaction)
+        setTransaction(transaction)
+        setOpenEditTransaction(true)
+      },
       loading
     }
   }
 
-  return <HomeTemplateUI {...dataHomeTemplate} />
+  return (
+    <>
+      <HomeTemplateUI {...dataHomeTemplate} />
+      <DialogEditTransaction
+        transaction={transaction}
+        handleSubmit={handleSubmitEditTransaction}
+        open={openEditTransaction}
+        close={() => {
+          setOpenEditTransaction(false)
+        }}
+      />
+    </>
+  )
 }

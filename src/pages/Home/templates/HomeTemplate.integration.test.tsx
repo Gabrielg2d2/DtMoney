@@ -1,24 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import { HomeTemplateUI, HomeTemplateUITypes } from '.'
-import { DialogTransaction } from '@/components'
+import { DialogNewTransaction } from '@/components'
 
 describe('Home - page', () => {
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      dialogTransaction: (
-        <DialogTransaction
-          title="Nova transação"
-          description="
-        Preencha os campos abaixo para adicionar uma nova transação.
-      "
-          handleSubmit={async () => {}}
-        />
-      )
+      dialogTransaction: <DialogNewTransaction handleSubmit={async () => {}} />
     },
     sectionCardsTransactions: {
-      totalIncomingTransactions: 'R$ 0,00',
-      totalOutgoingTransactions: 'R$ 0,00',
-      totalTransactions: 'R$ 0,00'
+      totalIncomingTransactions: 0,
+      totalOutgoingTransactions: 0,
+      totalTransactions: 0
     },
     sectionListTransactions: {
       list: [],
