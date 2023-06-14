@@ -69,6 +69,7 @@ export function DialogEditTransaction({
         <Input placeholder="Nome" register={method.register('name')} />
         <Input placeholder="Preço" register={method.register('amount')} />
         <SelectedCategory
+          defaultValue={transaction.type}
           outInput={(value) => {
             method.setValue('type', value)
           }}
