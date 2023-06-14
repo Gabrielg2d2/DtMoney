@@ -14,8 +14,8 @@ export function SelectedCategory(props: CategoryTypes) {
   }
 
   function handleWithdraw() {
-    setType('withdraw')
-    props.outInput('withdraw')
+    setType('withdrawn')
+    props.outInput('withdrawn')
   }
 
   return (
@@ -38,7 +38,7 @@ export function SelectedCategory(props: CategoryTypes) {
         className={`
         flex items-center justify-center gap-2 transition-all
         p-4 bg-white rounded-md border hover:bg-slate-100 w-full text-text-default 
-        ${type === 'withdraw' ? 'border-red-500' : 'border-gray-200'}
+        ${type === 'withdrawn' ? 'border-red-500' : 'border-gray-200'}
         `}
       >
         <ArrowCircleDown size={26} className="text-red-default" />
