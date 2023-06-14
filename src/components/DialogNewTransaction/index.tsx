@@ -5,6 +5,7 @@ import { Form } from './Form'
 import { SelectedCategory } from './SelectedCategory'
 import { Submit } from './Submit'
 import { useForm } from 'react-hook-form'
+import { InputMoney } from '../InputMoney'
 
 type DialogNewTransactionTypes = {
   handleSubmit: (data: any) => void
@@ -62,7 +63,13 @@ export function DialogNewTransaction({
       >
         <Form onSubmit={method.handleSubmit(onSubmit)}>
           <Input placeholder="Nome" register={method.register('name')} />
-          <Input placeholder="Preço" register={method.register('amount')} />
+          <InputMoney
+            name="amount"
+            placeholder="Preço"
+            onChangeValueMoney={(value) => {
+              method.setValue('amount', value)
+            }}
+          />
           <SelectedCategory
             outInput={(value) => {
               method.setValue('type', value)
