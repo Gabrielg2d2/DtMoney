@@ -60,8 +60,8 @@ export function DialogEditTransaction({
 
   return (
     <DialogCustom
-      title="Edit Transaction"
-      description="Fill in the fields to edit the transaction"
+      title="Editar transação"
+      description="Edite os dados da transação."
       open={open}
       close={close}
     >
