@@ -1,6 +1,7 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Pencil, Trash } from 'phosphor-react'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { DialogEditTransaction } from '../DialogEditTransaction'
 
 type BoxProps = {
   children: React.ReactNode
@@ -35,14 +36,28 @@ function Header() {
 type ListTransactionsProps = {
   list: TransactionDataTypes[]
   deleteTransaction: (id: string) => Promise<void>
-  handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => void
+  submit: (data: TransactionDataTypes) => void
 }
 
 export function ListTransactions({
   list,
   deleteTransaction,
-  handleOpenModalTransactionToEdit
+  submit
 }: ListTransactionsProps) {
+  const [openEditTransaction, setOpenEditTransaction] = useState(false)
+  const [transaction, setTransaction] = useState<TransactionDataTypes>({
+    id: '',
+    name: '',
+    amount: 0,
+    category: '',
+    type: 'deposit',
+    date: ''
+  })
+  function handleOpenEditModal(transaction: TransactionDataTypes) {
+    setTransaction(transaction)
+    setOpenEditTransaction(true)
+  }
+
   const listTransactions = useMemo(
     () =>
       list.map((transaction) => (
@@ -74,7 +89,7 @@ export function ListTransactions({
             title="Editar"
             className="absolute top-4 right-16"
             onClick={() => {
-              handleOpenModalTransactionToEdit(transaction)
+              handleOpenEditModal(transaction)
             }}
           >
             <Pencil size={20} />
@@ -90,7 +105,7 @@ export function ListTransactions({
           </button>
         </Box>
       )),
-    [deleteTransaction, handleOpenModalTransactionToEdit, list]
+    [deleteTransaction, list]
   )
 
   if (!list.length) {
@@ -114,6 +129,14 @@ export function ListTransactions({
       >
         <div className="flex flex-col gap-4">{listTransactions}</div>
       </div>
+      <DialogEditTransaction
+        transaction={transaction}
+        handleSubmit={submit}
+        open={openEditTransaction}
+        close={() => {
+          setOpenEditTransaction(false)
+        }}
+      />
     </>
   )
 }

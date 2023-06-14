@@ -3,18 +3,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
 import { FactoryCards } from '@/domain/Cards/FactoryCards'
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
-import { DialogEditTransaction, FormTypes } from '@/components'
+import { FormTypes } from '@/components'
 
 export function Home() {
-  const [openEditTransaction, setOpenEditTransaction] = useState(false)
-  const [transaction, setTransaction] = useState<TransactionDataTypes>({
-    id: '',
-    name: '',
-    amount: 0,
-    category: '',
-    type: 'deposit',
-    date: ''
-  })
   const [loading, setLoading] = useState(false)
   const [transactions] = useState(new FactoryTransaction().execute())
   const [cards] = useState(new FactoryCards().execute())
@@ -70,11 +61,7 @@ export function Home() {
     sectionListTransactions: {
       list: transactions.getList,
       deleteTransaction: handleDeleteTransaction,
-      handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => {
-        console.log(transaction)
-        setTransaction(transaction)
-        setOpenEditTransaction(true)
-      },
+      submit: handleSubmitEditTransaction,
       loading
     }
   }
@@ -82,14 +69,6 @@ export function Home() {
   return (
     <>
       <HomeTemplateUI {...dataHomeTemplate} />
-      <DialogEditTransaction
-        transaction={transaction}
-        handleSubmit={handleSubmitEditTransaction}
-        open={openEditTransaction}
-        close={() => {
-          setOpenEditTransaction(false)
-        }}
-      />
     </>
   )
 }

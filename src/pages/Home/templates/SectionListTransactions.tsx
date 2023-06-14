@@ -4,7 +4,7 @@ import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 export type SectionListTransactionsTypes = {
   list: TransactionDataTypes[]
   deleteTransaction: (id: string) => Promise<void>
-  handleOpenModalTransactionToEdit: (transaction: TransactionDataTypes) => void
+  submit: (data: TransactionDataTypes) => void
   loading: boolean
 }
 export function SectionListTransactions(props: SectionListTransactionsTypes) {
@@ -14,9 +14,7 @@ export function SectionListTransactions(props: SectionListTransactionsTypes) {
       <ListTransactions
         list={props.list}
         deleteTransaction={props.deleteTransaction}
-        handleOpenModalTransactionToEdit={
-          props.handleOpenModalTransactionToEdit
-        }
+        submit={props.submit}
       />
     </section>
   )
