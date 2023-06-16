@@ -1,7 +1,7 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo, useState } from 'react'
-import { DialogEditTransaction } from '../DialogEditTransaction'
+import { DialogEditTransaction } from '@/components'
 import { formatDate, formatMoneyPtBr, formatType } from '@/util'
 
 type BoxProps = {

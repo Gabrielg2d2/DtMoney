@@ -13,7 +13,9 @@ module.exports = {
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
-    '!**/*.d.ts' // config types
+    '!**/*.d.ts', // config types
+    '!src/index.tsx',
+    '!src/components/index.tsx'
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
