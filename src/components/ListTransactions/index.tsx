@@ -58,53 +58,78 @@ export function ListTransactions({
     setOpenEditTransaction(true)
   }
 
+  function formatValue(value: number) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value / 100)
+  }
+
+  function formatDate(date: string) {
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).format(new Date(date))
+  }
+
+  function formatType(type: string) {
+    return type === 'deposit' ? 'Entrada' : 'Saída'
+  }
+
   const listTransactions = useMemo(
     () =>
-      list.map((transaction) => (
-        <Box key={transaction.id}>
-          <span>{transaction.name}</span>
-          <span
-            className={`max-sm:mt-2 max-sm:text-xl ${
-              transaction.type === 'withdrawn'
-                ? 'text-red-default'
-                : 'text-green-default'
-            }`}
-          >
-            {transaction.type === 'withdrawn'
-              ? `-${transaction.amount}`
-              : transaction.amount}
-          </span>
-          <span className="max-sm:hidden text-title-default">
-            {transaction.type}
-          </span>
-          <span className="max-sm:hidden text-title-default">
-            {transaction.date}
-          </span>
+      list.map((transaction) => {
+        const formattedAmount = formatValue(transaction.amount)
+        const formattedDate = formatDate(transaction.date)
+        const formattedType = formatType(transaction.type)
 
-          <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
-            <span className="text-title-default">{transaction.type}</span>
-            <span className="text-title-default">{transaction.date}</span>
-          </div>
-          <button
-            title="Editar"
-            className="absolute top-4 right-16"
-            onClick={() => {
-              handleOpenEditModal(transaction)
-            }}
-          >
-            <Pencil size={20} />
-          </button>
-          <button
-            title="Deletar"
-            className="absolute top-3 right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
-            onClick={async () => {
-              await deleteTransaction(transaction.id)
-            }}
-          >
-            <Trash size={20} />
-          </button>
-        </Box>
-      )),
+        return (
+          <Box key={transaction.id}>
+            <span>{transaction.name}</span>
+            <span
+              className={`max-sm:mt-2 max-sm:text-xl ${
+                transaction.type === 'withdrawn'
+                  ? 'text-red-default'
+                  : 'text-green-default'
+              }`}
+            >
+              {transaction.type === 'withdrawn'
+                ? `-${formattedAmount}`
+                : formattedAmount}
+            </span>
+            <span className="max-sm:hidden text-title-default">
+              {formattedType}
+            </span>
+            <span className="max-sm:hidden text-title-default">
+              {formattedDate}
+            </span>
+
+            <div className="md:hidden max-sm:w-4/5 max-sm:flex max-sm:justify-between mt-4">
+              <span className="text-title-default">{formattedType}</span>
+              <span className="text-title-default">{formattedDate}</span>
+            </div>
+            <button
+              title="Editar"
+              className="absolute top-4 right-16"
+              onClick={() => {
+                handleOpenEditModal(transaction)
+              }}
+            >
+              <Pencil size={20} />
+            </button>
+            <button
+              title="Deletar"
+              className="absolute top-3 right-4 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-lg p-1"
+              onClick={async () => {
+                await deleteTransaction(transaction.id)
+              }}
+            >
+              <Trash size={20} />
+            </button>
+          </Box>
+        )
+      }),
     [deleteTransaction, list]
   )
 

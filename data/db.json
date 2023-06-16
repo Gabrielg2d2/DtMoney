@@ -2,19 +2,19 @@
   "transactions": [
     {
       "id": "1",
-      "name": "Transaction 1",
-      "amount": 100,
+      "amount": 10000,
+      "date": "2023-06-16T22:03:41.179Z",
       "category": "Salary",
       "type": "deposit",
-      "date": "2021-05-01T00:00:00.000Z"
+      "name": "Transaction 1"
     },
     {
       "id": "2",
-      "name": "Transaction 2",
-      "amount": 200,
+      "amount": 20032,
+      "date": "2023-06-16T22:05:57.197Z",
       "category": "Food",
       "type": "withdrawn",
-      "date": "2021-05-01T00:00:00.000Z"
+      "name": "Transaction 2"
     },
     {
       "id": "3",
@@ -34,11 +34,11 @@
     },
     {
       "id": "5",
-      "name": "Transaction 5",
       "amount": 500,
+      "date": "2023-06-16T22:05:17.651Z",
       "category": "Salary",
       "type": "deposit",
-      "date": "2021-05-01T00:00:00.000Z"
+      "name": "Transaction 5"
     },
     {
       "id": "6",
@@ -66,19 +66,11 @@
     },
     {
       "id": "9",
-      "name": "Transaction 9",
-      "amount": 900,
+      "amount": 9000,
+      "date": "2023-06-16T21:49:15.287Z",
       "category": "Salary",
       "type": "deposit",
-      "date": "2021-05-01T00:00:00.000Z"
-    },
-    {
-      "id": "10",
-      "name": "Transaction 10",
-      "amount": 1000,
-      "category": "Food",
-      "type": "withdrawn",
-      "date": "2021-05-01T00:00:00.000Z"
+      "name": "Transaction 9"
     }
   ]
 }
