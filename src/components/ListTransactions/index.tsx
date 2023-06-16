@@ -2,6 +2,7 @@ import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import { DialogEditTransaction } from '../DialogEditTransaction'
+import { formatDate, formatMoneyPtBr, formatType } from '@/util'
 
 type BoxProps = {
   children: React.ReactNode
@@ -58,29 +59,10 @@ export function ListTransactions({
     setOpenEditTransaction(true)
   }
 
-  function formatValue(value: number) {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(value / 100)
-  }
-
-  function formatDate(date: string) {
-    return new Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }).format(new Date(date))
-  }
-
-  function formatType(type: string) {
-    return type === 'deposit' ? 'Entrada' : 'Saída'
-  }
-
   const listTransactions = useMemo(
     () =>
       list.map((transaction) => {
-        const formattedAmount = formatValue(transaction.amount)
+        const formattedAmount = formatMoneyPtBr(transaction.amount)
         const formattedDate = formatDate(transaction.date)
         const formattedType = formatType(transaction.type)
 
