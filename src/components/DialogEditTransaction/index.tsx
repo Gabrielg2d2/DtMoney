@@ -18,7 +18,7 @@ type DialogEditTransactionTypes = {
   close: () => void
 }
 
-export type FormTypes = {
+type FormTypes = {
   name: string
   amount: string
   category: string

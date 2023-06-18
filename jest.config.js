@@ -15,7 +15,7 @@ module.exports = {
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
     '!**/*.d.ts', // config types
     '!src/index.tsx',
-    '!src/components/index.tsx'
+    '!src/components/index.ts'
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
