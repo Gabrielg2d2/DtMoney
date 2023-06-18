@@ -1,3 +1,4 @@
+import { formatMoneyPtBr } from '@/util'
 import { useEffect, useState } from 'react'
 
 type InputTypes = {
@@ -21,25 +22,17 @@ export function InputMoney({
     <span className="text-red-500 text-sm">{message}</span>
   ) : null
 
-  function formatValueMoneyPtBr(value: string) {
-    const valueMoney = value.replace(/\D/g, '')
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(Number(valueMoney) / 100)
-  }
-
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     const valueMoney = value.replace(/\D/g, '')
-    const valueMoneyPtBr = formatValueMoneyPtBr(valueMoney)
+    const valueMoneyPtBr = formatMoneyPtBr(parseInt(valueMoney))
     setValue(valueMoneyPtBr)
     onChangeValueMoney(valueMoney)
   }
 
   useEffect(() => {
     if (valueMoney) {
-      const valueMoneyPtBr = formatValueMoneyPtBr(valueMoney)
+      const valueMoneyPtBr = formatMoneyPtBr(parseInt(valueMoney))
       setValue(valueMoneyPtBr)
     }
   }, [valueMoney])
