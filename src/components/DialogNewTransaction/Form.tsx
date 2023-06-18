@@ -4,7 +4,7 @@ type FormTypes = {
 
 export function Form({ ...props }: FormTypes) {
   return (
-    <form className="flex flex-col gap-4 pb-4 px-2" {...props}>
+    <form role="form" className="flex flex-col gap-4 pb-4 px-2" {...props}>
       {props.children}
     </form>
   )
