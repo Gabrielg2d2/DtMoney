@@ -1,28 +1,43 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
-import { api } from '@/service/api'
+import { HttpClient } from '@/infra/HttpClient'
+
+function formatCards(arrTransactions: TransactionDataTypes[]) {
+  let totalIncomingTransactions = 0
+  let totalOutgoingTransactions = 0
+  let totalTransactions = 0
+
+  totalTransactions = arrTransactions.reduce((acc, transaction) => {
+    if (transaction.type === 'deposit') {
+      totalIncomingTransactions += transaction.amount
+      return acc + transaction.amount
+    }
+
+    totalOutgoingTransactions -= transaction.amount
+    return acc - transaction.amount
+  }, 0)
+
+  return {
+    totalIncomingTransactions,
+    totalOutgoingTransactions,
+    totalTransactions
+  }
+}
 
 export async function getTotalCards() {
-  try {
-    const response = await api.get<TransactionDataTypes[]>('/transactions')
-    let totalIncomingTransactions = 0
-    let totalOutgoingTransactions = 0
+  const httpClientGet = new HttpClient()
+  const response = await httpClientGet.get<TransactionDataTypes[]>(
+    '/transactions'
+  )
 
-    response.data.reduce((acc, transaction) => {
-      if (transaction.type === 'deposit') {
-        totalIncomingTransactions += transaction.amount
-      }
-      if (transaction.type === 'withdrawn') {
-        totalOutgoingTransactions -= transaction.amount
-      }
-      return acc
-    }, 0)
+  const {
+    totalTransactions,
+    totalIncomingTransactions,
+    totalOutgoingTransactions
+  } = formatCards(response)
 
-    return {
-      totalIncomingTransactions,
-      totalOutgoingTransactions,
-      totalTransactions: totalIncomingTransactions + totalOutgoingTransactions
-    }
-  } catch (error) {
-    throw new Error('Error to get transactions')
+  return {
+    totalIncomingTransactions,
+    totalOutgoingTransactions,
+    totalTransactions
   }
 }
