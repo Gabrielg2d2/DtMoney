@@ -1,7 +1,7 @@
-import { AdapterAxios } from './AdapterAxios'
+import { AdapterFetch } from './AdapterFetch'
 
 export class HttpClient {
-  constructor(private readonly adapterApi = new AdapterAxios()) {}
+  constructor(private readonly adapterApi = new AdapterFetch()) {}
 
   async get<T>(url: string) {
     const apiGet = this.adapterApi.getApi
