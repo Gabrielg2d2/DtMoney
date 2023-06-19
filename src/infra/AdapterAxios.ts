@@ -1,6 +1,7 @@
 import axios, { Axios } from 'axios'
+import { IAdapterApi } from './IAdapterApi'
 
-export class AdapterAxios {
+export class AdapterAxios implements IAdapterApi {
   private readonly api: Axios
 
   constructor(
