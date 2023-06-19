@@ -1,10 +1,13 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
-import { api } from '@/service/api'
+import { HttpClient } from '@/infra/HttpClient'
 
 export async function getListTransactions() {
   try {
-    const response = await api.get<TransactionDataTypes[]>('/transactions')
-    return response.data
+    const httpClient = new HttpClient()
+    const response = await httpClient.get<TransactionDataTypes[]>(
+      '/transactions'
+    )
+    return response
   } catch (error) {
     throw new Error('Error to get transactions')
   }

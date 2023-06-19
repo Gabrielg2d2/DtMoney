@@ -1,9 +1,10 @@
-import { api } from '@/service/api'
+import { HttpClient } from '@/infra/HttpClient'
 
 export async function deleteTransaction(id: string) {
   try {
-    const response = await api.delete(`/transactions/${id}`)
-    return response.data
+    const httpClient = new HttpClient()
+    const response = await httpClient.delete(`/transactions/${id}`)
+    return response
   } catch (error) {
     throw new Error('Error to delete transaction')
   }

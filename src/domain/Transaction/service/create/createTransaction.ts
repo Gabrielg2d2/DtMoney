@@ -1,10 +1,11 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
-import { api } from '@/service/api'
+import { HttpClient } from '@/infra/HttpClient'
 
 export async function createTransaction(transaction: TransactionDataTypes) {
   try {
-    const response = await api.post('/transactions', transaction)
-    return response.data
+    const httpClient = new HttpClient()
+    const response = await httpClient.post('/transactions', transaction)
+    return response
   } catch (error) {
     throw new Error('Error to create transaction')
   }
