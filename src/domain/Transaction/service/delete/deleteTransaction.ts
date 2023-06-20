@@ -3,8 +3,7 @@ import { HttpClient } from '@/infra/HttpClient'
 export async function deleteTransaction(id: string) {
   try {
     const httpClient = new HttpClient()
-    const response = await httpClient.delete(`/transactions/${id}`)
-    return response
+    await httpClient.delete(`/transactions/${id}`)
   } catch (error) {
     throw new Error('Error to delete transaction')
   }
