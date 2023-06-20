@@ -33,6 +33,22 @@ describe('createTransaction', () => {
       transaction
     )
   })
+})
+
+describe('createTransaction - Error', () => {
+  let createTransactionStub: jest.SpyInstance
+
+  beforeEach(() => {
+    createTransactionStub = jest
+      .spyOn(HttpClient.prototype, 'post')
+      .mockResolvedValueOnce(
+        Promise.reject(new Error('Error to create transaction'))
+      )
+  })
+
+  afterEach(() => {
+    createTransactionStub.mockRestore()
+  })
 
   it('should throw an error if create transaction fails', async () => {
     const transaction: TransactionDataTypes = {
@@ -44,8 +60,6 @@ describe('createTransaction', () => {
       date: '2021-01-01T00:00:00.000'
     }
 
-    createTransactionStub.mockRejectedValue(new Error('Error to create'))
-    await createTransaction(transaction)
-    await expect(createTransactionStub).rejects.toThrow('Error to create')
+    await expect(createTransaction(transaction)).rejects.toThrow()
   })
 })
