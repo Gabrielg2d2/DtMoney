@@ -41,5 +41,8 @@ describe('deleteTransaction - Error', () => {
   it('should delete a transaction', async () => {
     const id = '1'
     await expect(deleteTransaction(id)).rejects.toThrow()
+    await expect(deleteTransaction(id)).rejects.toThrowError(
+      new Error('Error to delete transaction')
+    )
   })
 })

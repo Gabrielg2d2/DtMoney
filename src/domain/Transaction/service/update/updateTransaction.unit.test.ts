@@ -59,5 +59,8 @@ describe('updateTransaction - Error', () => {
       name: 'name'
     }
     await expect(updateTransaction(transaction)).rejects.toThrow()
+    await expect(updateTransaction(transaction)).rejects.toThrowError(
+      new Error('Error to update transaction')
+    )
   })
 })
