@@ -61,5 +61,8 @@ describe('createTransaction - Error', () => {
     }
 
     await expect(createTransaction(transaction)).rejects.toThrow()
+    await expect(createTransaction(transaction)).rejects.toThrowError(
+      new Error('Error to create transaction')
+    )
   })
 })
