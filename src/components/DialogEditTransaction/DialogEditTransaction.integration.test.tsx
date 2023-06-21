@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { DialogEditTransaction } from '.'
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
+import { act } from 'react-dom/test-utils'
 
 type TypeCurrentType = 'deposit' | 'withdrawn'
 
@@ -69,6 +70,28 @@ describe('DialogEditTransaction', () => {
     expect(screen.getByText(/entrada/i)).toHaveClass('border-green-500')
   })
 
+  it('should activate the exit button, when clicked', () => {
+    const { transaction, closeSpy, handleSubmitSpy } = makeSut()
+    render(
+      <DialogEditTransaction
+        open
+        close={closeSpy}
+        handleSubmit={handleSubmitSpy}
+        transaction={transaction}
+      />
+    )
+
+    const buttonOutput = screen.getByText(/saída/i)
+    const buttonInput = screen.getByText(/entrada/i)
+
+    act(() => {
+      buttonOutput.click()
+    })
+
+    expect(buttonInput).toHaveClass('border-gray-200')
+    expect(buttonOutput).toHaveClass('border-red-500')
+  })
+
   it('should button output with border red, currently active button', () => {
     const { transaction, closeSpy, handleSubmitSpy } = makeSut('withdrawn')
     render(
@@ -80,5 +103,31 @@ describe('DialogEditTransaction', () => {
       />
     )
     expect(screen.getByText(/saída/i)).toHaveClass('border-red-500')
+  })
+
+  it('should activate input button when clicked', () => {
+    const { transaction, closeSpy, handleSubmitSpy } = makeSut()
+    render(
+      <DialogEditTransaction
+        open
+        close={closeSpy}
+        handleSubmit={handleSubmitSpy}
+        transaction={transaction}
+      />
+    )
+
+    const buttonOutput = screen.getByText(/saída/i)
+    const buttonInput = screen.getByText(/entrada/i)
+
+    act(() => {
+      buttonOutput.click()
+    })
+
+    act(() => {
+      buttonInput.click()
+    })
+
+    expect(buttonInput).toHaveClass('border-green-500')
+    expect(buttonOutput).toHaveClass('border-gray-200')
   })
 })
