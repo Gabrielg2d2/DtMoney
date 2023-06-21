@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import { HomeTemplateUI, HomeTemplateUITypes } from '.'
-import { DialogNewTransaction } from '@/components'
 
 describe('Home - page', () => {
   const dataHomeTemplate: HomeTemplateUITypes = {
     header: {
-      dialogTransaction: <DialogNewTransaction handleSubmit={async () => {}} />
+      submit: jest.fn()
     },
     sectionCardsTransactions: {
       totalIncomingTransactions: 0,
@@ -14,10 +13,8 @@ describe('Home - page', () => {
     },
     sectionListTransactions: {
       list: [],
-      deleteTransaction: async () => {
-        await Promise.resolve()
-      },
-      handleOpenModalTransactionToEdit: () => {},
+      deleteTransaction: jest.fn(),
+      submit: jest.fn(),
       loading: false
     }
   }

@@ -64,11 +64,10 @@ describe('Cards - getCards', () => {
   })
 
   it('should return error in the create a new Cards', async () => {
-    const getCardsAPISpy = jest.fn()
+    const getCardsAPISpy = jest
+      .fn()
+      .mockReturnValueOnce(Promise.reject(new Error('Error in getCards')))
     const cards = new Cards(getCardsAPISpy)
-    getCardsAPISpy.mockReturnValueOnce(
-      Promise.reject(new Error('Error in getCards'))
-    )
 
     await expect(cards.getCards()).rejects.toThrowError(
       new Error('Error in getCards')

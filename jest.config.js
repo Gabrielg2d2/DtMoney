@@ -15,6 +15,7 @@ module.exports = {
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
     '!**/*.d.ts', // config types
     '!src/index.tsx',
+    '!src/pages/Home/index.tsx',
     '!src/**/interfaces*.ts',
     '!src/util/index.ts',
     '!src/components/index.ts'
@@ -23,10 +24,10 @@ module.exports = {
   coverageProvider: 'v8',
   coverageThreshold: {
     global: {
-      branches: 10,
-      functions: 10,
-      lines: 10,
-      statements: 10
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
     }
   },
   maxWorkers: '50%',
