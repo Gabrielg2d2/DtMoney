@@ -6,6 +6,8 @@ import { SelectedCategory } from './SelectedCategory'
 import { Submit } from './Submit'
 import { useForm } from 'react-hook-form'
 import { InputMoney } from '../InputMoney'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type DialogNewTransactionTypes = {
   handleSubmit: (data: any) => void
@@ -31,13 +33,40 @@ export function DialogNewTransaction({
     setOpenModalTransaction(true)
   }
 
+  const schema = zod.object({
+    amount: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .refine(
+        (value) => {
+          const isDecimal = /^-?[0-9]+(\.[0-9]+)?$/.test(value)
+          return isDecimal
+        },
+        {
+          message: 'Insira um valor monetário válido'
+        }
+      ),
+    category: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .min(3, 'Mínimo 3 caracteres'),
+    type: zod.string(),
+    name: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .min(3, 'Mínimo 3 caracteres')
+  })
   const method = useForm<FormTypes>({
     defaultValues: {
       name: '',
       amount: '',
       category: '',
       type: 'deposit'
-    }
+    },
+    resolver: zodResolver(schema)
   })
 
   function onSubmit(data: FormTypes) {
@@ -62,13 +91,20 @@ export function DialogNewTransaction({
         close={handleCloseModalTransaction}
       >
         <Form onSubmit={method.handleSubmit(onSubmit)}>
-          <Input placeholder="Nome" register={method.register('name')} />
+          <Input
+            placeholder="Nome"
+            register={method.register('name')}
+            error={!!method.formState.errors.name?.message}
+            message={method.formState.errors.name?.message}
+          />
           <InputMoney
             name="amount"
             placeholder="Preço"
             onChangeValueMoney={(value) => {
               method.setValue('amount', value)
             }}
+            error={!!method.formState.errors.amount?.message}
+            message={method.formState.errors.amount?.message}
           />
           <SelectedCategory
             outInput={(value) => {
@@ -78,6 +114,8 @@ export function DialogNewTransaction({
           <Input
             placeholder="Categoria"
             register={method.register('category')}
+            error={!!method.formState.errors.category?.message}
+            message={method.formState.errors.category?.message}
           />
           <Submit />
         </Form>

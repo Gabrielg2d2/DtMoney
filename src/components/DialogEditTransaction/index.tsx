@@ -10,6 +10,8 @@ import {
 } from '@/entity/Transaction/TransactionEntity'
 import { useEffect } from 'react'
 import { InputMoney } from '../InputMoney'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type DialogEditTransactionTypes = {
   handleSubmit: (data: any) => void
@@ -31,13 +33,40 @@ export function DialogEditTransaction({
   open,
   close
 }: DialogEditTransactionTypes) {
+  const schema = zod.object({
+    amount: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .refine(
+        (value) => {
+          const isDecimal = /^-?[0-9]+(\.[0-9]+)?$/.test(value)
+          return isDecimal
+        },
+        {
+          message: 'Insira um valor monetário válido'
+        }
+      ),
+    category: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .min(3, 'Mínimo 3 caracteres'),
+    type: zod.string(),
+    name: zod
+      .string({
+        description: 'Obrigatório'
+      })
+      .min(3, 'Mínimo 3 caracteres')
+  })
   const method = useForm<FormTypes>({
     defaultValues: {
       name: transaction.name,
       amount: String(transaction.amount),
       category: transaction.category,
       type: transaction.type
-    }
+    },
+    resolver: zodResolver(schema)
   })
 
   function onSubmit(data: FormTypes) {
@@ -67,7 +96,12 @@ export function DialogEditTransaction({
       close={close}
     >
       <Form onSubmit={method.handleSubmit(onSubmit)}>
-        <Input placeholder="Nome" register={method.register('name')} />
+        <Input
+          placeholder="Nome"
+          register={method.register('name')}
+          error={!!method.formState.errors.name?.message}
+          message={method.formState.errors.name?.message}
+        />
         <InputMoney
           name="amount"
           placeholder="Preço"
@@ -75,6 +109,8 @@ export function DialogEditTransaction({
           onChangeValueMoney={(value) => {
             method.setValue('amount', value)
           }}
+          error={!!method.formState.errors.amount?.message}
+          message={method.formState.errors.amount?.message}
         />
         <SelectedCategory
           defaultValue={transaction.type}
@@ -82,7 +118,12 @@ export function DialogEditTransaction({
             method.setValue('type', value)
           }}
         />
-        <Input placeholder="Categoria" register={method.register('category')} />
+        <Input
+          placeholder="Categoria"
+          register={method.register('category')}
+          error={!!method.formState.errors.category?.message}
+          message={method.formState.errors.category?.message}
+        />
         <Submit />
       </Form>
     </DialogCustom>
