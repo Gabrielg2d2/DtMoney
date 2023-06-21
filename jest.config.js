@@ -15,6 +15,7 @@ module.exports = {
     '<rootDir>/src/**/*.(js|jsx|ts|tsx)?',
     '!**/*.d.ts', // config types
     '!src/index.tsx',
+    '!src/**/interfaces*.ts',
     '!src/util/index.ts',
     '!src/components/index.ts'
   ],

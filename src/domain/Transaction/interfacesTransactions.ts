@@ -1,8 +1,8 @@
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 
-export type CreateType = (transaction: TransactionDataTypes) => Promise<boolean>
-export type DeleteType = (id: string) => Promise<boolean>
-export type UpdateType = (transaction: TransactionDataTypes) => Promise<boolean>
+export type CreateType = (transaction: TransactionDataTypes) => Promise<void>
+export type DeleteType = (id: string) => Promise<void>
+export type UpdateType = (transaction: TransactionDataTypes) => Promise<void>
 export type ListType = () => Promise<TransactionDataTypes[]>
 
 export interface ITransaction {
