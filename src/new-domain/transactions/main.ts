@@ -21,6 +21,5 @@ export class MainTransaction {
       const repository = new TransactionRepository()
       await repository.create(result)
     }
-    throw new Error('Error to create new transaction')
   }
 }
