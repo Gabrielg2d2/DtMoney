@@ -38,6 +38,7 @@
     "@typescript-eslint/consistent-type-definitions": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "multiline-ternary": "off"
+    "multiline-ternary": "off",
+    "@typescript-eslint/brace-style": "off"
   }
 }
