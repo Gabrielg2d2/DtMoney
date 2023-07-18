@@ -1,6 +1,7 @@
 import { AdapterFetch } from './AdapterFetch'
+import { IHttpClient } from './httpclient-interface'
 
-export class HttpClient {
+export class HttpClient implements IHttpClient {
   constructor(private readonly adapterApi = new AdapterFetch()) {}
 
   async get<T>(url: string) {
