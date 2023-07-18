@@ -3,23 +3,27 @@ import { TransactionRepository } from './repository/transaction-api'
 import { TransactionObjectValueType } from './types/transaction-object-value'
 
 export class MainTransaction {
+  private readonly listTransactions = []
+  private readonly cards = {
+    total: 0,
+    withdrawn: 0,
+    deposit: 0
+  }
+
+  constructor(private readonly repository = new TransactionRepository()) {}
+
   get allData() {
     return {
-      listTransactions: [],
-      cards: {
-        total: 0,
-        withdrawn: 0,
-        deposit: 0
-      }
+      listTransactions: this.listTransactions,
+      cards: this.cards
     }
   }
 
-  async createNewTransaction(transaction: TransactionObjectValueType) {
+  async createNewTransaction(transactionOBV: TransactionObjectValueType) {
     const createTransaction = new CreateTransaction()
-    const result = createTransaction.execute(transaction)
-    if (result) {
-      const repository = new TransactionRepository()
-      await repository.create(result)
+    const transaction = createTransaction.execute(transactionOBV)
+    if (transaction) {
+      await this.repository.create(transaction)
     }
   }
 }
