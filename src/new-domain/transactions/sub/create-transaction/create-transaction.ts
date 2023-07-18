@@ -1,5 +1,5 @@
-import { TransactionObjectValueType } from '../types/transaction-object-value'
-import { TransactionValueObject } from '../value-object/transaction-value-object/transaction-value-object'
+import { TransactionObjectValueType } from '../../types/transaction-object-value'
+import { TransactionValueObject } from '../../value-object/transaction-value-object/transaction-value-object'
 
 export class CreateTransaction {
   execute(transaction: TransactionObjectValueType) {
