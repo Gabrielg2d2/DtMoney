@@ -1,8 +1,7 @@
-import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { Pencil, Trash } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import { DialogEditTransaction } from '@/components'
-import { formatDate, formatMoneyPtBr, formatType } from '@/util'
+import { formatType } from '@/util'
 import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
 
 type BoxProps = {
@@ -47,13 +46,15 @@ export function ListTransactions({
   submit
 }: ListTransactionsProps) {
   const [openEditTransaction, setOpenEditTransaction] = useState(false)
-  const [transaction, setTransaction] = useState<TransactionDataTypes>({
+  const [transaction, setTransaction] = useState<TransactionACLType>({
     id: '',
     name: '',
     amount: 0,
+    amountFormatted: '',
     category: '',
     type: 'deposit',
-    date: ''
+    date: '',
+    dateFormatted: ''
   })
   function handleOpenEditModal(transaction: any) {
     setTransaction(transaction)
@@ -63,8 +64,8 @@ export function ListTransactions({
   const listTransactions = useMemo(
     () =>
       list.map((transaction) => {
-        const formattedAmount = formatMoneyPtBr(transaction.amount)
-        const formattedDate = formatDate(transaction.date)
+        const formattedAmount = transaction.amountFormatted
+        const formattedDate = transaction.dateFormatted
         const formattedType = formatType(transaction.type)
 
         return (
