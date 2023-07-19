@@ -1,5 +1,5 @@
 import { ListTransactions } from '@/components'
-import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
+import { TransactionACLType } from '@/domain/transactions/types/transaction-acl'
 
 export type SectionListTransactionsTypes = {
   list: TransactionACLType[]

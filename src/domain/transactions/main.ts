@@ -1,3 +1,4 @@
+import { LANGUAGE_PT_BR } from '../constant/constant'
 import { TransactionRepository } from './repository/repository-api'
 import { serviceCards } from './service/cards'
 import { CreateTransaction } from './sub/create-transaction/create-transaction'
@@ -11,9 +12,9 @@ import { TransactionObjectValueType } from './types/transaction-object-value'
 export class MainTransaction {
   private dataTransactions: TransactionACLType[] = []
   private cards = {
-    total: 0,
-    income: 0,
-    outcome: 0
+    total: 'R$ 0,00',
+    income: 'R$ 0,00',
+    outcome: 'R$ 0,00'
   }
 
   constructor(private readonly repository = new TransactionRepository()) {}
@@ -25,7 +26,7 @@ export class MainTransaction {
     }
   }
 
-  async listTransactions(language = 'pt-br') {
+  async listTransactions(language = LANGUAGE_PT_BR) {
     const allTransactions = await this.repository.list()
     if (allTransactions) {
       const list = new ListTransaction()

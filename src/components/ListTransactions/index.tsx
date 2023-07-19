@@ -2,7 +2,7 @@ import { Pencil, Trash } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import { DialogEditTransaction } from '@/components'
 import { formatType } from '@/util'
-import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
+import { TransactionACLType } from '@/domain/transactions/types/transaction-acl'
 
 type BoxProps = {
   children: React.ReactNode

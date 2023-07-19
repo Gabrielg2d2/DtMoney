@@ -1,3 +1,4 @@
+import { formatMoneyPtBr } from '@/util'
 import { TransactionEntityType } from '../types/transaction-entity'
 
 export class serviceCards {
@@ -8,7 +9,7 @@ export class serviceCards {
       outcome: 0
     }
     listTransactions.forEach((transaction) => {
-      if (transaction.type === 'income') {
+      if (transaction.type === 'deposit') {
         cards.income += transaction.amount
       } else {
         cards.outcome += transaction.amount
@@ -20,18 +21,9 @@ export class serviceCards {
 
   private static formattedCardsPtBr(cards: any) {
     const cardsFormatted = {
-      total: cards.total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }),
-      income: cards.income.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }),
-      outcome: cards.outcome.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      })
+      total: formatMoneyPtBr(cards.total),
+      income: formatMoneyPtBr(cards.income),
+      outcome: formatMoneyPtBr(cards.outcome)
     }
     return cardsFormatted
   }

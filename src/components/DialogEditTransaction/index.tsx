@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 import { InputMoney } from '../InputMoney'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
+import { TransactionACLType } from '@/domain/transactions/types/transaction-acl'
 
 type DialogEditTransactionTypes = {
   handleSubmit: (data: any) => void

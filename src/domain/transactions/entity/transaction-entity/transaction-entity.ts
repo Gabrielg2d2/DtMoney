@@ -1,7 +1,7 @@
-import { formatMoneyPtBr } from '@/global/functions/formatMoneyPtBr/formatMoneyPtBr'
 import { TransactionEntityType } from '../../types/transaction-entity'
-import { formatDatePtBr } from '@/global/functions/formatDate/formatDatePtBr'
 import { TransactionACLType } from '../../types/transaction-acl'
+import { formatDate, formatMoneyPtBr } from '@/util'
+import { LANGUAGE_PT_BR } from '@/domain/constant/constant'
 
 export class TransactionEntity {
   validateTransactionEntity(transactionEntity: TransactionEntityType): boolean {
@@ -36,7 +36,7 @@ export class TransactionEntity {
 
   createTransactionEntity(
     transaction: TransactionEntityType,
-    language: string = 'pt-BR' // translate
+    language: string = LANGUAGE_PT_BR // translate
   ): TransactionACLType {
     if (!this.validateTransactionEntity(transaction)) {
       throw new Error('Invalid transaction entity to list transactions.')
@@ -46,9 +46,9 @@ export class TransactionEntity {
 
     // translate future
     const amountFormatted =
-      language === 'pt-BR' ? formatMoneyPtBr(amount) : String(amount)
+      language === LANGUAGE_PT_BR ? formatMoneyPtBr(amount) : String(amount)
 
-    const dateFormatted = language === 'pt-BR' ? formatDatePtBr(date) : date
+    const dateFormatted = language === LANGUAGE_PT_BR ? formatDate(date) : date
 
     return {
       id,

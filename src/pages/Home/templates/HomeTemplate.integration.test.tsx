@@ -7,9 +7,9 @@ describe('Home - page', () => {
       submit: jest.fn()
     },
     sectionCardsTransactions: {
-      totalIncomingTransactions: 0,
-      totalOutgoingTransactions: 0,
-      totalTransactions: 0
+      totalIncomingTransactions: 'R$ 0,00',
+      totalOutgoingTransactions: 'R$ 0,00',
+      totalTransactions: 'R$ 0,00'
     },
     sectionListTransactions: {
       list: [],

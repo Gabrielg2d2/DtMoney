@@ -1,28 +1,25 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useCallback, useEffect, useState } from 'react'
-import { FactoryTransaction } from '@/domain/Transaction/FactoryTransaction'
-import { FactoryCards } from '@/domain/Cards/FactoryCards'
 import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { FormTypes } from '@/components'
+import { MainTransaction } from '@/domain/transactions/main'
+import { TransactionACLType } from '@/domain/transactions/types/transaction-acl'
 
 export function Home() {
   const [loading, setLoading] = useState(false)
-  const [transactions] = useState(new FactoryTransaction().execute())
-  const [cards] = useState(new FactoryCards().execute())
+  const [transactions] = useState(new MainTransaction())
 
   async function handleDeleteTransaction(id: string) {
     setLoading(true)
-    await transactions.delete(id)
-    await cards.getCards()
+    await transactions.deleteTransaction(id)
     setLoading(false)
   }
 
   const listTransactions = useCallback(async () => {
     setLoading(true)
-    await transactions.list()
-    await cards.getCards()
+    await transactions.listTransactions()
     setLoading(false)
-  }, [cards, transactions])
+  }, [transactions])
 
   async function handleSubmitNewTransaction(data: FormTypes) {
     setLoading(true)
@@ -33,15 +30,13 @@ export function Home() {
       type: data.type,
       date: new Date().toISOString()
     }
-    await transactions.create(obj as TransactionDataTypes)
-    await cards.getCards()
+    await transactions.createNewTransaction(obj as TransactionDataTypes)
     setLoading(false)
   }
 
-  async function handleSubmitEditTransaction(data: TransactionDataTypes) {
+  async function handleSubmitEditTransaction(data: TransactionACLType) {
     setLoading(true)
-    await transactions.update(data)
-    await cards.getCards()
+    await transactions.updateTransaction(data)
     setLoading(false)
   }
 
@@ -54,12 +49,12 @@ export function Home() {
       submit: handleSubmitNewTransaction
     },
     sectionCardsTransactions: {
-      totalIncomingTransactions: cards.totalCards.totalIncomingTransactions,
-      totalOutgoingTransactions: cards.totalCards.totalOutgoingTransactions,
-      totalTransactions: cards.totalCards.totalTransactions
+      totalIncomingTransactions: transactions.allData.cards.income,
+      totalOutgoingTransactions: transactions.allData.cards.outcome,
+      totalTransactions: transactions.allData.cards.total
     },
     sectionListTransactions: {
-      list: transactions.getList,
+      list: transactions.allData.listTransactions,
       deleteTransaction: handleDeleteTransaction,
       submit: handleSubmitEditTransaction,
       loading

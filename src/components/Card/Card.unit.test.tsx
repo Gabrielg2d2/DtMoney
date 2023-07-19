@@ -3,13 +3,13 @@ import { CardTotal, CardIncoming, CardOutgoing } from '.'
 
 describe('CardTotal', () => {
   it('should render component CardTotal', () => {
-    render(<CardTotal title="Card_Jest_Title" value={100} />)
+    render(<CardTotal title="Card_Jest_Title" amount={'R$ 100,00'} />)
 
     expect(screen.getByText('Card_Jest_Title')).toBeInTheDocument()
   })
 
   it('should render component CardTotal with value', () => {
-    render(<CardTotal title="Card_Jest_Title" value={10000} />)
+    render(<CardTotal title="Card_Jest_Title" amount={'R$ 100,00'} />)
 
     expect(screen.getByText('R$ 100,00')).toBeInTheDocument()
   })
@@ -17,13 +17,13 @@ describe('CardTotal', () => {
 
 describe('CardIncoming', () => {
   it('should render component CardIncoming', () => {
-    render(<CardIncoming title="Card_Jest_Title" value={100} />)
+    render(<CardIncoming title="Card_Jest_Title" amount={'R$ 100,00'} />)
 
     expect(screen.getByText('Card_Jest_Title')).toBeInTheDocument()
   })
 
   it('should render component CardIncoming with value', () => {
-    render(<CardIncoming title="Card_Jest_Title" value={0} />)
+    render(<CardIncoming title="Card_Jest_Title" amount={'R$ 0,00'} />)
 
     expect(screen.getByText('R$ 0,00')).toBeInTheDocument()
   })
@@ -31,13 +31,13 @@ describe('CardIncoming', () => {
 
 describe('CardOutgoing', () => {
   it('should render component CardOutgoing', () => {
-    render(<CardOutgoing title="Card_Jest_Title" value={900} />)
+    render(<CardOutgoing title="Card_Jest_Title" amount={'R$ 100,00'} />)
 
     expect(screen.getByText('Card_Jest_Title')).toBeInTheDocument()
   })
 
   it('should render component CardOutgoing with value', () => {
-    render(<CardOutgoing title="Card_Jest_Title" value={0} />)
+    render(<CardOutgoing title="Card_Jest_Title" amount={'R$ 0,00'} />)
 
     expect(screen.getByText('R$ 0,00')).toBeInTheDocument()
   })
