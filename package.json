@@ -68,7 +68,7 @@
     "dev": "webpack serve --mode=development --open",
     "start": "npm run server & npm run dev",
     "build": "export NODE_ENV=production && webpack",
-    "tscheck": "tsc",
+    "tscheck": "tsc --noEmit",
     "test": "jest --passWithNoTests --onlyChanged",
     "test:watch": "npm run test -- --watch",
     "test:unit": "npm run test -- --config=jest-unit.config.js",

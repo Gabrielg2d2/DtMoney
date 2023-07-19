@@ -1,19 +1,20 @@
 import { render, screen } from '@testing-library/react'
 import { DialogEditTransaction } from '.'
-import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { act } from 'react-dom/test-utils'
 
 type TypeCurrentType = 'deposit' | 'withdrawn'
 
 describe('DialogEditTransaction', () => {
   const makeSut = (typeCurrent: TypeCurrentType = 'deposit') => {
-    const transaction: TransactionDataTypes = {
+    const transaction = {
       id: '1',
       name: 'test',
       amount: 100,
+      amountFormatted: 'R$ 1,00',
       category: 'test',
       type: typeCurrent,
-      date: new Date().toISOString()
+      date: '2023-01-01T00:00:00.000Z',
+      dateFormatted: '01/01/2023'
     }
 
     const closeSpy = jest.fn()

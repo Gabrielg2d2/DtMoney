@@ -4,10 +4,6 @@ import { Form } from './Form'
 import { SelectedCategory } from './SelectedCategory'
 import { Submit } from './Submit'
 import { useForm } from 'react-hook-form'
-import {
-  TransactionDataTypes,
-  TransactionType
-} from '@/entity/Transaction/TransactionEntity'
 import { useEffect } from 'react'
 import { InputMoney } from '../InputMoney'
 import * as zod from 'zod'
@@ -71,12 +67,12 @@ export function DialogEditTransaction({
   })
 
   function onSubmit(data: FormTypes) {
-    const obj: TransactionDataTypes = {
+    const obj = {
       id: transaction.id,
       name: data.name,
       amount: Number(data.amount),
       category: data.category,
-      type: data.type as TransactionType,
+      type: data.type,
       date: new Date().toISOString()
     }
     handleSubmit(obj)

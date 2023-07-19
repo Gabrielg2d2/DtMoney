@@ -1,6 +1,5 @@
 import { HomeTemplateUI, HomeTemplateUITypes } from './templates'
 import { useCallback, useEffect, useState } from 'react'
-import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
 import { FormTypes } from '@/components'
 import { MainTransaction } from '@/domain/transactions/main'
 import { TransactionACLType } from '@/domain/transactions/types/transaction-acl'
@@ -30,7 +29,7 @@ export function Home() {
       type: data.type,
       date: new Date().toISOString()
     }
-    await transactions.createNewTransaction(obj as TransactionDataTypes)
+    await transactions.createNewTransaction(obj)
     setLoading(false)
   }
 

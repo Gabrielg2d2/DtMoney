@@ -3,21 +3,23 @@ import { ListTransactions } from '.'
 
 describe('ListTransactions', () => {
   const mockDeleteTransaction = jest.fn()
-  const mockOpenModalTransactionToEdit = jest.fn()
+  const mockSubmit = jest.fn()
 
   it('should render component ListTransactions', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
             name: 'Jest_Name',
             type: 'deposit',
             category: 'Jest_Category',
-            amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            amount: 1000,
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
@@ -30,8 +32,8 @@ describe('ListTransactions', () => {
   it('should render component Header with texts', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
@@ -39,7 +41,9 @@ describe('ListTransactions', () => {
             type: 'deposit',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
@@ -54,8 +58,8 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with list', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
@@ -63,7 +67,9 @@ describe('ListTransactions', () => {
             type: 'deposit',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
@@ -75,8 +81,8 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with list and type withdrawn', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
@@ -84,7 +90,9 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
@@ -96,8 +104,8 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with array empty', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[]}
       />
     )
@@ -108,8 +116,8 @@ describe('ListTransactions', () => {
   it('should render component ListTransactions with button of icon delete transaction', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
@@ -117,7 +125,9 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
@@ -133,8 +143,8 @@ describe('ListTransactions', () => {
   it('should be possible to click the delete transaction button', () => {
     render(
       <ListTransactions
+        submit={mockSubmit}
         deleteTransaction={mockDeleteTransaction}
-        handleOpenModalTransactionToEdit={mockOpenModalTransactionToEdit}
         list={[
           {
             id: '1',
@@ -142,7 +152,9 @@ describe('ListTransactions', () => {
             type: 'withdrawn',
             category: 'Jest_Category',
             amount: 10,
-            date: '2021-03-01T00:00:00.000Z'
+            date: '2021-03-01T00:00:00.000Z',
+            amountFormatted: 'R$ 10,00',
+            dateFormatted: '01/03/2021'
           }
         ]}
       />
