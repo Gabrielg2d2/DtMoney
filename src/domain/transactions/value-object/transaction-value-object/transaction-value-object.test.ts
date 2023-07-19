@@ -40,7 +40,7 @@ describe('TransactionValueObject', () => {
   test('should return false for invalid date', () => {
     const transactionValueObject = new TransactionValueObject()
     const transaction: TransactionObjectValueType = {
-      amount: 0,
+      amount: 100,
       date: '2021-01-0123',
       category: 'category',
       type: 'withdrawn',
@@ -54,9 +54,9 @@ describe('TransactionValueObject', () => {
   test('should return false for invalid category', () => {
     const transactionValueObject = new TransactionValueObject()
     const transaction: TransactionObjectValueType = {
-      amount: 0,
-      date: '2021-01-0123',
-      category: 'ab',
+      amount: 100,
+      date: '2021-01-01',
+      category: '',
       type: 'withdrawn',
       name: 'name'
     }
@@ -68,9 +68,9 @@ describe('TransactionValueObject', () => {
   test('should return false for invalid type', () => {
     const transactionValueObject = new TransactionValueObject()
     const transaction: TransactionObjectValueType = {
-      amount: 0,
-      date: '2021-01-0123',
-      category: 'ab',
+      amount: 100,
+      date: '2021-01-01',
+      category: 'category',
       type: 'invalid',
       name: 'name'
     }
@@ -82,10 +82,10 @@ describe('TransactionValueObject', () => {
   test('should return false for invalid name', () => {
     const transactionValueObject = new TransactionValueObject()
     const transaction: TransactionObjectValueType = {
-      amount: 0,
-      date: '2021-01-0123',
-      category: 'ab',
-      type: 'invalid',
+      amount: 100,
+      date: '2021-01-01',
+      category: 'category',
+      type: 'withdrawn',
       name: 'ab'
     }
 
