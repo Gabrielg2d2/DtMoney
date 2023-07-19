@@ -1,4 +1,4 @@
-import { TransactionRepository } from './repository/repository'
+import { TransactionRepository } from './repository/repository-api'
 import { CreateTransaction } from './sub/create-transaction/create-transaction'
 import { DeleteTransaction } from './sub/delete-transaction/delete-transaction'
 import { ListTransaction } from './sub/list-transaction/list-transaction'

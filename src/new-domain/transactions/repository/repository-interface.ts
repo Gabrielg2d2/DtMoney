@@ -1,9 +1,12 @@
 import { TransactionEntityType } from '../types/transaction-entity'
 import { TransactionObjectValueType } from '../types/transaction-object-value'
 
-export interface ITransactionRepository {
-  create: (transaction: TransactionObjectValueType) => Promise<void>
-  update: (transaction: TransactionEntityType) => Promise<void>
-  delete: (transactionId: string) => Promise<void>
-  list: () => Promise<TransactionEntityType[]>
+export interface IRepository<
+  IResponseCUD = Promise<void>,
+  IResponseList = Promise<TransactionEntityType[]>
+> {
+  create: (transaction: TransactionObjectValueType) => IResponseCUD
+  update: (transaction: TransactionEntityType) => IResponseCUD
+  delete: (transactionId: string) => IResponseCUD
+  list: () => IResponseList
 }
