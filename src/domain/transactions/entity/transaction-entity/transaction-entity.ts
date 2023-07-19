@@ -48,7 +48,8 @@ export class TransactionEntity {
     const amountFormatted =
       language === LANGUAGE_PT_BR ? formatMoneyPtBr(amount) : String(amount)
 
-    const dateFormatted = language === LANGUAGE_PT_BR ? formatDate(date) : date
+    const dateFormatted =
+      language === LANGUAGE_PT_BR ? formatDate(date).split('T')[0] : date
 
     return {
       id,
