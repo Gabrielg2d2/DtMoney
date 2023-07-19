@@ -15,15 +15,15 @@ export class TransactionRepository implements ITransactionRepository {
 
   async update(transaction: TransactionEntityType) {
     try {
-      await this.persisted.put('/transactions', transaction)
+      await this.persisted.put(`/transactions/${transaction.id}`, transaction)
     } catch (error) {
       throw new Error('Error to update transaction repository')
     }
   }
 
-  async delete(transaction: TransactionEntityType) {
+  async delete(transactionId: string) {
     try {
-      await this.persisted.delete(`/transactions/${transaction.id}`)
+      await this.persisted.delete(`/transactions/${transactionId}`)
     } catch (error) {
       throw new Error('Error to delete transaction repository')
     }

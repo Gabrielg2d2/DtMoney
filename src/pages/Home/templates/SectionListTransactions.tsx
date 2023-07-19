@@ -1,10 +1,10 @@
 import { ListTransactions } from '@/components'
-import { TransactionDataTypes } from '@/entity/Transaction/TransactionEntity'
+import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
 
 export type SectionListTransactionsTypes = {
-  list: TransactionDataTypes[]
+  list: TransactionACLType[]
   deleteTransaction: (id: string) => Promise<void>
-  submit: (data: TransactionDataTypes) => void
+  submit: (data: TransactionACLType) => void
   loading: boolean
 }
 export function SectionListTransactions(props: SectionListTransactionsTypes) {

@@ -3,6 +3,7 @@ import { Pencil, Trash } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import { DialogEditTransaction } from '@/components'
 import { formatDate, formatMoneyPtBr, formatType } from '@/util'
+import { TransactionACLType } from '@/new-domain/transactions/types/transaction-acl'
 
 type BoxProps = {
   children: React.ReactNode
@@ -35,9 +36,9 @@ function Header() {
 }
 
 type ListTransactionsProps = {
-  list: TransactionDataTypes[]
+  list: TransactionACLType[]
   deleteTransaction: (id: string) => Promise<void>
-  submit: (data: TransactionDataTypes) => void
+  submit: (data: TransactionACLType) => void
 }
 
 export function ListTransactions({
@@ -54,7 +55,7 @@ export function ListTransactions({
     type: 'deposit',
     date: ''
   })
-  function handleOpenEditModal(transaction: TransactionDataTypes) {
+  function handleOpenEditModal(transaction: any) {
     setTransaction(transaction)
     setOpenEditTransaction(true)
   }
