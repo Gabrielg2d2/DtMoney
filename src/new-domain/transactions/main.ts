@@ -1,4 +1,5 @@
 import { TransactionRepository } from './repository/repository-api'
+import { serviceCards } from './service/cards'
 import { CreateTransaction } from './sub/create-transaction/create-transaction'
 import { DeleteTransaction } from './sub/delete-transaction/delete-transaction'
 import { ListTransaction } from './sub/list-transaction/list-transaction'
@@ -9,7 +10,7 @@ import { TransactionObjectValueType } from './types/transaction-object-value'
 
 export class MainTransaction {
   private dataTransactions: TransactionACLType[] = []
-  private readonly cards = {
+  private cards = {
     total: 0,
     income: 0,
     outcome: 0
@@ -30,6 +31,8 @@ export class MainTransaction {
       const list = new ListTransaction()
       const transactionsFormatted = list.execute(allTransactions, language)
       this.dataTransactions = transactionsFormatted
+      const currentCards = serviceCards.calcCards(allTransactions)
+      this.cards = currentCards
     }
   }
 

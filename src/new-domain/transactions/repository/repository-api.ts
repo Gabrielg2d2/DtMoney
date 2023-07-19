@@ -1,11 +1,12 @@
 import { HttpClient } from '../infra/HttpClient'
 import { TransactionEntityType } from '../types/transaction-entity'
+import { TransactionObjectValueType } from '../types/transaction-object-value'
 import { IRepository } from './repository-interface'
 
 export class TransactionRepository implements IRepository {
   constructor(private readonly httpClient = new HttpClient()) {}
 
-  async create(transaction: any) {
+  async create(transaction: TransactionObjectValueType) {
     try {
       await this.httpClient.post('/transactions', transaction)
     } catch (error) {
