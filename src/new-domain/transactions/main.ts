@@ -1,12 +1,14 @@
 import { TransactionRepository } from './repository/repository'
 import { CreateTransaction } from './sub/create-transaction/create-transaction'
 import { DeleteTransaction } from './sub/delete-transaction/delete-transaction'
+import { ListTransaction } from './sub/list-transaction/list-transaction'
 import { UpdateTransaction } from './sub/update-transaction/update-transaction'
+import { TransactionACLType } from './types/transaction-acl'
 import { TransactionEntityType } from './types/transaction-entity'
 import { TransactionObjectValueType } from './types/transaction-object-value'
 
 export class MainTransaction {
-  private readonly listTransactions = []
+  private dataTransactions: TransactionACLType[] = []
   private readonly cards = {
     total: 0,
     withdrawn: 0,
@@ -17,7 +19,7 @@ export class MainTransaction {
 
   get allData() {
     return {
-      listTransactions: this.listTransactions,
+      listTransactions: this.dataTransactions,
       cards: this.cards
     }
   }
@@ -43,6 +45,15 @@ export class MainTransaction {
     const transaction = deleteTransaction.execute(transactionEntity)
     if (transaction) {
       await this.repository.delete(transaction)
+    }
+  }
+
+  async listTransactions(language = 'pt-br') {
+    const allTransactions = await this.repository.list()
+    if (allTransactions) {
+      const list = new ListTransaction()
+      const transactionsFormatted = list.execute(allTransactions, language)
+      this.dataTransactions = transactionsFormatted
     }
   }
 }

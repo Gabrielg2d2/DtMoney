@@ -5,4 +5,5 @@ export interface ITransactionRepository {
   create: (transaction: TransactionObjectValueType) => Promise<void>
   update: (transaction: TransactionEntityType) => Promise<void>
   delete: (transaction: TransactionEntityType) => Promise<void>
+  list: () => Promise<TransactionEntityType[]>
 }

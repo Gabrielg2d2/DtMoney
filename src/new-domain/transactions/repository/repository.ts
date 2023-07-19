@@ -28,4 +28,15 @@ export class TransactionRepository implements ITransactionRepository {
       throw new Error('Error to delete transaction repository')
     }
   }
+
+  async list() {
+    try {
+      const data = await this.persisted.get<TransactionEntityType[]>(
+        '/transactions'
+      )
+      return data
+    } catch (error) {
+      throw new Error('Error to list transactions repository')
+    }
+  }
 }
