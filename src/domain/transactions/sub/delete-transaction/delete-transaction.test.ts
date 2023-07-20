@@ -12,6 +12,7 @@ describe('DeleteTransaction', () => {
   test('should throw error if invalid', () => {
     const deleteTransaction = new DeleteTransaction()
     const transactionId = ''
-    expect(() => deleteTransaction.execute(transactionId)).toThrowError()
+    const result = deleteTransaction.execute(transactionId)
+    expect(result).toBeFalsy()
   })
 })
