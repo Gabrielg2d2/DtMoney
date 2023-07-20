@@ -6,11 +6,7 @@ export class UpdateTransaction {
     const transactionEntity = new TransactionEntity()
     const isValid = transactionEntity.validateTransactionEntity(transaction)
 
-    if (!isValid) {
-      throw new Error(
-        'Invalid transaction entity. Please check the values of the transaction entity to update.'
-      )
-    }
+    if (!isValid) return false
     return transaction
   }
 }

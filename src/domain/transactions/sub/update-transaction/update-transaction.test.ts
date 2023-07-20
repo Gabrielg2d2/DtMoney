@@ -32,6 +32,7 @@ describe('UpdateTransaction', () => {
       name: 'name'
     }
     const updateTransaction = new UpdateTransaction()
-    expect(() => updateTransaction.execute(transactionEntity)).toThrowError()
+    const result = updateTransaction.execute(transactionEntity)
+    expect(result).toBeFalsy()
   })
 })
