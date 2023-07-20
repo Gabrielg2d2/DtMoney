@@ -1,4 +1,4 @@
-import { HttpClient } from '../infra/HttpClient'
+import { HttpClient } from '@/domain/infra/HttpClient'
 import { TransactionEntityType } from '../types/transaction-entity'
 import { TransactionObjectValueType } from '../types/transaction-object-value'
 import { IRepository } from './repository-interface'
