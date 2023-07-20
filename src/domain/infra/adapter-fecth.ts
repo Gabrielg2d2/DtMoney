@@ -1,4 +1,4 @@
-import { IAdapterApi } from './IAdapterApi'
+import { IAdapterApi } from './adapter-api-interface'
 
 export class AdapterFetch implements IAdapterApi {
   async getApi<T>(url: string) {

@@ -1,4 +1,4 @@
-import { AdapterFetch } from './AdapterFetch'
+import { AdapterFetch } from './adapter-fecth'
 import { IHttpClient } from './httpclient-interface'
 
 export class HttpClient implements IHttpClient {

@@ -1,5 +1,5 @@
-import { AdapterAxios } from './AdapterAxios'
-import { HttpClient } from './HttpClient'
+import { AdapterAxios } from './adapter-axios'
+import { HttpClient } from './httpclient'
 
 describe('HttpClient', () => {
   const httpClient = new HttpClient()

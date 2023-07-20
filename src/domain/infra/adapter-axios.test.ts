@@ -1,4 +1,4 @@
-import { AdapterAxios } from './AdapterAxios'
+import { AdapterAxios } from './adapter-axios'
 
 describe('AdapterAxios', () => {
   it('should be defined', () => {

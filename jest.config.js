@@ -16,9 +16,10 @@ module.exports = {
     '!**/*.d.ts', // config types
     '!src/index.tsx',
     '!src/pages/Home/index.tsx',
-    '!src/**/interfaces*.ts',
+    '!src/**/*-interface.ts',
     '!src/util/index.ts',
-    '!src/components/index.ts'
+    '!src/components/index.ts',
+    '!src/domain/transactions/types/**'
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   coverageProvider: 'v8',
