@@ -7,11 +7,7 @@ export class CreateTransaction {
     const isValid =
       transactionValueObject.validateTransactionObject(transaction)
 
-    if (!isValid) {
-      throw new Error(
-        'Invalid transaction object. Please check the values of the transaction object.'
-      )
-    }
+    if (!isValid) return false
     return transaction
   }
 }
