@@ -30,7 +30,6 @@ describe('CreateTransaction', () => {
       type: 'invalid',
       name: 'name'
     }
-    const result = createTransaction.execute(transactionOBV)
-    expect(result).toBeFalsy()
+    expect(() => createTransaction.execute(transactionOBV)).toThrowError()
   })
 })

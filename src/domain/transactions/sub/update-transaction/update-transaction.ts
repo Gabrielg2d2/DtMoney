@@ -8,7 +8,7 @@ export class UpdateTransaction {
 
     if (!isValid) {
       throw new Error(
-        'Invalid transaction entity. Please check the values of the transaction entity.'
+        'Invalid transaction entity. Please check the values of the transaction entity to update.'
       )
     }
     return transaction
