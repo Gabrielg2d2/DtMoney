@@ -39,7 +39,7 @@ export class TransactionEntity {
     language: string = LANGUAGE_PT_BR // translate
   ): TransactionACLType {
     if (!this.validateTransactionEntity(transaction)) {
-      throw new Error('Invalid transaction entity to list transactions.')
+      return
     }
 
     const { id, amount, date, category, type, name } = transaction

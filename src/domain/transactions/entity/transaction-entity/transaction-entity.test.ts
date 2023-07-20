@@ -154,8 +154,7 @@ describe('TransactionEntity - createTransactionEntity', () => {
     }
 
     const transactionValueObject = new TransactionEntity()
-    expect(() =>
-      transactionValueObject.createTransactionEntity(transaction)
-    ).toThrowError()
+    const result = transactionValueObject.createTransactionEntity(transaction)
+    expect(result).toBeUndefined()
   })
 })
