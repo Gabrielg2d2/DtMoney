@@ -61,3 +61,62 @@ describe('MainTransaction - listTransactions', () => {
     ])
   })
 })
+
+describe('MainTransaction - createNewTransaction', () => {
+  test('should register new transaction', async () => {
+    const persistTransactions = []
+    const repository = {
+      list: jest.fn().mockResolvedValueOnce([]),
+      create: jest.fn().mockImplementationOnce(() => {
+        persistTransactions.push({
+          id: '1',
+          amount: 100,
+          date: '2023-07-01',
+          category: 'category',
+          type: 'deposit',
+          name: 'name'
+        })
+      }),
+      update: jest.fn().mockResolvedValueOnce({}),
+      delete: jest.fn().mockResolvedValueOnce({})
+    }
+    const mainTransaction = new MainTransaction(repository as any)
+    await mainTransaction.createNewTransaction({
+      amount: 100,
+      date: '2023-07-01',
+      category: 'category',
+      type: 'deposit',
+      name: 'name'
+    })
+    expect(persistTransactions).toEqual([
+      {
+        id: '1',
+        amount: 100,
+        date: '2023-07-01',
+        category: 'category',
+        type: 'deposit',
+        name: 'name'
+      }
+    ])
+  })
+
+  test('should not create a new transaction', async () => {
+    const persistTransactions = []
+    const repository = {
+      list: jest.fn().mockResolvedValueOnce([]),
+      create: jest.fn().mockRejectedValueOnce(new Error()),
+      update: jest.fn().mockResolvedValueOnce({}),
+      delete: jest.fn().mockResolvedValueOnce({})
+    }
+    const mainTransaction = new MainTransaction(repository as any)
+    await mainTransaction.createNewTransaction({
+      amount: 0,
+      date: '2023-07-01',
+      category: 'category',
+      type: 'invalid',
+      name: 'name'
+    })
+    expect(persistTransactions).toEqual([])
+    expect(mainTransaction.allData.listTransactions).toEqual([])
+  })
+})
